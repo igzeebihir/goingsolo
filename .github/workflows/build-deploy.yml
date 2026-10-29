@@ -95,7 +95,8 @@ jobs:
       - name: Package the build
         if: github.event_name != 'pull_request'
         run: |
-          rm -rf web/sites/default/settings.php private
+          chmod -R u+w web/sites/default
+          rm -rf web/sites/default/settings.php web/sites/default/files private
           composer install --no-dev --no-interaction --no-progress --prefer-dist --optimize-autoloader
           tar czf /tmp/build.tgz --exclude=.git --exclude=web/sites/default/files .
       - uses: actions/upload-artifact@v4
