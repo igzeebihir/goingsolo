@@ -49,8 +49,9 @@ PHP
   echo "Wrote $PRIVATE/secrets.php"
 fi
 
+chmod u+w web/sites/default 2>/dev/null || true
+chmod u+w web/sites/default/settings.php 2>/dev/null || true
 cp deploy/settings.php web/sites/default/settings.php
-chmod 444 web/sites/default/settings.php
 
 if ! $DRUSH status --field=bootstrap 2>/dev/null | grep -q Successful; then
   echo "Installing Drupal..."
@@ -66,4 +67,6 @@ else
   $DRUSH cache:rebuild
 fi
 $DRUSH cron || true
+chmod 444 web/sites/default/settings.php
+chmod 555 web/sites/default
 echo "Done: https://$DOMAIN"

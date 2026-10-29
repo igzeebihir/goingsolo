@@ -137,30 +137,66 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
           SITE_DOMAIN: ${{ vars.SITE_DOMAIN }}
+          SITE_WEBROOT: ${{ vars.SITE_WEBROOT }}
           SITE_MAIL: ${{ vars.SITE_MAIL }}
           DB_NAME: ${{ secrets.DB_NAME }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
         run: |
           set -euo pipefail
+          mkdir -p /tmp/deploy-logs
+          exec > >(tee /tmp/deploy-logs/deploy.log) 2>&1
+          if [ -z "${SITE_DOMAIN:-}" ]; then echo "Set the SITE_DOMAIN variable." >&2; exit 1; fi
           mkdir -p ~/.ssh
-          echo "$SSH_KEY" > ~/.ssh/id_deploy
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_deploy
           chmod 600 ~/.ssh/id_deploy
           ssh-keyscan -p "${SSH_PORT:-22}" "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
-          SSH="ssh -i ~/.ssh/id_deploy -p ${SSH_PORT:-22} -o StrictHostKeyChecking=yes"
-          SITE_DIR="domains/$SITE_DOMAIN"
-          APP="$SITE_DIR/goingsolo"
+          SSH="ssh -i $HOME/.ssh/id_deploy -p ${SSH_PORT:-22} -o StrictHostKeyChecking=yes -o BatchMode=yes"
+          TARGET="$SSH_USER@$SSH_HOST"
+
+          # Work out where the domain's web root is. A main domain uses
+          # domains/<domain>/public_html; a Hostinger subdomain usually uses
+          # domains/<parent>/public_html/<sub>.
+          PATHS=$($SSH "$TARGET" "SITE_DOMAIN='$SITE_DOMAIN' SITE_WEBROOT='${SITE_WEBROOT:-}' bash -s" <<'SH'
+          set -e
+          D="$SITE_DOMAIN"; SUB="${D%%.*}"; PARENT="${D#*.}"
+          if [ -n "$SITE_WEBROOT" ]; then
+            WEBROOT="$SITE_WEBROOT"; APP="$(dirname "$SITE_WEBROOT")/goingsolo-$D"
+          elif [ -e "$HOME/domains/$D/public_html" ]; then
+            WEBROOT="domains/$D/public_html"; APP="domains/$D/goingsolo"
+          elif [ -e "$HOME/domains/$PARENT/public_html/$SUB" ]; then
+            WEBROOT="domains/$PARENT/public_html/$SUB"; APP="domains/$PARENT/goingsolo-$SUB"
+          else
+            echo "Could not find the web root for $D. Folders in ~/domains:" >&2
+            ls -la "$HOME/domains" >&2 || true
+            ls -la "$HOME/domains/$PARENT/public_html" >&2 || true
+            exit 1
+          fi
+          echo "$WEBROOT|$APP"
+          SH
+          )
+          WEBROOT="${PATHS%%|*}"; APP="${PATHS##*|}"
+          echo "Web root: ~/$WEBROOT  App: ~/$APP"
 
           mkdir build && tar xzf build.tgz -C build
-          $SSH "$SSH_USER@$SSH_HOST" "mkdir -p $APP"
+          $SSH "$TARGET" "mkdir -p $APP"
           rsync -az --delete \
             --exclude 'web/sites/default/files/' \
             --exclude 'web/sites/default/settings.php' \
             --exclude 'private/' \
-            -e "$SSH" build/ "$SSH_USER@$SSH_HOST:$APP/"
+            -e "$SSH" build/ "$TARGET:$APP/"
 
-          # Point the domain's web root at Drupal's web folder.
-          $SSH "$SSH_USER@$SSH_HOST" "set -e; cd $SITE_DIR; if [ -d public_html ] && [ ! -L public_html ]; then mv public_html public_html.before-goingsolo.\$(date +%s); fi; ln -sfn goingsolo/web public_html"
+          # Point the web root at Drupal's web folder, keeping whatever was there.
+          $SSH "$TARGET" "set -e; cd \$HOME; if [ -e $WEBROOT ] && [ ! -L $WEBROOT ]; then mv $WEBROOT $WEBROOT.before-goingsolo.\$(date +%s); fi; ln -sfn \$HOME/$APP/web $WEBROOT"
 
-          $SSH "$SSH_USER@$SSH_HOST" \
-            "DB_NAME='$DB_NAME' DB_USER='$DB_USER' DB_PASS='$DB_PASS' SITE_MAIL='${SITE_MAIL:-hello@goingsolo.ie}' bash \$HOME/$APP/deploy/remote.sh \$HOME/$APP '$SITE_DOMAIN'"
+          $SSH "$TARGET" \
+            "DB_NAME='${DB_NAME:-}' DB_USER='${DB_USER:-}' DB_PASS='${DB_PASS:-}' SITE_MAIL='${SITE_MAIL:-hello@goingsolo.ie}' bash \$HOME/$APP/deploy/remote.sh \$HOME/$APP '$SITE_DOMAIN'"
+
+      - name: Save deploy log to the deploy-output branch
+        if: always() && steps.check.outputs.ready == 'true'
+        run: |
+          mkdir -p /tmp/deploy-logs && cd /tmp/deploy-logs
+          git init -q -b deploy-output
+          git -c user.name=ci -c user.email=ci@localhost add -A
+          git -c user.name=ci -c user.email=ci@localhost commit -q --allow-empty -m "Deploy output for ${GITHUB_SHA}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" deploy-output
