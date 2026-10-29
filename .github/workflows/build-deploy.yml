@@ -192,6 +192,17 @@ jobs:
           $SSH "$TARGET" \
             "DB_NAME='${DB_NAME:-}' DB_USER='${DB_USER:-}' DB_PASS='${DB_PASS:-}' SITE_MAIL='${SITE_MAIL:-hello@goingsolo.ie}' bash \$HOME/$APP/deploy/remote.sh \$HOME/$APP '$SITE_DOMAIN'"
 
+      - name: Check the live site
+        if: steps.check.outputs.ready == 'true'
+        env:
+          SITE_DOMAIN: ${{ vars.SITE_DOMAIN || 'staging.ohalloran.in' }}
+        run: |
+          exec > >(tee /tmp/deploy-logs/live.log) 2>&1
+          for path in / /deals /guides /county/galway /membership /membership/monthly /providers/featured-listing /ads.txt /sitemap.xml /user/login; do
+            echo "$(curl -s -o /tmp/page.html -w '%{http_code} %{time_total}s' "https://$SITE_DOMAIN$path") $path $(grep -o '<title>[^<]*' /tmp/page.html | head -1)"
+          done
+          curl -sI "https://$SITE_DOMAIN/" | head -15
+
       - name: Save deploy log to the deploy-output branch
         if: always() && steps.check.outputs.ready == 'true'
         run: |
