@@ -136,7 +136,7 @@ jobs:
           SSH_PORT: ${{ secrets.SSH_PORT }}
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
-          SITE_DOMAIN: ${{ vars.SITE_DOMAIN }}
+          SITE_DOMAIN: ${{ vars.SITE_DOMAIN || 'staging.ohalloran.in' }}
           SITE_WEBROOT: ${{ vars.SITE_WEBROOT }}
           SITE_MAIL: ${{ vars.SITE_MAIL }}
           DB_NAME: ${{ secrets.DB_NAME }}
