@@ -1,0 +1,127 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for the goingsolo.ie profile.
+ */
+
+declare(strict_types=1);
+
+use Drupal\user\Entity\Role;
+use Drupal\user\RoleInterface;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_install().
+ */
+function goingsolo_install(bool $is_syncing): void {
+  if ($is_syncing) {
+    return;
+  }
+  // Installing the theme while Olivero is the default copies Olivero's block
+  // layout, which the Going Solo theme then adjusts.
+  \Drupal::service('theme_installer')->install(['goingsolo_theme']);
+  \Drupal::configFactory()->getEditable('system.theme')->set('default', 'goingsolo_theme')->save();
+
+  \Drupal::configFactory()->getEditable('system.site')
+    ->set('name', 'goingsolo.ie')
+    ->set('slogan', 'Solo holidays in Ireland, priced for one')
+    ->set('page.front', '/home')
+    ->save();
+
+  \Drupal::configFactory()->getEditable('user.settings')
+    ->set('register', UserInterface::REGISTER_VISITORS)
+    ->set('verify_mail', TRUE)
+    ->save();
+
+  user_role_grant_permissions(RoleInterface::ANONYMOUS_ID, ['access content', 'access site-wide contact form']);
+  user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, ['access content', 'access site-wide contact form']);
+
+  // Assign user 1 the "administrator" role.
+  $user = \Drupal::entityTypeManager()->getStorage('user')->load(1);
+  $user->addRole('administrator');
+  $user->save();
+
+  if ($editor = Role::load('content_editor')) {
+    foreach (['listing', 'article', 'page'] as $type) {
+      $editor->grantPermission("create $type content");
+      $editor->grantPermission("edit any $type content");
+      $editor->grantPermission("delete any $type content");
+      $editor->grantPermission("view $type revisions");
+      $editor->grantPermission("revert $type revisions");
+    }
+    foreach (['county', 'listing_type', 'topic'] as $vid) {
+      $editor->grantPermission("create terms in $vid");
+      $editor->grantPermission("edit terms in $vid");
+    }
+    foreach (['access content overview', 'view own unpublished content', 'access contextual links', 'view the administration theme', 'create url aliases', 'browse without ads', 'view members only deals', 'use text format basic_html', 'use text format full_html'] as $permission) {
+      $editor->grantPermission($permission);
+    }
+    $editor->save();
+  }
+
+  goingsolo_place_blocks();
+}
+
+/**
+ * Sets up the footer and removes blocks the site does not need.
+ */
+function goingsolo_place_blocks(): void {
+  $storage = \Drupal::entityTypeManager()->getStorage('block');
+  foreach (['goingsolo_theme_powered', 'goingsolo_theme_syndicate', 'goingsolo_theme_search_form_narrow', 'goingsolo_theme_search_form_wide'] as $id) {
+    $storage->load($id)?->delete();
+  }
+  if (!$storage->load('goingsolo_theme_footer_menu')) {
+    $storage->create([
+      'id' => 'goingsolo_theme_footer_menu',
+      'theme' => 'goingsolo_theme',
+      'region' => 'footer_top',
+      'plugin' => 'system_menu_block:footer',
+      'weight' => 0,
+      'settings' => [
+        'id' => 'system_menu_block:footer',
+        'label' => 'Footer',
+        'label_display' => '0',
+        'provider' => 'system',
+        'level' => 1,
+        'depth' => 1,
+        'expand_all_items' => FALSE,
+      ],
+    ])->save();
+  }
+  if (!$storage->load('goingsolo_theme_footer_note')) {
+    $storage->create([
+      'id' => 'goingsolo_theme_footer_note',
+      'theme' => 'goingsolo_theme',
+      'region' => 'footer_bottom',
+      'plugin' => 'goingsolo_footer_note',
+      'weight' => 0,
+      'settings' => [
+        'id' => 'goingsolo_footer_note',
+        'label' => 'Footer note',
+        'label_display' => '0',
+        'provider' => 'goingsolo_core',
+      ],
+    ])->save();
+  }
+  $slots = ['header' => ['content_above', -20], 'in_content' => ['content_below', 0], 'footer' => ['footer_top', -10]];
+  foreach ($slots as $slot => [$region, $weight]) {
+    $id = 'goingsolo_theme_ad_' . $slot;
+    if (!$storage->load($id)) {
+      $storage->create([
+        'id' => $id,
+        'theme' => 'goingsolo_theme',
+        'region' => $region,
+        'plugin' => 'goingsolo_ad_slot',
+        'weight' => $weight,
+        'settings' => [
+          'id' => 'goingsolo_ad_slot',
+          'label' => 'Ad: ' . $slot,
+          'label_display' => '0',
+          'provider' => 'goingsolo_ads',
+          'slot' => $slot,
+        ],
+      ])->save();
+    }
+  }
+}

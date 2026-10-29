@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_supplement
+field_name: field_supplement
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: none
+      label: 'No single supplement'
+    -
+      value: reduced
+      label: 'Reduced single rate'
+    -
+      value: share
+      label: 'Room share, no supplement'
+    -
+      value: standard
+      label: 'Single supplement applies'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_solo_price
+    - node.type.listing
+id: node.listing.field_solo_price
+field_name: field_solo_price
+entity_type: node
+bundle: listing
+label: 'Solo price from (€)'
+description: 'The lowest price for one person. Leave empty if the provider does not publish one.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0.0
+  max: null
+  prefix: €
+  suffix: ''
+field_type: decimal

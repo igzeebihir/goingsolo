@@ -1,0 +1,6 @@
+administer goingsolo ads:
+  title: 'Administer ads'
+  restrict access: true
+browse without ads:
+  title: 'Browse without ads'
+  description: 'Given to Solo Club members, editors and administrators.'

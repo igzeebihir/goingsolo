@@ -1,0 +1,355 @@
+/**
+ * @file
+ * goingsolo.ie styles on top of Olivero.
+ */
+:root {
+  --gs-teal: #1f6f68;
+  --gs-teal-dark: #134b46;
+  --gs-teal-light: #e6f2f1;
+  --gs-coral: #e0603f;
+  --gs-coral-light: #fdeee9;
+  --gs-sand: #fbfaf7;
+  --gs-ink: #1d2433;
+  --gs-muted: #5b6474;
+  --gs-line: #e4e1da;
+  --gs-radius: 14px;
+}
+
+body {
+  background: var(--gs-sand);
+}
+
+/* Hero */
+.gs-hero {
+  margin-block-end: 2.5rem;
+  padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 3.5rem);
+  border-radius: var(--gs-radius);
+  background: linear-gradient(135deg, var(--gs-teal-dark), var(--gs-teal) 60%, #2f8f86);
+  color: #fff;
+}
+.gs-hero__eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffd7cb;
+}
+.gs-hero__title {
+  margin: 0 0 1rem;
+  color: #fff;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.1;
+}
+.gs-hero__lead {
+  max-width: 40rem;
+  margin: 0 0 1.75rem;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #eaf5f4;
+}
+.gs-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.gs-hero .button {
+  margin: 0;
+}
+.gs-hero .button:not(.button--primary) {
+  border-color: #fff;
+  background: transparent;
+  color: #fff;
+}
+.button--primary,
+.gs-hero .button--primary {
+  border-color: var(--gs-coral);
+  background: var(--gs-coral);
+  color: #fff;
+}
+.button--primary:hover,
+.button--primary:focus {
+  border-color: #c44c2d;
+  background: #c44c2d;
+  color: #fff;
+}
+
+.home-section {
+  margin-block: 2.5rem 3.5rem;
+}
+.home-section > h2,
+.county-section > h2 {
+  margin-block-end: 1.25rem;
+}
+
+/* Card grids */
+.deal-grid,
+.guide-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+  margin-block: 1.5rem;
+}
+.deal-grid > .view-filters,
+.deal-grid > .view-header,
+.deal-grid > .view-empty,
+.deal-grid > nav,
+.deal-grid > .pager,
+.guide-grid > .view-filters,
+.guide-grid > nav,
+.guide-grid > .pager,
+.guide-grid > .view-empty {
+  grid-column: 1 / -1;
+}
+.deal-grid > .view-content,
+.guide-grid > .view-content {
+  display: contents;
+}
+
+.deal-card,
+.guide-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.25rem 1.25rem 1rem;
+  border: 1px solid var(--gs-line);
+  border-radius: var(--gs-radius);
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(29, 36, 51, 0.04);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.deal-card:hover,
+.guide-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(29, 36, 51, 0.08);
+}
+.deal-card--featured {
+  border-color: var(--gs-coral);
+  box-shadow: 0 0 0 1px var(--gs-coral);
+}
+.deal-card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 0.6rem;
+  padding: 0;
+  list-style: none;
+}
+.gs-badge {
+  margin: 0;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.6;
+  background: var(--gs-teal-light);
+  color: var(--gs-teal-dark);
+}
+.gs-badge--featured {
+  background: var(--gs-coral);
+  color: #fff;
+}
+.gs-badge--members {
+  background: var(--gs-ink);
+  color: #fff;
+}
+.gs-badge--reduced {
+  background: var(--gs-coral-light);
+  color: #8a3018;
+}
+.deal-card__where,
+.guide-card__topic {
+  margin: 0 0 0.35rem;
+  font-size: 0.85rem;
+  color: var(--gs-muted);
+}
+.deal-card__title,
+.guide-card__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.2rem;
+  line-height: 1.3;
+}
+.deal-card__title a,
+.guide-card__title a {
+  color: var(--gs-ink);
+  text-decoration: none;
+}
+.deal-card__title a:hover,
+.guide-card__title a:hover {
+  color: var(--gs-teal);
+  text-decoration: underline;
+}
+.deal-card__provider {
+  margin: 0 0 0.6rem;
+  font-weight: 600;
+  color: var(--gs-teal);
+}
+.deal-card__summary,
+.guide-card__standfirst {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #3a4252;
+}
+.deal-card__summary p {
+  margin: 0 0 0.5rem;
+}
+.deal-card__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-block: 0.75rem 0.5rem;
+  padding-block-start: 0.75rem;
+  border-top: 1px solid var(--gs-line);
+}
+.deal-card__amount {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--gs-ink);
+}
+.deal-card__amount--ask {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gs-muted);
+}
+.deal-card__basis {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--gs-muted);
+}
+.deal-card__more {
+  font-weight: 700;
+  color: var(--gs-coral);
+}
+
+/* Full deal */
+.deal-full__layout {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 62rem) {
+  .deal-full__layout {
+    grid-template-columns: minmax(0, 1fr) 20rem;
+    align-items: start;
+  }
+  .deal-full__pricebox {
+    position: sticky;
+    top: 1.5rem;
+  }
+}
+.deal-full__pricebox {
+  padding: 1.5rem;
+  border: 1px solid var(--gs-line);
+  border-radius: var(--gs-radius);
+  background: #fff;
+}
+.deal-full__provider {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  color: var(--gs-teal);
+}
+.deal-full__cta {
+  display: block;
+  margin: 1rem 0 0;
+  text-align: center;
+}
+.deal-full__note {
+  margin: 1rem 0 0;
+  font-size: 0.8rem;
+  color: var(--gs-muted);
+}
+.gs-members-teaser {
+  margin-block: 2rem;
+  padding: 1.5rem;
+  border-radius: var(--gs-radius);
+  background: var(--gs-ink);
+  color: #fff;
+}
+.gs-members-teaser h2 {
+  margin-top: 0;
+  color: #fff;
+}
+
+/* Exposed filters */
+.view-filters {
+  padding: 1rem 1.25rem;
+  border-radius: var(--gs-radius);
+  background: #fff;
+  border: 1px solid var(--gs-line);
+}
+.view-filters .form--inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0 1rem;
+}
+.view-filters .form-item {
+  margin-block: 0.5rem;
+}
+
+/* Guides */
+.node--type-article .field--name-field-standfirst {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--gs-muted);
+}
+
+/* Membership plans */
+.gs-plans {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  margin-block: 2rem;
+}
+.gs-plan {
+  padding: 1.5rem;
+  border: 1px solid var(--gs-line);
+  border-radius: var(--gs-radius);
+  background: #fff;
+}
+.gs-plan--highlight {
+  border-color: var(--gs-teal);
+  box-shadow: 0 0 0 2px var(--gs-teal);
+}
+.gs-plan__price {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--gs-ink);
+}
+
+.guide-card__topic {
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gs-coral);
+}
+
+/* Footer */
+.site-footer .menu--footer ul,
+.site-footer .gs-footer-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site-footer a {
+  color: #fff;
+}
+.gs-footer-note {
+  margin: 1rem 0 0;
+  font-size: 0.85rem;
+  color: #b9c0cc;
+}
+
+.deal-full__cta.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}

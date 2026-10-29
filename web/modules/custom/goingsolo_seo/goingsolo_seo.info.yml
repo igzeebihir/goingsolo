@@ -1,0 +1,11 @@
+name: 'Going Solo SEO'
+type: module
+description: 'Clean URLs with Pathauto, meta tags and an XML sitemap for goingsolo.ie.'
+package: 'Going Solo'
+core_version_requirement: ^11
+dependencies:
+  - goingsolo_core:goingsolo_core
+  - pathauto:pathauto
+  - token:token
+  - metatag:metatag
+  - simple_sitemap:simple_sitemap

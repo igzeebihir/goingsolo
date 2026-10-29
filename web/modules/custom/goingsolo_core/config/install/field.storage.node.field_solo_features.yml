@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_solo_features
+field_name: field_solo_features
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: single_rooms
+      label: 'Dedicated single rooms'
+    -
+      value: communal_dining
+      label: 'Communal or shared dining'
+    -
+      value: group_activities
+      label: 'Group activities or guided tours'
+    -
+      value: women_only
+      label: 'Women-only options'
+    -
+      value: spa
+      label: 'Spa or wellness'
+    -
+      value: public_transport
+      label: 'Reachable by public transport'
+    -
+      value: dog_friendly
+      label: 'Dog friendly'
+    -
+      value: meals_included
+      label: 'Meals included'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

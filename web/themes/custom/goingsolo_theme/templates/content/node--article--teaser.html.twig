@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Guide card.
+ */
+#}
+<article{{ attributes.addClass('guide-card') }}>
+  {% if node.field_topic.entity %}
+    <p class="guide-card__topic">{{ node.field_topic.entity.label }}</p>
+  {% endif %}
+  {{ title_prefix }}
+  <h3{{ title_attributes.addClass('guide-card__title') }}>
+    <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+  </h3>
+  {{ title_suffix }}
+  <div class="guide-card__standfirst">{{ content.field_standfirst }}</div>
+</article>

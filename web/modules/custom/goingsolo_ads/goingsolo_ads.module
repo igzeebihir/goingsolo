@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Adds the AdSense script to pages for visitors who see ads.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_page_attachments().
+ */
+function goingsolo_ads_page_attachments(array &$attachments): void {
+  $config = \Drupal::config('goingsolo_ads.settings');
+  $attachments['#cache']['tags'][] = 'config:goingsolo_ads.settings';
+  $attachments['#cache']['contexts'][] = 'user.permissions';
+  $attachments['#cache']['contexts'][] = 'route.name.is_layout_builder_ui';
+  if (!$config->get('enabled') || !$config->get('publisher_id')) {
+    return;
+  }
+  if (\Drupal::currentUser()->hasPermission('browse without ads') || \Drupal::service('router.admin_context')->isAdminRoute()) {
+    return;
+  }
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#type' => 'html_tag',
+      '#tag' => 'script',
+      '#attributes' => [
+        'async' => TRUE,
+        'src' => 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' . $config->get('publisher_id'),
+        'crossorigin' => 'anonymous',
+      ],
+    ],
+    'goingsolo_adsense',
+  ];
+  // Lets AdSense verify the site during sign-up.
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => ['name' => 'google-adsense-account', 'content' => $config->get('publisher_id')],
+    ],
+    'goingsolo_adsense_account',
+  ];
+}

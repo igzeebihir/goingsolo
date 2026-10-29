@@ -1,0 +1,38 @@
+.gs-map {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fbfaf7;
+  margin-block: 1rem 2rem;
+}
+.gs-map--counties {
+  height: min(80vh, 620px);
+  background: #fbfaf7;
+}
+.gs-map--deals {
+  height: 420px;
+}
+.gs-map__legend {
+  background: rgba(255, 255, 255, 0.92);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+.gs-map__legend-swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  vertical-align: middle;
+  margin: 0 6px;
+}
+.gs-map__popup a {
+  font-weight: 600;
+}
+.leaflet-container {
+  font-family: inherit;
+}
+.leaflet-interactive:focus {
+  outline: none;
+}

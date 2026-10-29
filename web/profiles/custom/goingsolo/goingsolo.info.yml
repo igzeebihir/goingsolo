@@ -1,0 +1,43 @@
+name: 'goingsolo.ie'
+type: profile
+description: 'Solo holiday deals in Ireland: listings, county maps, guides, memberships and ads.'
+version: 1.0.0
+core_version_requirement: ^11
+distribution:
+  name: 'goingsolo.ie'
+install:
+  - node
+  - block
+  - breakpoint
+  - ckeditor5
+  - config
+  - contextual
+  - menu_link_content
+  - datetime
+  - block_content
+  - editor
+  - help
+  - image
+  - link
+  - menu_ui
+  - options
+  - path
+  - page_cache
+  - dynamic_page_cache
+  - big_pipe
+  - taxonomy
+  - dblog
+  - navigation
+  - field_ui
+  - file
+  - views
+  - views_ui
+  - automated_cron
+  - contact
+  - goingsolo_core
+  - goingsolo_maps
+  - goingsolo_ads
+  - goingsolo_content
+themes:
+  - olivero
+  - claro

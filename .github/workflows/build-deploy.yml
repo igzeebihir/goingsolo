@@ -1,0 +1,142 @@
+name: Build, test and deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: gd, pdo_sqlite, sqlite3, mbstring, xml, zip, curl, bcmath, intl
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: |
+          if [ -f composer.lock ]; then
+            composer install --no-interaction --no-progress --prefer-dist
+          else
+            composer update --no-interaction --no-progress --prefer-dist
+          fi
+
+      - name: Keep the lock file
+        uses: actions/upload-artifact@v4
+        with:
+          name: composer-lock
+          path: composer.lock
+
+      - name: Install the site with SQLite
+        run: |
+          cp deploy/settings.php web/sites/default/settings.php
+          mkdir -p private/files
+          cat > private/secrets.php <<'PHP'
+          <?php
+          $databases['default']['default'] = ['driver' => 'sqlite', 'database' => '/tmp/goingsolo.sqlite', 'prefix' => '', 'namespace' => 'Drupal\\sqlite\\Driver\\Database\\sqlite', 'autoload' => 'core/modules/sqlite/src/Driver/Database/sqlite/'];
+          $settings['hash_salt'] = 'ci-only';
+          PHP
+          vendor/bin/drush site:install goingsolo --site-name=goingsolo.ie --account-pass=ci -y
+          vendor/bin/drush pm:install goingsolo_commerce goingsolo_seo -y
+          vendor/bin/drush pathauto:aliases-generate create all -y || true
+          vendor/bin/drush cache:rebuild
+
+      - name: Smoke test pages
+        run: |
+          cd web
+          php -S 127.0.0.1:8080 .ht.router.php > /tmp/server.log 2>&1 &
+          sleep 3
+          fail=0
+          for path in / /deals /guides /county/galway /membership /membership/monthly /membership/annual /providers/pro /providers/featured-listing /list-your-offer /about /ads.txt /sitemap.xml /user/register; do
+            code=$(curl -s -o /tmp/page.html -w '%{http_code}' "http://127.0.0.1:8080$path")
+            echo "$code $path"
+            if [ "$code" != "200" ]; then fail=1; grep -o '<title>[^<]*' /tmp/page.html || true; fi
+          done
+          cd ..
+          vendor/bin/drush watchdog:show --severity=Error --count=20 || true
+          exit $fail
+
+      - name: Test a membership purchase
+        run: |
+          vendor/bin/drush php:script deploy/ci-checkout-test.php
+
+      - name: Package the build
+        if: github.event_name != 'pull_request'
+        run: |
+          rm -rf web/sites/default/settings.php private
+          composer install --no-dev --no-interaction --no-progress --prefer-dist --optimize-autoloader
+          tar czf /tmp/build.tgz --exclude=.git --exclude=web/sites/default/files .
+      - uses: actions/upload-artifact@v4
+        if: github.event_name != 'pull_request'
+        with:
+          name: build
+          path: /tmp/build.tgz
+          retention-days: 3
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: hostinger
+    steps:
+      - name: Check deploy settings
+        id: check
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          if [ -z "$SSH_HOST" ]; then
+            echo "No SSH_HOST secret yet, so nothing is deployed."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/download-artifact@v4
+        if: steps.check.outputs.ready == 'true'
+        with:
+          name: build
+
+      - name: Upload and update the site
+        if: steps.check.outputs.ready == 'true'
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SITE_DOMAIN: ${{ vars.SITE_DOMAIN }}
+          SITE_MAIL: ${{ vars.SITE_MAIL }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASS: ${{ secrets.DB_PASS }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan -p "${SSH_PORT:-22}" "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          SSH="ssh -i ~/.ssh/id_deploy -p ${SSH_PORT:-22} -o StrictHostKeyChecking=yes"
+          SITE_DIR="domains/$SITE_DOMAIN"
+          APP="$SITE_DIR/goingsolo"
+
+          mkdir build && tar xzf build.tgz -C build
+          $SSH "$SSH_USER@$SSH_HOST" "mkdir -p $APP"
+          rsync -az --delete \
+            --exclude 'web/sites/default/files/' \
+            --exclude 'web/sites/default/settings.php' \
+            --exclude 'private/' \
+            -e "$SSH" build/ "$SSH_USER@$SSH_HOST:$APP/"
+
+          # Point the domain's web root at Drupal's web folder.
+          $SSH "$SSH_USER@$SSH_HOST" "set -e; cd $SITE_DIR; if [ -d public_html ] && [ ! -L public_html ]; then mv public_html public_html.before-goingsolo.\$(date +%s); fi; ln -sfn goingsolo/web public_html"
+
+          $SSH "$SSH_USER@$SSH_HOST" \
+            "DB_NAME='$DB_NAME' DB_USER='$DB_USER' DB_PASS='$DB_PASS' SITE_MAIL='${SITE_MAIL:-hello@goingsolo.ie}' bash \$HOME/$APP/deploy/remote.sh \$HOME/$APP '$SITE_DOMAIN'"

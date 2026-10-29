@@ -1,0 +1,36 @@
+# Built by Composer.
+/vendor/
+/web/core/
+/web/modules/contrib/
+/web/themes/contrib/
+/web/profiles/contrib/
+/web/libraries/
+/drush/Commands/contrib/
+/recipes/
+
+# Scaffold files written by Composer.
+/web/*.php
+/web/*.txt
+/web/*.md
+/web/.ht.router.php
+/web/.htaccess
+/web/example.gitignore
+/web/web.config
+/web/sites/*/settings.php
+/web/sites/*/services.yml
+/web/sites/default/default.*
+/web/sites/development.services.yml
+/web/sites/example.*
+/web/sites/README.txt
+/web/modules/README.txt
+/web/themes/README.txt
+/web/profiles/README.txt
+/web/autoload*.php
+/web/sites/default/files/
+/web/sites/*/settings.local.php
+
+# Local only.
+/composer.local.*
+/private/
+.env
+*.sqlite

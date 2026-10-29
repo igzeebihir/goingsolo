@@ -1,0 +1,4 @@
+services:
+  goingsolo_maps.builder:
+    class: Drupal\goingsolo_maps\MapBuilder
+    arguments: ['@entity_type.manager', '@database', '@extension.list.module', '@file_url_generator']

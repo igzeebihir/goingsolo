@@ -1,0 +1,47 @@
+county:
+  - { name: Carlow, province: leinster, description: "Ireland's second-smallest county, with the Barrow towpath, Mount Leinster and gardens on the Carlow Garden Trail. Easy to reach by train from Dublin." }
+  - { name: Dublin, province: leinster, description: "Ireland's capital is the easiest place to start a solo trip: compact, walkable and full of free museums, with the DART running out to the coast at Howth, Dalkey and Bray." }
+  - { name: Kildare, province: leinster, description: "Horse country close to Dublin, with the Irish National Stud, the Curragh, canal walks and outlet shopping. Good for short, easy solo breaks by train." }
+  - { name: Kilkenny, province: leinster, description: "A small medieval city with a castle, craft studios and a lively pub scene, all walkable. A natural first solo weekend away." }
+  - { name: Laois, province: leinster, description: "The quiet heart of the midlands, with the Slieve Bloom Mountains for walking and the Rock of Dunamase." }
+  - { name: Longford, province: leinster, description: "Lakes, bogland and Center Parcs, with the Royal Canal Greenway for flat, traffic-free walking and cycling." }
+  - { name: Louth, province: leinster, description: "Ireland's smallest county takes in the Cooley Peninsula, Carlingford's medieval streets and the historic towns of Drogheda and Dundalk." }
+  - { name: Meath, province: leinster, description: "Home to Brú na Bóinne and Newgrange, the Hill of Tara and Trim Castle. A rich day out from Dublin, or a slower solo stay." }
+  - { name: Offaly, province: leinster, description: "Clonmacnoise monastic site, Birr Castle and its gardens, and miles of bogland walks." }
+  - { name: Westmeath, province: leinster, description: "Lakes around Mullingar and Athlone, the Old Rail Trail greenway and Sean's Bar, which claims to be Ireland's oldest pub." }
+  - { name: Wexford, province: leinster, description: "The sunny south-east, with long beaches, Hook Lighthouse, the Wexford Festival Opera and an easy pace." }
+  - { name: Wicklow, province: leinster, description: "The Garden of Ireland: Glendalough, the Wicklow Way and Powerscourt, all within an hour of Dublin." }
+  - { name: Clare, province: munster, description: "The Cliffs of Moher, the Burren's limestone and wildflowers, and traditional music in Doolin and Ennis." }
+  - { name: Cork, province: munster, description: "Ireland's largest county: a foodie city, Kinsale, and West Cork's islands, peninsulas and small towns." }
+  - { name: Kerry, province: munster, description: "Killarney National Park, the Ring of Kerry, the Dingle Peninsula and the Skellig Ring. Plenty of tours if you don't drive." }
+  - { name: Limerick, province: munster, description: "A riverside city with King John's Castle and the Hunt Museum, plus Adare village and the Limerick Greenway." }
+  - { name: Tipperary, province: munster, description: "The Rock of Cashel, the Glen of Aherlow and the Galtee Mountains, with fine country house hotels." }
+  - { name: Waterford, province: munster, description: "Ireland's oldest city, the Viking Triangle, House of Waterford Crystal and the 46km Waterford Greenway." }
+  - { name: Galway, province: connacht, description: "A music-filled city and gateway to Connemara and the Aran Islands. One of the friendliest places in Ireland to travel alone." }
+  - { name: Leitrim, province: connacht, description: "Lakes, the Shannon–Erne waterway and Carrick-on-Shannon. Quiet, unspoiled and good for walkers and paddlers." }
+  - { name: Mayo, province: connacht, description: "Westport, Croagh Patrick, Achill Island and the Great Western Greenway." }
+  - { name: Roscommon, province: connacht, description: "Strokestown Park and the National Famine Museum, Lough Key Forest Park and quiet lakeland." }
+  - { name: Sligo, province: connacht, description: "Yeats country: Benbulben, Strandhill's surf, seaweed baths and Mullaghmore." }
+  - { name: Cavan, province: ulster, description: "A county of lakes, with the Cavan Burren, the Marble Arch Caves Global Geopark and good angling." }
+  - { name: Donegal, province: ulster, description: "Wild Atlantic coast, Slieve League cliffs, Glenveagh National Park and Irish-speaking Gaeltacht areas." }
+  - { name: Monaghan, province: ulster, description: "Drumlins and small lakes, Castle Leslie and the Patrick Kavanagh Centre." }
+  - { name: Northern Ireland, province: ulster, map_name: Northern Ireland, description: "Belfast's food and history, the Causeway Coast, the Mourne Mountains and the Fermanagh lakes. Prices are in sterling." }
+listing_type:
+  - Hotel
+  - Country house hotel
+  - B&B or guesthouse
+  - Self-catering
+  - Hostel
+  - Glamping
+  - Guided tour
+  - Walking or activity holiday
+  - Retreat or wellness break
+  - Package holiday
+topic:
+  - { name: Planning and money, description: "Single supplements, budgets and booking tips." }
+  - { name: Places to go, description: "Counties, cities and towns that work well for solo travellers." }
+  - { name: Staying safe, description: "Practical safety advice for travelling alone in Ireland." }
+  - { name: Getting around, description: "Trains, buses, driving and tours." }
+  - { name: Food and company, description: "Eating out alone, pubs and meeting people." }
+  - { name: Outdoors and wellness, description: "Walking, swimming, cycling, spas and retreats." }
+  - { name: Visiting Ireland, description: "Advice for solo visitors coming from abroad." }

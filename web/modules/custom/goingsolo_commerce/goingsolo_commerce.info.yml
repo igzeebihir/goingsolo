@@ -1,0 +1,14 @@
+name: 'Going Solo commerce'
+type: module
+description: 'Solo Club memberships, provider subscriptions and paid featured listings, built on Drupal Commerce and Commerce Recurring.'
+package: 'Going Solo'
+core_version_requirement: ^11
+dependencies:
+  - goingsolo_core:goingsolo_core
+  - commerce:commerce_product
+  - commerce:commerce_order
+  - commerce:commerce_cart
+  - commerce:commerce_checkout
+  - commerce:commerce_payment
+  - commerce:commerce_payment_example
+  - commerce_recurring:commerce_recurring

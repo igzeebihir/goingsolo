@@ -1,0 +1,6 @@
+services:
+  goingsolo_commerce.order_paid_subscriber:
+    class: Drupal\goingsolo_commerce\EventSubscriber\OrderPaidSubscriber
+    arguments: ['@entity_type.manager', '@logger.factory']
+    tags:
+      - { name: event_subscriber }

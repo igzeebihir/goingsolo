@@ -1,0 +1,9 @@
+enabled: false
+provider: adsense
+publisher_id: ''
+slots:
+  header: ''
+  in_content: ''
+  sidebar: ''
+  footer: ''
+ads_txt_extra: ''

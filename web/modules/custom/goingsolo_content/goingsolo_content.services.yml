@@ -1,0 +1,4 @@
+services:
+  goingsolo_content.importer:
+    class: Drupal\goingsolo_content\ContentImporter
+    arguments: ['@entity_type.manager', '@extension.list.module', '@logger.factory']

@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Adds a location map above the solo deals listing.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_preprocess_HOOK() for views_view.
+ */
+function goingsolo_maps_preprocess_views_view(array &$variables): void {
+  $view = $variables['view'];
+  if ($view->id() === 'deals' && $view->current_display === 'page_deals') {
+    $variables['header']['gs_map'] = \Drupal::service('goingsolo_maps.builder')->dealsMap();
+  }
+}

@@ -1,0 +1,9 @@
+name: 'Going Solo starter content'
+type: module
+description: 'Counties, stay types, topics, starter solo deals, guides and pages for goingsolo.ie.'
+package: 'Going Solo'
+core_version_requirement: ^11
+dependencies:
+  - goingsolo_core:goingsolo_core
+  - drupal:menu_link_content
+  - drupal:contact

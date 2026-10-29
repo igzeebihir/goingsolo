@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Imports the starter content.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_install().
+ */
+function goingsolo_content_install(bool $is_syncing): void {
+  if (!$is_syncing) {
+    \Drupal::service('goingsolo_content.importer')->importAll();
+  }
+}

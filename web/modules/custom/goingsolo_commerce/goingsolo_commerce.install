@@ -1,0 +1,281 @@
+<?php
+
+/**
+ * @file
+ * Sets up the store, membership products and featured listings.
+ */
+
+declare(strict_types=1);
+
+use Drupal\commerce_price\Price;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\user\Entity\Role;
+use Drupal\user\RoleInterface;
+
+/**
+ * Implements hook_install().
+ */
+function goingsolo_commerce_install(bool $is_syncing): void {
+  if ($is_syncing) {
+    return;
+  }
+  $etm = \Drupal::entityTypeManager();
+
+  // Roles granted by subscriptions.
+  $roles = [
+    'solo_club_member' => ['Solo Club member', ['view members only deals', 'browse without ads', 'view own commerce_subscription']],
+    'provider' => ['Provider', ['create listing content', 'edit own listing content', 'view own unpublished content', 'browse without ads', 'view own commerce_subscription']],
+  ];
+  $all_permissions = array_keys(\Drupal::service('user.permissions')->getPermissions());
+  foreach ($roles as $id => [$label, $permissions]) {
+    $role = Role::load($id) ?? Role::create(['id' => $id, 'label' => $label]);
+    foreach (array_intersect($permissions, $all_permissions) as $permission) {
+      $role->grantPermission($permission);
+    }
+    $role->save();
+  }
+  $customer_permissions = array_intersect(['view commerce_product', 'access checkout', 'view own commerce_order', 'manage own commerce_payment_method'], $all_permissions);
+  user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, $customer_permissions);
+  user_role_grant_permissions(RoleInterface::ANONYMOUS_ID, array_intersect(['view commerce_product', 'access checkout'], $all_permissions));
+
+  // Currency and store.
+  \Drupal::service('commerce_price.currency_importer')->import('EUR');
+  $store_storage = $etm->getStorage('commerce_store');
+  $store = $store_storage->loadDefault();
+  if (!$store) {
+    $store = $store_storage->create([
+      'type' => 'online',
+      'uid' => 1,
+      'name' => 'goingsolo.ie',
+      'mail' => \Drupal::config('system.site')->get('mail') ?: 'hello@goingsolo.ie',
+      'default_currency' => 'EUR',
+      'timezone' => 'Europe/Dublin',
+      'address' => [
+        'country_code' => 'IE',
+        'locality' => 'Dublin',
+        'administrative_area' => 'Co. Dublin',
+        'address_line1' => 'Address to be confirmed',
+      ],
+      'billing_countries' => [],
+    ]);
+    if (method_exists($store, 'setDefault')) {
+      $store->setDefault(TRUE);
+    }
+    $store->save();
+    if (method_exists($store_storage, 'markAsDefault')) {
+      $store_storage->markAsDefault($store);
+    }
+  }
+
+  // Billing schedules.
+  $schedule_storage = $etm->getStorage('commerce_billing_schedule');
+  foreach (['monthly' => ['Monthly', 'month'], 'yearly' => ['Yearly', 'year']] as $id => [$label, $unit]) {
+    if (!$schedule_storage->load($id)) {
+      $schedule_storage->create([
+        'id' => $id,
+        'label' => $label,
+        'displayLabel' => $label,
+        'billingType' => 'prepaid',
+        'plugin' => 'rolling',
+        'configuration' => ['interval' => ['number' => 1, 'unit' => $unit]],
+        'prorater' => 'proportional',
+        'proraterConfiguration' => [],
+        'retrySchedule' => [1, 3, 5],
+        'unpaidSubscriptionState' => 'canceled',
+        'status' => TRUE,
+      ])->save();
+    }
+  }
+
+  // Order item type for featured listings, with a reference to the listing.
+  $order_item_types = $etm->getStorage('commerce_order_item_type');
+  if (!$order_item_types->load('featured_listing')) {
+    $order_item_types->create([
+      'id' => 'featured_listing',
+      'label' => 'Featured listing',
+      'purchasableEntityType' => 'commerce_product_variation',
+      'orderType' => 'default',
+    ])->save();
+  }
+  if (!FieldStorageConfig::loadByName('commerce_order_item', 'field_listing')) {
+    FieldStorageConfig::create([
+      'field_name' => 'field_listing',
+      'entity_type' => 'commerce_order_item',
+      'type' => 'entity_reference',
+      'settings' => ['target_type' => 'node'],
+    ])->save();
+    FieldConfig::create([
+      'field_name' => 'field_listing',
+      'entity_type' => 'commerce_order_item',
+      'bundle' => 'featured_listing',
+      'label' => 'Deal to feature',
+      'required' => TRUE,
+      'description' => 'Start typing the name of your deal.',
+      'settings' => ['handler' => 'default:node', 'handler_settings' => ['target_bundles' => ['listing' => 'listing']]],
+    ])->save();
+  }
+  $display_storage = $etm->getStorage('entity_form_display');
+  foreach (['default', 'add_to_cart'] as $mode) {
+    $display = $display_storage->load("commerce_order_item.featured_listing.$mode")
+      ?? $display_storage->create(['targetEntityType' => 'commerce_order_item', 'bundle' => 'featured_listing', 'mode' => $mode, 'status' => TRUE]);
+    $display->setComponent('field_listing', ['type' => 'entity_reference_autocomplete', 'weight' => 0]);
+    if ($mode === 'add_to_cart') {
+      $display->setComponent('purchased_entity', ['type' => 'commerce_product_variation_attributes', 'weight' => 1]);
+      $display->removeComponent('quantity');
+    }
+    $display->save();
+  }
+
+  // Variation types.
+  $variation_types = $etm->getStorage('commerce_product_variation_type');
+  foreach ([
+    'membership' => ['Subscription', 'default', ['purchasable_entity_subscription']],
+    'featured_listing' => ['Featured listing', 'featured_listing', []],
+  ] as $id => [$label, $order_item_type, $traits]) {
+    if (!$variation_types->load($id)) {
+      $type = $variation_types->create([
+        'id' => $id,
+        'label' => $label,
+        'orderItemType' => $order_item_type,
+        'generateTitle' => FALSE,
+        'traits' => $traits,
+      ]);
+      $type->save();
+      if ($traits) {
+        $trait_manager = \Drupal::service('plugin.manager.commerce_entity_trait');
+        foreach ($traits as $trait_id) {
+          $trait_manager->installTrait($trait_manager->createInstance($trait_id), 'commerce_product_variation', $id);
+        }
+      }
+    }
+  }
+  foreach ([
+    ['field_grants_role', 'membership', 'string', 'Role granted while active', ['max_length' => 64]],
+    ['field_feature_days', 'featured_listing', 'integer', 'Days featured', []],
+  ] as [$name, $bundle, $type, $label, $settings]) {
+    if (!FieldStorageConfig::loadByName('commerce_product_variation', $name)) {
+      FieldStorageConfig::create(['field_name' => $name, 'entity_type' => 'commerce_product_variation', 'type' => $type, 'settings' => $settings])->save();
+    }
+    if (!FieldConfig::loadByName('commerce_product_variation', $bundle, $name)) {
+      FieldConfig::create(['field_name' => $name, 'entity_type' => 'commerce_product_variation', 'bundle' => $bundle, 'label' => $label])->save();
+    }
+  }
+
+  // Product types.
+  $product_types = $etm->getStorage('commerce_product_type');
+  foreach (['membership' => 'Membership', 'featured_listing' => 'Featured listing'] as $id => $label) {
+    if (!$product_types->load($id)) {
+      $product_type = $product_types->create([
+        'id' => $id,
+        'label' => $label,
+        'variationType' => $id,
+        'variationTypes' => [$id],
+        'multipleVariations' => FALSE,
+        'injectVariationFields' => TRUE,
+      ]);
+      if (method_exists($product_type, 'setVariationTypeIds')) {
+        $product_type->setVariationTypeIds([$id]);
+      }
+      elseif (method_exists($product_type, 'setVariationTypeId')) {
+        $product_type->setVariationTypeId($id);
+      }
+      $product_type->save();
+      commerce_product_add_body_field($product_type, 'Description');
+    }
+  }
+
+  // Products.
+  $products = [
+    [
+      'type' => 'membership',
+      'title' => 'Solo Club monthly',
+      'alias' => '/membership/monthly',
+      'body' => '<p>Members-only deals, no ads and deal alerts for the counties you choose. Billed monthly. Cancel any time from your account.</p>',
+      'sku' => 'SOLO-CLUB-MONTHLY',
+      'price' => '4.99',
+      'variation' => ['field_grants_role' => 'solo_club_member', 'billing_schedule' => 'monthly', 'subscription_type' => ['target_plugin_id' => 'product_variation']],
+    ],
+    [
+      'type' => 'membership',
+      'title' => 'Solo Club annual',
+      'alias' => '/membership/annual',
+      'body' => '<p>Members-only deals, no ads and deal alerts for the counties you choose. Billed yearly, saving over a third on monthly. Cancel any time from your account.</p>',
+      'sku' => 'SOLO-CLUB-ANNUAL',
+      'price' => '39.00',
+      'variation' => ['field_grants_role' => 'solo_club_member', 'billing_schedule' => 'yearly', 'subscription_type' => ['target_plugin_id' => 'product_variation']],
+    ],
+    [
+      'type' => 'membership',
+      'title' => 'Provider Pro',
+      'alias' => '/providers/pro',
+      'body' => '<p>For hotels, B&amp;Bs and tour operators. Add and update your own solo offers (we check each one before it goes live), feature up to three at a time and see how many people click through to your booking page. Billed monthly.</p>',
+      'sku' => 'PROVIDER-PRO-MONTHLY',
+      'price' => '29.00',
+      'variation' => ['field_grants_role' => 'provider', 'billing_schedule' => 'monthly', 'subscription_type' => ['target_plugin_id' => 'product_variation']],
+    ],
+    [
+      'type' => 'featured_listing',
+      'title' => 'Featured listing for 30 days',
+      'alias' => '/providers/featured-listing',
+      'body' => '<p>Your deal shows first on the deals page and its county page for 30 days, with a Featured label and a highlighted map marker. Choose the deal below. If it is not listed yet, <a href="/list-your-offer">send it to us first</a>.</p>',
+      'sku' => 'FEATURED-30',
+      'price' => '49.00',
+      'variation' => ['field_feature_days' => 30],
+    ],
+  ];
+  $product_storage = $etm->getStorage('commerce_product');
+  $variation_storage = $etm->getStorage('commerce_product_variation');
+  foreach ($products as $item) {
+    if ($variation_storage->loadBySku($item['sku'])) {
+      continue;
+    }
+    $variation = $variation_storage->create([
+      'type' => $item['type'],
+      'sku' => $item['sku'],
+      'title' => $item['title'],
+      'price' => new Price($item['price'], 'EUR'),
+      'status' => 1,
+    ] + $item['variation']);
+    $variation->save();
+    $product_storage->create([
+      'type' => $item['type'],
+      'title' => $item['title'],
+      'stores' => [$store->id()],
+      'variations' => [$variation],
+      'body' => ['value' => $item['body'], 'format' => 'basic_html'],
+      'status' => 1,
+      'path' => ['alias' => $item['alias']],
+    ])->save();
+  }
+
+  // Test payment gateway so the whole flow can be tried on the preview site.
+  // Replace with Stripe before launch.
+  $gateways = $etm->getStorage('commerce_payment_gateway');
+  if (!$gateways->load('test_payments')) {
+    $gateways->create([
+      'id' => 'test_payments',
+      'label' => 'Test payments (preview only)',
+      'plugin' => 'example_onsite',
+      'configuration' => [
+        'display_label' => 'Card (test mode: use 4111 1111 1111 1111)',
+        'mode' => 'test',
+        'payment_method_types' => ['credit_card'],
+        'collect_billing_information' => TRUE,
+        'api_key' => 'test',
+      ],
+      'status' => TRUE,
+      'weight' => 0,
+    ])->save();
+  }
+
+  // Subscriptions need an account, so checkout asks people to log in or
+  // register instead of checking out as a guest.
+  if ($flow = $etm->getStorage('commerce_checkout_flow')->load('default')) {
+    $configuration = $flow->get('configuration');
+    $configuration['panes']['login']['allow_guest_checkout'] = FALSE;
+    $configuration['panes']['login']['allow_registration'] = TRUE;
+    $flow->set('configuration', $configuration);
+    $flow->save();
+  }
+}

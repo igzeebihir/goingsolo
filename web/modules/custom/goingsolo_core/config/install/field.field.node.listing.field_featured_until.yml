@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_featured_until
+    - node.type.listing
+  module:
+    - datetime
+id: node.listing.field_featured_until
+field_name: field_featured_until
+entity_type: node
+bundle: listing
+label: 'Featured until'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

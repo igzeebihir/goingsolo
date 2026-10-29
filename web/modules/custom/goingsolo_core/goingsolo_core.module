@@ -1,0 +1,171 @@
+<?php
+
+/**
+ * @file
+ * Hooks for the Going Solo content model.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function goingsolo_core_theme(): array {
+  return [
+    'goingsolo_hero' => [
+      'variables' => ['deals_url' => NULL, 'guides_url' => NULL],
+    ],
+    'goingsolo_members_teaser' => [
+      'variables' => ['join_url' => NULL, 'login_url' => NULL],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_entity_field_access().
+ *
+ * Hides the description and booking link of members-only deals from people
+ * who are not Solo Club members.
+ */
+function goingsolo_core_entity_field_access(string $operation, FieldDefinitionInterface $field_definition, AccountInterface $account, ?FieldItemListInterface $items = NULL): AccessResult {
+  if ($operation !== 'view' || !$items || $field_definition->getTargetEntityTypeId() !== 'node') {
+    return AccessResult::neutral();
+  }
+  if (!in_array($field_definition->getName(), ['field_offer_link', 'body'], TRUE)) {
+    return AccessResult::neutral();
+  }
+  $node = $items->getEntity();
+  if (!$node instanceof NodeInterface || $node->bundle() !== 'listing' || !$node->hasField('field_members_only')) {
+    return AccessResult::neutral();
+  }
+  if (!$node->get('field_members_only')->value) {
+    return AccessResult::neutral()->addCacheableDependency($node);
+  }
+  return AccessResult::forbiddenIf(!$account->hasPermission('view members only deals'))
+    ->cachePerPermissions()
+    ->addCacheableDependency($node);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view() for nodes.
+ */
+function goingsolo_core_node_view(array &$build, EntityInterface $node, EntityViewDisplayInterface $display, string $view_mode): void {
+  if (!$node instanceof NodeInterface || $node->bundle() !== 'listing' || $view_mode !== 'full') {
+    return;
+  }
+  if ($node->get('field_members_only')->value && !\Drupal::currentUser()->hasPermission('view members only deals')) {
+    $build['members_teaser'] = [
+      '#theme' => 'goingsolo_members_teaser',
+      '#join_url' => _goingsolo_core_membership_url(),
+      '#login_url' => Url::fromRoute('user.login', [], ['query' => ['destination' => $node->toUrl()->toString()]])->toString(),
+      '#weight' => 50,
+      '#cache' => ['contexts' => ['user.permissions']],
+    ];
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view() for taxonomy terms.
+ *
+ * County pages show a map of the county's deals, the deals and related guides.
+ */
+function goingsolo_core_taxonomy_term_view(array &$build, EntityInterface $term, EntityViewDisplayInterface $display, string $view_mode): void {
+  if ($term->bundle() !== 'county' || $view_mode !== 'full') {
+    return;
+  }
+  if (\Drupal::moduleHandler()->moduleExists('goingsolo_maps')) {
+    $build['gs_map'] = \Drupal::service('goingsolo_maps.builder')->dealsMap((int) $term->id());
+    $build['gs_map']['#weight'] = 5;
+  }
+  $build['gs_deals'] = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['county-section']],
+    'title' => ['#markup' => '<h2>' . t('Solo deals in @county', ['@county' => $term->label()]) . '</h2>'],
+    'view' => views_embed_view('deals', 'block_county', $term->id()),
+    '#weight' => 10,
+  ];
+  $build['gs_guides'] = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['county-section']],
+    'title' => ['#markup' => '<h2>' . t('Guides to @county', ['@county' => $term->label()]) . '</h2>'],
+    'view' => views_embed_view('guides', 'block_county', $term->id()),
+    '#weight' => 20,
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for node templates.
+ */
+function goingsolo_core_preprocess_node(array &$variables): void {
+  $node = $variables['node'];
+  if ($node->bundle() !== 'listing') {
+    return;
+  }
+  $badges = [];
+  if ($node->get('field_featured')->value) {
+    $badges[] = ['label' => t('Featured'), 'modifier' => 'featured'];
+  }
+  if ($node->get('field_members_only')->value) {
+    $badges[] = ['label' => t('Members only'), 'modifier' => 'members'];
+  }
+  $supplement = $node->get('field_supplement')->value;
+  if (in_array($supplement, ['none', 'share'], TRUE)) {
+    $badges[] = ['label' => t('No single supplement'), 'modifier' => 'nosupplement'];
+  }
+  elseif ($supplement === 'reduced') {
+    $badges[] = ['label' => t('Reduced solo rate'), 'modifier' => 'reduced'];
+  }
+  $variables['gs_badges'] = $badges;
+  $variables['gs_provider'] = $node->get('field_provider')->value;
+  $price = $node->get('field_solo_price')->value;
+  $variables['gs_price'] = $price !== NULL ? '€' . number_format((float) $price, ((float) $price == floor((float) $price)) ? 0 : 2) : NULL;
+  $variables['gs_price_basis'] = $node->get('field_price_basis')->value;
+  $county = $node->get('field_county')->entity;
+  $variables['gs_county'] = $county?->label();
+  $variables['gs_town'] = $node->get('field_town')->value;
+  $type = $node->get('field_listing_type')->entity;
+  $variables['gs_type'] = $type?->label();
+  $link = $node->get('field_offer_link');
+  $variables['gs_offer_url'] = (!$link->isEmpty() && $link->access('view')) ? $link->first()->getUrl()->toString() : NULL;
+  $variables['#cache']['contexts'][] = 'user.permissions';
+}
+
+/**
+ * Implements hook_cron().
+ *
+ * Clears the featured flag once a paid featured period ends.
+ */
+function goingsolo_core_cron(): void {
+  $today = (new \DateTimeImmutable('now', new \DateTimeZone('Europe/Dublin')))->format('Y-m-d');
+  $storage = \Drupal::entityTypeManager()->getStorage('node');
+  $ids = $storage->getQuery()
+    ->accessCheck(FALSE)
+    ->condition('type', 'listing')
+    ->condition('field_featured', 1)
+    ->condition('field_featured_until', $today, '<')
+    ->range(0, 50)
+    ->execute();
+  foreach ($storage->loadMultiple($ids) as $node) {
+    $node->set('field_featured', 0);
+    $node->setNewRevision(TRUE);
+    $node->setRevisionLogMessage('Featured period ended.');
+    $node->save();
+  }
+}
+
+/**
+ * Returns the URL of the membership page.
+ */
+function _goingsolo_core_membership_url(): string {
+  $path = \Drupal::service('path_alias.manager')->getPathByAlias('/membership');
+  return $path !== '/membership' ? Url::fromUserInput('/membership')->toString() : Url::fromRoute('user.register')->toString();
+}

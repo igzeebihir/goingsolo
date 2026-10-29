@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_price_basis
+    - node.type.listing
+id: node.listing.field_price_basis
+field_name: field_price_basis
+entity_type: node
+bundle: listing
+label: 'Price basis'
+description: 'For example: per night, B&B; per person, 5-day tour.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

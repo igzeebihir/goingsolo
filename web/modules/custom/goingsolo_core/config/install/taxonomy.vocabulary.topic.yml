@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: Topic
+vid: topic
+description: 'Article topics for the solo travel guides.'
+weight: 0
+new_revision: false

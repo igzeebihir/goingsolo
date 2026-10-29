@@ -1,0 +1,13 @@
+goingsolo_ads.settings:
+  path: '/admin/config/services/ads'
+  defaults:
+    _form: '\Drupal\goingsolo_ads\Form\AdsSettingsForm'
+    _title: 'Ads'
+  requirements:
+    _permission: 'administer goingsolo ads'
+goingsolo_ads.ads_txt:
+  path: '/ads.txt'
+  defaults:
+    _controller: '\Drupal\goingsolo_ads\Controller\AdsTxtController::content'
+  requirements:
+    _access: 'TRUE'

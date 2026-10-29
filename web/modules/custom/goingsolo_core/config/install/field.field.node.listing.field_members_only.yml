@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_members_only
+    - node.type.listing
+id: node.listing.field_members_only
+field_name: field_members_only
+entity_type: node
+bundle: listing
+label: 'Members only'
+description: 'Only Solo Club members can see the full offer details and link.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'Members only'
+  off_label: Public
+field_type: boolean

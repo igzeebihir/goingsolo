@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Solo deal card.
+ */
+#}
+<article{{ attributes.addClass('deal-card', node.field_featured.value ? 'deal-card--featured') }}>
+  <div class="deal-card__top">
+    {% if gs_badges %}
+      <ul class="deal-card__badges">
+        {% for badge in gs_badges %}
+          <li class="gs-badge gs-badge--{{ badge.modifier }}">{{ badge.label }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    <p class="deal-card__where">
+      {{ gs_type }}{% if gs_town %} · {{ gs_town }}{% endif %}{% if gs_county %}, {{ 'Co. @county'|t({'@county': gs_county}) }}{% endif %}
+    </p>
+  </div>
+  {{ title_prefix }}
+  <h3{{ title_attributes.addClass('deal-card__title') }}>
+    <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+  </h3>
+  {{ title_suffix }}
+  {% if gs_provider %}<p class="deal-card__provider">{{ gs_provider }}</p>{% endif %}
+  <div class="deal-card__summary">{{ content.body }}</div>
+  <div class="deal-card__price">
+    {% if gs_price %}
+      <span class="deal-card__amount">{{ 'from @price'|t({'@price': gs_price}) }}</span>
+    {% elseif gs_price_basis %}
+      <span class="deal-card__amount deal-card__amount--ask">{{ gs_price_basis }}</span>
+    {% else %}
+      <span class="deal-card__amount deal-card__amount--ask">{{ 'Price on request'|t }}</span>
+    {% endif %}
+    {% if gs_price and gs_price_basis %}<span class="deal-card__basis">{{ gs_price_basis }}</span>{% endif %}
+  </div>
+  <a class="deal-card__more" href="{{ url }}">{{ 'See the deal'|t }}<span class="visually-hidden">: {{ label }}</span></a>
+</article>

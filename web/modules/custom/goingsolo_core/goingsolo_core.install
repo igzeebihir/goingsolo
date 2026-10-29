@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for Going Solo core.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_install().
+ */
+function goingsolo_core_install(bool $is_syncing): void {
+  if ($is_syncing) {
+    return;
+  }
+  // County pages are built by this module, so the default term listing view
+  // would only duplicate the deals.
+  if ($view = \Drupal::entityTypeManager()->getStorage('view')->load('taxonomy_term')) {
+    $view->disable()->save();
+  }
+  \Drupal::configFactory()->getEditable('system.site')->set('page.front', '/home')->save();
+}

@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: County
+vid: county
+description: 'Irish counties used to group solo deals and power the county map.'
+weight: 0
+new_revision: false

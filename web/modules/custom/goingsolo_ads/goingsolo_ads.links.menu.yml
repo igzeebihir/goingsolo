@@ -1,0 +1,5 @@
+goingsolo_ads.settings:
+  title: 'Ads'
+  description: 'Google AdSense publisher ID, ad slots and ads.txt.'
+  route_name: goingsolo_ads.settings
+  parent: system.admin_config_services

@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_map_name
+    - taxonomy.vocabulary.county
+id: taxonomy_term.county.field_map_name
+field_name: field_map_name
+entity_type: taxonomy_term
+bundle: county
+label: 'Map name'
+description: 'Must match the county name in the map outline file.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

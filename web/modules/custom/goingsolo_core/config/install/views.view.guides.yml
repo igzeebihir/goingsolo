@@ -1,0 +1,240 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.storage.node.field_counties
+    - field.storage.node.field_topic
+    - node.type.article
+    - taxonomy.vocabulary.topic
+  module:
+    - node
+    - taxonomy
+    - user
+id: guides
+label: 'Solo travel guides'
+module: views
+description: 'Articles for solo travellers.'
+tag: goingsolo
+base_table: node_field_data
+base_field: nid
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: 'Solo travel guides'
+      fields: {  }
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 12
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Filter
+          reset_button: false
+      access:
+        type: perm
+        options:
+          perm: 'access content'
+      cache:
+        type: tag
+        options: {  }
+      empty: {  }
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
+          granularity: second
+      arguments: {  }
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            article: article
+          group: 1
+        field_topic_target_id:
+          id: field_topic_target_id
+          table: node__field_topic
+          field: field_topic_target_id
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_topic_target_id_op
+            label: Topic
+            identifier: topic
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          type: select
+          limit: true
+          vid: topic
+          hierarchy: false
+          error_message: true
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: 'guide-grid__item'
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: teaser
+      query:
+        type: views_query
+        options:
+          distinct: true
+      relationships: {  }
+      css_class: guide-grid
+      header: {  }
+      footer: {  }
+      display_extenders: {  }
+  page_guides:
+    id: page_guides
+    display_title: 'Guides page'
+    display_plugin: page
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: guides
+      menu:
+        type: normal
+        title: Guides
+        weight: 1
+        menu_name: main
+        parent: ''
+        expanded: false
+  block_latest:
+    id: block_latest
+    display_title: 'Latest guides'
+    display_plugin: block
+    position: 2
+    display_options:
+      title: 'Solo travel guides'
+      display_extenders: {  }
+      block_description: 'Latest guides'
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 6
+      defaults:
+        pager: false
+        filters: false
+        filter_groups: false
+        title: false
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            article: article
+          group: 1
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+  block_county:
+    id: block_county
+    display_title: 'Guides about a county'
+    display_plugin: block
+    position: 3
+    display_options:
+      title: 'Guides'
+      display_extenders: {  }
+      block_description: 'Guides about one county'
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 6
+      defaults:
+        pager: false
+        filters: false
+        filter_groups: false
+        arguments: false
+        title: false
+      arguments:
+        field_counties_target_id:
+          id: field_counties_target_id
+          table: node__field_counties
+          field: field_counties_target_id
+          plugin_id: taxonomy_index_tid
+          default_action: empty
+          default_argument_type: fixed
+          specify_validation: false
+          break_phrase: false
+          not: false
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            article: article
+          group: 1
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND

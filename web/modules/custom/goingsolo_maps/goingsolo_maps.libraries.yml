@@ -1,0 +1,24 @@
+leaflet:
+  version: 1.9.4
+  license:
+    name: BSD-2-Clause
+    url: https://github.com/Leaflet/Leaflet/blob/main/LICENSE
+    gpl-compatible: true
+  js:
+    vendor/leaflet/leaflet.js: { minified: true }
+  css:
+    component:
+      vendor/leaflet/leaflet.css: { minified: true }
+
+maps:
+  version: 1.0
+  js:
+    js/goingsolo-maps.js: {}
+  css:
+    component:
+      css/goingsolo-maps.css: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/once
+    - goingsolo_maps/leaflet

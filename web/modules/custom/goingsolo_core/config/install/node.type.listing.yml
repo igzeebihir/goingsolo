@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Solo deal'
+type: listing
+description: 'A holiday, stay or tour with a solo rate or no single supplement.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

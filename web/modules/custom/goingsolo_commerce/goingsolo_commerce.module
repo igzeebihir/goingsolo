@@ -1,0 +1,104 @@
+<?php
+
+/**
+ * @file
+ * Grants and removes roles as Solo Club and provider subscriptions change.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for commerce_subscription.
+ */
+function goingsolo_commerce_commerce_subscription_insert(EntityInterface $subscription): void {
+  _goingsolo_commerce_sync_roles($subscription);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for commerce_subscription.
+ */
+function goingsolo_commerce_commerce_subscription_update(EntityInterface $subscription): void {
+  _goingsolo_commerce_sync_roles($subscription);
+}
+
+/**
+ * Gives the customer the subscription's role while it is active.
+ *
+ * The role is only removed when no other active subscription grants it.
+ */
+function _goingsolo_commerce_sync_roles(EntityInterface $subscription): void {
+  $variation = $subscription->getPurchasedEntity();
+  $customer = $subscription->getCustomer();
+  if (!$variation || !$customer || $customer->isAnonymous() || !$variation->hasField('field_grants_role')) {
+    return;
+  }
+  $role = $variation->get('field_grants_role')->value;
+  if (!$role) {
+    return;
+  }
+  $active = in_array($subscription->getState()->getId(), ['active', 'trial'], TRUE);
+  if ($active && !$customer->hasRole($role)) {
+    $customer->addRole($role)->save();
+  }
+  elseif (!$active && $customer->hasRole($role) && !_goingsolo_commerce_has_other_active($customer, $role, (int) $subscription->id())) {
+    $customer->removeRole($role)->save();
+  }
+}
+
+/**
+ * Checks for another active subscription that grants the same role.
+ */
+function _goingsolo_commerce_has_other_active(AccountInterface $customer, string $role, int $exclude_id): bool {
+  $storage = \Drupal::entityTypeManager()->getStorage('commerce_subscription');
+  $ids = $storage->getQuery()
+    ->accessCheck(FALSE)
+    ->condition('uid', $customer->id())
+    ->condition('state', ['active', 'trial'], 'IN')
+    ->condition('subscription_id', $exclude_id, '<>')
+    ->execute();
+  foreach ($storage->loadMultiple($ids) as $other) {
+    $variation = $other->getPurchasedEntity();
+    if ($variation && $variation->hasField('field_grants_role') && $variation->get('field_grants_role')->value === $role) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for node.
+ *
+ * Listings added by providers wait for an editor to check them.
+ */
+function goingsolo_commerce_node_presave(NodeInterface $node): void {
+  if ($node->bundle() !== 'listing' || !$node->isNew()) {
+    return;
+  }
+  $account = \Drupal::currentUser();
+  if ($account->hasPermission('edit any listing content')) {
+    return;
+  }
+  if (in_array('provider', $account->getRoles(), TRUE)) {
+    $node->setUnpublished();
+    $node->set('field_featured', 0);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for the listing add form.
+ */
+function goingsolo_commerce_form_node_listing_form_alter(array &$form): void {
+  if (\Drupal::currentUser()->hasPermission('edit any listing content')) {
+    return;
+  }
+  // Providers cannot set the paid or internal fields themselves.
+  foreach (['field_featured', 'field_featured_until', 'field_members_only', 'field_source_note', 'field_last_checked'] as $field) {
+    if (isset($form[$field])) {
+      $form[$field]['#access'] = FALSE;
+    }
+  }
+}

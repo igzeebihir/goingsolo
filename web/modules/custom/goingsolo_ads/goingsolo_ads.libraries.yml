@@ -1,0 +1,10 @@
+slot:
+  version: 1.0
+  js:
+    js/ad-slot.js: {}
+  css:
+    component:
+      css/ads.css: {}
+  dependencies:
+    - core/drupal
+    - core/once

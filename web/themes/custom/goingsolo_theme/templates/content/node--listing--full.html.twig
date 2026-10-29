@@ -1,0 +1,46 @@
+{#
+/**
+ * @file
+ * Full solo deal page.
+ */
+#}
+{%
+  set classes = [
+    'node',
+    'node--type-listing',
+    'node--view-mode-full',
+    not node.isPublished() ? 'node--unpublished',
+    'deal-full',
+  ]
+%}
+<article{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  <div class="deal-full__layout">
+    <div{{ content_attributes.addClass('node__content', 'deal-full__main') }}>
+      {% if gs_badges %}
+        <ul class="deal-card__badges">
+          {% for badge in gs_badges %}
+            <li class="gs-badge gs-badge--{{ badge.modifier }}">{{ badge.label }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      {{ content|without('field_offer_link', 'field_solo_price', 'field_price_basis') }}
+    </div>
+    <aside class="deal-full__pricebox">
+      {% if gs_provider %}<p class="deal-full__provider">{{ gs_provider }}</p>{% endif %}
+      {% if gs_price %}
+        <p class="deal-card__amount">{{ 'from @price'|t({'@price': gs_price}) }}</p>
+      {% elseif gs_price_basis %}
+        <p class="deal-card__amount deal-card__amount--ask">{{ gs_price_basis }}</p>
+      {% else %}
+        <p class="deal-card__amount deal-card__amount--ask">{{ 'Price on request'|t }}</p>
+      {% endif %}
+      {% if gs_price and gs_price_basis %}<p class="deal-card__basis">{{ gs_price_basis }}</p>{% endif %}
+      {% if gs_offer_url %}
+        <a class="button button--primary deal-full__cta" href="{{ gs_offer_url }}" target="_blank" rel="nofollow noopener sponsored">{{ 'See the offer'|t }}</a>
+      {% endif %}
+      <p class="deal-full__note">{{ 'Prices and availability change. Confirm the solo rate with the provider when you book.'|t }}</p>
+    </aside>
+  </div>
+</article>

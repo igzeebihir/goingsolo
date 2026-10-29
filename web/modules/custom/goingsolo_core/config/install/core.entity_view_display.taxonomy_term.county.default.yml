@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.county.field_map_name
+    - field.field.taxonomy_term.county.field_province
+    - taxonomy.vocabulary.county
+  module:
+    - text
+id: taxonomy_term.county.default
+targetEntityType: taxonomy_term
+bundle: county
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_map_name: true
+  field_province: true

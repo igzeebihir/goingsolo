@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_valid_until
+    - node.type.listing
+  module:
+    - datetime
+id: node.listing.field_valid_until
+field_name: field_valid_until
+entity_type: node
+bundle: listing
+label: 'Valid until'
+description: 'Leave empty for ongoing offers.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

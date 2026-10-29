@@ -1,0 +1,6 @@
+name: 'Going Solo ads'
+type: module
+description: 'Google AdSense ad slots and ads.txt. Ads are hidden for Solo Club members.'
+package: 'Going Solo'
+core_version_requirement: ^11
+configure: goingsolo_ads.settings

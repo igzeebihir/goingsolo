@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * @file
+ * URL patterns, meta tag defaults and sitemap settings.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_install().
+ */
+function goingsolo_seo_install(bool $is_syncing): void {
+  if ($is_syncing) {
+    return;
+  }
+  $patterns = [
+    'listing' => ['node', 'deals/[node:field_county:entity:name]/[node:title]', 'Solo deals'],
+    'article' => ['node', 'guides/[node:title]', 'Guides'],
+    'county' => ['taxonomy_term', 'county/[term:name]', 'Counties'],
+  ];
+  $storage = \Drupal::entityTypeManager()->getStorage('pathauto_pattern');
+  $weight = 0;
+  foreach ($patterns as $bundle => [$entity_type, $pattern, $label]) {
+    if ($storage->load($bundle)) {
+      continue;
+    }
+    $context = $entity_type === 'node' ? 'node' : 'taxonomy_term';
+    $entity = $storage->create([
+      'id' => $bundle,
+      'label' => $label,
+      'type' => 'canonical_entities:' . $entity_type,
+      'pattern' => $pattern,
+      'weight' => $weight++,
+    ]);
+    $entity->addSelectionCondition([
+      'id' => 'entity_bundle:' . $entity_type,
+      'bundles' => [$bundle => $bundle],
+      'negate' => FALSE,
+      'context_mapping' => [$context => $context],
+    ]);
+    $entity->save();
+  }
+
+  // Meta tag defaults.
+  $metatag = \Drupal::entityTypeManager()->getStorage('metatag_defaults');
+  if ($global = $metatag->load('global')) {
+    $tags = $global->get('tags');
+    $tags['description'] = 'Solo holidays in Ireland with solo rates or no single supplement. Hotels, B&Bs and tours checked and organised by county.';
+    $global->set('tags', $tags)->save();
+  }
+  if ($node = $metatag->load('node')) {
+    $tags = $node->get('tags');
+    $tags['description'] = '[node:summary]';
+    $node->set('tags', $tags)->save();
+  }
+
+  // Sitemap.
+  try {
+    $generator = \Drupal::service('simple_sitemap.generator');
+    $entity_manager = method_exists($generator, 'entityManager') ? $generator->entityManager() : \Drupal::service('simple_sitemap.entity_manager');
+    $entity_manager->enableEntityType('node');
+    $entity_manager->enableEntityType('taxonomy_term');
+    foreach (['listing' => 0.8, 'article' => 0.6, 'page' => 0.4] as $bundle => $priority) {
+      $entity_manager->setBundleSettings('node', $bundle, ['index' => TRUE, 'priority' => $priority, 'changefreq' => 'weekly']);
+    }
+    $entity_manager->setBundleSettings('taxonomy_term', 'county', ['index' => TRUE, 'priority' => 0.7, 'changefreq' => 'weekly']);
+  }
+  catch (\Throwable $e) {
+    \Drupal::logger('goingsolo_seo')->warning('Sitemap settings not applied: @m', ['@m' => $e->getMessage()]);
+  }
+}

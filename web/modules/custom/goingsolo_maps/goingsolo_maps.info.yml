@@ -1,0 +1,7 @@
+name: 'Going Solo maps'
+type: module
+description: 'County map of Ireland coloured by number of solo deals, and maps of deal locations. Uses Leaflet.'
+package: 'Going Solo'
+core_version_requirement: ^11
+dependencies:
+  - goingsolo_core:goingsolo_core

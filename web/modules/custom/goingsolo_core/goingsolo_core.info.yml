@@ -1,0 +1,15 @@
+name: 'Going Solo core'
+type: module
+description: 'Content model for goingsolo.ie: solo deals, counties, guides, the homepage and members-only deals.'
+package: 'Going Solo'
+core_version_requirement: ^11
+dependencies:
+  - drupal:node
+  - drupal:taxonomy
+  - drupal:views
+  - drupal:link
+  - drupal:datetime
+  - drupal:options
+  - drupal:image
+  - drupal:text
+  - drupal:path

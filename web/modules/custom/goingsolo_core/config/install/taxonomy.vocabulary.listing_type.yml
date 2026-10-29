@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Stay type'
+vid: listing_type
+description: 'Type of solo offer: hotel, B&B, tour and so on.'
+weight: 0
+new_revision: false

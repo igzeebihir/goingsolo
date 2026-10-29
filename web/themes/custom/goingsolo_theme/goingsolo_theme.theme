@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Theme hooks for goingsolo.ie.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_preprocess_HOOK() for page_title.
+ *
+ * The homepage hero carries its own heading.
+ */
+function goingsolo_theme_preprocess_page_title(array &$variables): void {
+  if (\Drupal::service('path.matcher')->isFrontPage()) {
+    $variables['title'] = '';
+  }
+}

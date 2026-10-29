@@ -1,0 +1,7 @@
+goingsolo_core.home:
+  path: '/home'
+  defaults:
+    _controller: '\Drupal\goingsolo_core\Controller\HomeController::build'
+    _title: 'Solo holidays and solo rates in Ireland'
+  requirements:
+    _permission: 'access content'

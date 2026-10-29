@@ -1,0 +1,351 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.storage.node.field_county
+    - field.storage.node.field_featured
+    - field.storage.node.field_listing_type
+    - field.storage.node.field_solo_price
+    - field.storage.node.field_supplement
+    - node.type.listing
+    - taxonomy.vocabulary.county
+    - taxonomy.vocabulary.listing_type
+  module:
+    - node
+    - options
+    - taxonomy
+    - user
+id: deals
+label: 'Solo deals'
+module: views
+description: 'Solo deals with filters, plus homepage and county blocks.'
+tag: goingsolo
+base_table: node_field_data
+base_field: nid
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: 'Solo deals in Ireland'
+      fields: {  }
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 12
+      exposed_form:
+        type: basic
+        options:
+          submit_button: 'Show deals'
+          reset_button: true
+          reset_button_label: Reset
+      access:
+        type: perm
+        options:
+          perm: 'access content'
+      cache:
+        type: tag
+        options: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          plugin_id: text_custom
+          empty: true
+          content: 'No solo deals match those filters yet. Try another county, or <a href="/list-your-offer">tell us about one</a>.'
+          tokenize: false
+      sorts:
+        field_featured_value:
+          id: field_featured_value
+          table: node__field_featured
+          field: field_featured_value
+          plugin_id: standard
+          order: DESC
+        sticky:
+          id: sticky
+          table: node_field_data
+          field: sticky
+          entity_type: node
+          entity_field: sticky
+          plugin_id: standard
+          order: DESC
+        changed:
+          id: changed
+          table: node_field_data
+          field: changed
+          entity_type: node
+          entity_field: changed
+          plugin_id: date
+          order: DESC
+          granularity: second
+      arguments: {  }
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            listing: listing
+          group: 1
+        field_county_target_id:
+          id: field_county_target_id
+          table: node__field_county
+          field: field_county_target_id
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_county_target_id_op
+            label: County
+            identifier: county
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          type: select
+          limit: true
+          vid: county
+          hierarchy: false
+          error_message: true
+        field_listing_type_target_id:
+          id: field_listing_type_target_id
+          table: node__field_listing_type
+          field: field_listing_type_target_id
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_listing_type_target_id_op
+            label: 'Stay type'
+            identifier: type
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          type: select
+          limit: true
+          vid: listing_type
+          hierarchy: false
+          error_message: true
+        field_supplement_value:
+          id: field_supplement_value
+          table: node__field_supplement
+          field: field_supplement_value
+          plugin_id: list_field
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_supplement_value_op
+            label: 'Single supplement'
+            identifier: supplement
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+        field_solo_price_value:
+          id: field_solo_price_value
+          table: node__field_solo_price
+          field: field_solo_price_value
+          plugin_id: numeric
+          operator: '<='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_solo_price_value_op
+            label: 'Max price (€)'
+            identifier: max_price
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: 'deal-grid__item'
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: teaser
+      query:
+        type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: true
+      relationships: {  }
+      css_class: deal-grid
+      header: {  }
+      footer: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  page_deals:
+    id: page_deals
+    display_title: 'Deals page'
+    display_plugin: page
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: deals
+      menu:
+        type: normal
+        title: 'Solo deals'
+        weight: 0
+        menu_name: main
+        parent: ''
+        expanded: false
+  block_featured:
+    id: block_featured
+    display_title: 'Featured deals'
+    display_plugin: block
+    position: 2
+    display_options:
+      title: 'Latest solo deals'
+      display_extenders: {  }
+      block_description: 'Featured solo deals'
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 6
+      defaults:
+        pager: false
+        filters: false
+        filter_groups: false
+        title: false
+        empty: false
+      empty: {  }
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            listing: listing
+          group: 1
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+  block_county:
+    id: block_county
+    display_title: 'Deals in a county'
+    display_plugin: block
+    position: 3
+    display_options:
+      title: 'Solo deals'
+      display_extenders: {  }
+      block_description: 'Solo deals in one county'
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 24
+      defaults:
+        pager: false
+        filters: false
+        filter_groups: false
+        arguments: false
+        title: false
+        empty: false
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          plugin_id: text_custom
+          empty: true
+          content: 'We have no solo deals listed here yet. Know one? <a href="/list-your-offer">Tell us about it</a>.'
+          tokenize: false
+      arguments:
+        field_county_target_id:
+          id: field_county_target_id
+          table: node__field_county
+          field: field_county_target_id
+          plugin_id: taxonomy_index_tid
+          default_action: 'not found'
+          default_argument_type: fixed
+          specify_validation: false
+          break_phrase: false
+          not: false
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            listing: listing
+          group: 1
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND

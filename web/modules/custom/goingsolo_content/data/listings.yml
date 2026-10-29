@@ -1,0 +1,290 @@
+# Starter solo deals. Each was checked on the provider's own website on the
+# last_checked date. Entries with published: false came from older press
+# coverage and are on the calling list to confirm before they go live.
+
+- title: 'Solo Sojourn at Cashel Palace'
+  provider: 'Cashel Palace Hotel'
+  town: Cashel
+  county: Tipperary
+  type: Country house hotel
+  price: 369
+  price_basis: 'per night, with breakfast and dinner'
+  supplement: reduced
+  features: [meals_included, spa]
+  summary: 'A one-night solo package at a five-star country house below the Rock of Cashel, priced at a special single-occupancy rate.'
+  description: |
+    Cashel Palace's Solo Sojourn package is built for one. You get a night in a King Room at a special single-occupancy rate, full Irish breakfast in the Queen Anne Room and a two-course dinner in the Snug at Mikey Ryan's, the hotel's pub across the street.
+
+    Small touches make it feel like a treat rather than a compromise: two magazines or newspapers of your choice waiting in the room, a candle to take home and 20% off Bamford and Valmont products in the spa.
+
+    You can add a seaweed bath, a spa treatment, a private yoga or meditation session, a guided hike or a pottery class, and the hotel can arrange a transfer from Thurles or Limerick Junction stations if you're coming by train.
+  url: 'https://www.cashelpalacehotel.ie/news/hotel-news/the-power-of-one-cashel-palace-hotel-unveils-new'
+  last_checked: '2026-10-29'
+  lat: 52.5167
+  lng: -7.8853
+  source: 'Hotel website, Solo Sojourn package page'
+
+- title: 'Solo Traveller Package at The Maritime, Bantry'
+  provider: 'The Maritime Hotel'
+  town: Bantry
+  county: Cork
+  type: Hotel
+  price: 115
+  price_basis: 'per night, B&B for one'
+  supplement: none
+  features: [spa, meals_included]
+  summary: 'A night for one on Bantry Bay with full Irish breakfast, leisure centre and parking included.'
+  description: |
+    The Maritime's Solo Traveller Package is priced for one person, so there's no single supplement to worry about. It includes your room, a full Irish breakfast, use of the leisure centre and free parking.
+
+    Bantry is a good base for West Cork: Bantry House and Garden is a short walk away, the Sheep's Head and Beara peninsulas are close by, and the town has a Friday market.
+
+    Free cancellation up to 48 hours before arrival.
+  url: 'https://www.themaritime.ie/en/solo-traveller-hotel-breaks/'
+  last_checked: '2026-10-29'
+  lat: 51.6802
+  lng: -9.4527
+  source: 'Hotel website, Solo Traveller page'
+
+- title: 'Solo Traveller Breaks at The Brehon, Killarney'
+  provider: 'The Brehon Hotel'
+  town: Killarney
+  county: Kerry
+  type: Hotel
+  price_basis: 'Check rates on the hotel website'
+  supplement: reduced
+  features: [spa, meals_included]
+  summary: 'A four-star spa hotel beside Killarney National Park with a solo package that includes breakfast and time in the Anú Spa.'
+  description: |
+    The Brehon runs a dedicated Solo Traveller package with a stay, breakfast and time in the hotel's Anú Spa. It sits on the Muckross Road, so you can walk or cycle into Killarney National Park from the door.
+
+    The Irish Hotels Federation lists The Brehon among its recommended solo hotels for its reduced single-occupancy rates. The hotel's page does not publish a fixed price, so check the booking engine for your dates.
+  url: 'https://www.thebrehon.com/special-offers/solo-travel-hotel-packages/'
+  last_checked: '2026-10-29'
+  lat: 52.0467
+  lng: -9.4955
+  source: 'Hotel website and irelandhotels.com solo travel feature, Feb 2026'
+
+- title: 'Solo Travellers in Connemara at Ballynahinch Castle'
+  provider: 'Ballynahinch Castle'
+  town: Recess
+  county: Galway
+  type: Country house hotel
+  price_basis: 'Check rates on the hotel website'
+  supplement: reduced
+  features: [group_activities, meals_included]
+  summary: 'A castle hotel on a private estate in Connemara with solo packages that include breakfast and hotel-arranged guided outings.'
+  description: |
+    Ballynahinch Castle has a dedicated set of offers for solo travellers. Packages include a deluxe room, breakfast and help from the hotel arranging guided walks, coastal hikes, cultural tours and scenic drives, which takes the effort out of exploring Connemara alone.
+
+    The estate has its own walking trails and river, and the bar is a sociable place to spend an evening by the fire.
+  url: 'https://www.ballynahinch-castle.com/en/offer-groups/solo-travellers'
+  last_checked: '2026-10-29'
+  lat: 53.4605
+  lng: -9.8604
+  source: 'Hotel website, Solo Travellers offer group'
+
+- title: 'Small-group walking and cycling holidays with no forced supplement'
+  provider: 'Wilderness Ireland'
+  town: 'Galway (tours nationwide)'
+  county: Galway
+  type: Walking or activity holiday
+  price_basis: 'Per person, guided small-group trips'
+  supplement: share
+  features: [group_activities, women_only, meals_included, public_transport]
+  summary: 'Guided hiking, cycling and island-hopping trips across Ireland. Solo travellers who share a room with a guest of the same gender pay no supplement.'
+  description: |
+    Wilderness Ireland runs more than 20 small-group trips in Ireland, from Connemara and Kerry hiking to island hopping and cycling. Most trips include guides, accommodation, transport during the trip, most meals and activities.
+
+    Solo travellers are not automatically charged a single supplement. If you are happy to share with another guest of the same gender, the advertised price is what you pay. A limited number of private single rooms are available for a supplement on most trips, first come, first served.
+
+    Women-only departures are available, and the company says guests in their 50s, 60s and beyond are well represented.
+  url: 'https://www.wildernessireland.com/solo-holidays/'
+  last_checked: '2026-10-29'
+  lat: 53.2743
+  lng: -9.0490
+  source: 'Operator website, solo holidays page'
+
+- title: 'Donegal and the Wild Atlantic Way for Solo Travellers'
+  provider: 'Shearings'
+  town: Mullaghmore
+  county: Sligo
+  type: Guided tour
+  price_basis: 'From £1,229 per person, 6 days by coach and ferry from Britain'
+  supplement: none
+  features: [single_rooms, group_activities, meals_included]
+  summary: 'A six-day escorted coach tour for solo travellers from Britain, with your own room at no extra cost.'
+  description: |
+    Shearings runs this tour specifically for people travelling alone. Everyone gets sole use of their own room with no single supplement. Three nights are spent at the Pier Head Hotel in Mullaghmore, Co. Sligo, with excursions along the Donegal and Sligo coast.
+
+    The tour joins from regional points in Britain and travels via Holyhead and the ferry, so it suits visitors from the UK rather than people already in Ireland.
+  url: 'https://shearings.com/holidays/donegal-and-wild-atlantic-way-for-solo-travellers'
+  last_checked: '2026-10-29'
+  lat: 54.4669
+  lng: -8.4497
+  source: 'Operator website'
+
+- title: 'Solo Ireland B&B self-drive holiday from the US'
+  provider: 'Aer Lingus Vacation Store'
+  town: Ennis
+  county: Clare
+  type: Package holiday
+  price_basis: 'From $2,164 per person, 6 nights with flights from New York and car'
+  supplement: none
+  features: [meals_included]
+  summary: 'A flight, car and B&B package from the US that is priced for one person, with no single supplement.'
+  description: |
+    Aimed at visitors from the United States, this package is specially priced for solo travellers. It includes return flights into Shannon and out of Dublin, a rental car, one night at Hotel Woodstock in Ennis (or similar) and five nights in B&Bs you choose along the way, with breakfast daily.
+
+    It's a flexible way to see the west of Ireland at your own pace. Rates are non-refundable, so read the conditions before booking.
+  url: 'https://www.aerlingusvacationstore.com/vacations/solo-travel-ireland-bed-breakfast-vacation'
+  last_checked: '2026-10-29'
+  lat: 52.8517
+  lng: -8.9988
+  source: 'Operator website'
+
+# Calling list: confirm these before publishing.
+
+- title: 'Solo discount at the Iveagh Garden Hotel'
+  published: false
+  provider: 'Iveagh Garden Hotel'
+  town: 'Harcourt Street'
+  county: Dublin
+  type: Hotel
+  price_basis: 'Solo rate €20 to €30 below the double rate (2023)'
+  supplement: none
+  features: [public_transport]
+  summary: 'A central Dublin hotel that has offered solo guests a discount instead of charging a supplement.'
+  description: |
+    In 2023 the Iveagh Garden Hotel told the Irish Times it charges no single supplement and gives solo travellers €20 to €30 off B&B or room-only rates, subject to availability. Confirm this is still offered before publishing.
+  url: 'https://www.iveaghgardenhotel.ie/'
+  last_checked: '2023-11-27'
+  lat: 53.3346
+  lng: -6.2640
+  source: 'Irish Times, 27 Nov 2023. Needs a call.'
+
+- title: 'Single rooms at Kelly''s Resort Hotel, Rosslare'
+  published: false
+  provider: 'Kelly''s Resort Hotel & Spa'
+  town: Rosslare
+  county: Wexford
+  type: Hotel
+  price_basis: 'Single occupancy about €30 over the sharing rate (2023)'
+  supplement: reduced
+  features: [single_rooms, spa, group_activities]
+  summary: 'A family-run seaside resort with a limited number of single rooms.'
+  description: |
+    Kelly's has a limited number of single rooms, and in 2023 single occupancy cost about €30 more than the per-person sharing rate. Confirm current rates before publishing.
+  url: 'https://www.kellys.ie/'
+  last_checked: '2023-11-27'
+  lat: 52.2560
+  lng: -6.3510
+  source: 'Irish Times, 27 Nov 2023. Needs a call.'
+
+- title: 'Single occupancy B&B at The Twelve, Barna'
+  published: false
+  provider: 'The Twelve Hotel'
+  town: Barna
+  county: Galway
+  type: Hotel
+  price_basis: 'Single occupancy B&B from €134 (2023)'
+  supplement: reduced
+  features: [dog_friendly]
+  summary: 'A boutique hotel by the sea just west of Galway city.'
+  description: |
+    In 2023 The Twelve offered single occupancy B&B from €134, and €15 off the best rate for solo guests in its dog-friendly Pet Suites. Confirm before publishing.
+  url: 'https://www.thetwelvehotel.ie/'
+  last_checked: '2023-11-27'
+  lat: 53.2525
+  lng: -9.1490
+  source: 'Irish Times, 27 Nov 2023. Needs a call.'
+
+- title: 'Single occupancy rooms at Kilkenny Hibernian Hotel'
+  published: false
+  provider: 'Kilkenny Hibernian Hotel'
+  town: Kilkenny
+  county: Kilkenny
+  type: Hotel
+  price_basis: 'Ask for the single occupancy rate'
+  supplement: reduced
+  features: [public_transport]
+  summary: 'A city-centre hotel that Visit Kilkenny recommends to solo travellers for its single occupancy rooms.'
+  description: |
+    Visit Kilkenny's solo travel guide recommends the Hibernian for single occupancy double rooms. Ask the hotel what the solo rate is and whether it will list it.
+  url: 'https://visitkilkenny.ie/solo-travel-to-kilkenny/'
+  last_checked: '2026-10-29'
+  lat: 52.6518
+  lng: -7.2513
+  source: 'Visit Kilkenny solo travel guide. Needs a call.'
+
+- title: 'Single occupancy rooms at Avalon House Hotel, Castlecomer'
+  published: false
+  provider: 'Avalon House Hotel'
+  town: Castlecomer
+  county: Kilkenny
+  type: Hotel
+  price_basis: 'Ask for the single occupancy rate'
+  supplement: reduced
+  features: []
+  summary: 'A boutique hotel in north Kilkenny recommended for solo travellers.'
+  description: |
+    Visit Kilkenny lists Avalon House as offering single occupancy double rooms for solo travellers. Ask for the rate.
+  url: 'https://visitkilkenny.ie/solo-travel-to-kilkenny/'
+  last_checked: '2026-10-29'
+  lat: 52.8030
+  lng: -7.2100
+  source: 'Visit Kilkenny solo travel guide. Needs a call.'
+
+- title: 'Personalised itineraries for solo guests at the Ardilaun, Galway'
+  published: false
+  provider: 'The Ardilaun Hotel'
+  town: Galway
+  county: Galway
+  type: Hotel
+  price_basis: 'Ask for the solo rate'
+  supplement: standard
+  features: [spa]
+  summary: 'A Galway city hotel whose staff plan itineraries for solo guests.'
+  description: |
+    The Irish Hotels Federation's solo travel feature says the Ardilaun's team will tailor an itinerary for solo guests. Ask whether there is a solo rate.
+  url: 'https://www.irelandhotels.com/blog.html/solo-travel-destinations'
+  last_checked: '2026-10-29'
+  lat: 53.2690
+  lng: -9.0800
+  source: 'irelandhotels.com, Feb 2026. Needs a call.'
+
+- title: 'Solo stays with a Dublin guide at the Castle Hotel'
+  published: false
+  provider: 'Castle Hotel'
+  town: 'Great Denmark Street'
+  county: Dublin
+  type: Hotel
+  price_basis: 'Ask for the solo rate'
+  supplement: standard
+  features: [public_transport]
+  summary: 'A historic Georgian hotel in Dublin city with a dedicated guide for solo guests.'
+  description: |
+    The Irish Hotels Federation highlights the Castle Hotel for its dedicated Dublin guide and solo-friendly dining. Ask whether there is a solo rate.
+  url: 'https://www.irelandhotels.com/blog.html/solo-travel-destinations'
+  last_checked: '2026-10-29'
+  lat: 53.3540
+  lng: -6.2620
+  source: 'irelandhotels.com, Feb 2026. Needs a call.'
+
+- title: 'Coastal solo retreat at Seafield Hotel & Spa'
+  published: false
+  provider: 'Seafield Hotel & Spa Resort'
+  town: Ballymoney
+  county: Wexford
+  type: Hotel
+  price_basis: 'Ask for the solo rate'
+  supplement: standard
+  features: [spa]
+  summary: 'A spa resort on the Wexford coast recommended for solo retreats.'
+  description: |
+    Recommended by the Irish Hotels Federation as a quiet coastal retreat for solo guests. Ask whether there is a solo rate or package.
+  url: 'https://www.irelandhotels.com/blog.html/solo-travel-destinations'
+  last_checked: '2026-10-29'
+  lat: 52.6700
+  lng: -6.2300
+  source: 'irelandhotels.com, Feb 2026. Needs a call.'

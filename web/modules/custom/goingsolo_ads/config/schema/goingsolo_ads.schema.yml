@@ -1,0 +1,40 @@
+goingsolo_ads.settings:
+  type: config_object
+  label: 'Ads settings'
+  mapping:
+    enabled:
+      type: boolean
+      label: 'Show ads'
+    provider:
+      type: string
+      label: 'Ad provider'
+    publisher_id:
+      type: string
+      label: 'AdSense publisher ID'
+    slots:
+      type: mapping
+      label: 'Ad unit slot IDs'
+      mapping:
+        header:
+          type: string
+          label: 'Header'
+        in_content:
+          type: string
+          label: 'In content'
+        sidebar:
+          type: string
+          label: 'Sidebar'
+        footer:
+          type: string
+          label: 'Footer'
+    ads_txt_extra:
+      type: string
+      label: 'Extra ads.txt lines'
+
+block.settings.goingsolo_ad_slot:
+  type: block_settings
+  label: 'Ad slot block'
+  mapping:
+    slot:
+      type: string
+      label: 'Slot'

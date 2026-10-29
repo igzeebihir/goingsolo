@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+name: Article
+type: article
+description: 'Guides, tips and destination articles for solo travellers.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_source_note
+    - node.type.listing
+id: node.listing.field_source_note
+field_name: field_source_note
+entity_type: node
+bundle: listing
+label: 'Source note'
+description: 'Internal: where this deal was found.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
