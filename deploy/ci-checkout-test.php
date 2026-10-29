@@ -76,6 +76,8 @@ $payment = Payment::create([
   'order_id' => $order->id(),
 ]);
 $gateway->getPlugin()->createPayment($payment, TRUE);
+// The order's paid total is normally updated at the end of the request.
+\Drupal::service('commerce_payment.order_updater')->updateOrders();
 
 $order = $etm->getStorage('commerce_order')->loadUnchanged($order->id());
 echo 'Order ' . $order->id() . ' state ' . $order->getState()->getId() . ', paid: ' . ($order->isPaid() ? 'yes' : 'no') . "\n";
