@@ -69,4 +69,5 @@ fi
 $DRUSH cron || true
 chmod 444 web/sites/default/settings.php
 chmod 555 web/sites/default
+echo "Server IP addresses: $(hostname -I 2>/dev/null || true) outbound $(curl -s --max-time 5 https://api.ipify.org || true)"
 echo "Done: https://$DOMAIN"

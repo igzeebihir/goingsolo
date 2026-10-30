@@ -200,6 +200,7 @@ jobs:
           exec > >(tee /tmp/deploy-logs/live.log) 2>&1
           echo "DNS for $SITE_DOMAIN:"; dig +short A "$SITE_DOMAIN" || true
           echo "Name servers for ${SITE_DOMAIN#*.}:"; dig +short NS "${SITE_DOMAIN#*.}" || true
+          echo "A record for ${SITE_DOMAIN#*.}:"; dig +short A "${SITE_DOMAIN#*.}" || true
           curl -sv -o /dev/null "https://$SITE_DOMAIN/" 2>&1 | grep -E '^\* |^< HTTP' | head -15 || true
           for path in / /deals /guides /county/galway /membership /membership/monthly /providers/featured-listing /ads.txt /sitemap.xml /user/login; do
             echo "$(curl -s -o /tmp/page.html -w '%{http_code} %{time_total}s' "https://$SITE_DOMAIN$path") $path $(grep -o '<title>[^<]*' /tmp/page.html | head -1)"
