@@ -136,9 +136,10 @@ jobs:
           SSH_PORT: ${{ secrets.SSH_PORT }}
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
-          SITE_DOMAIN: ${{ vars.SITE_DOMAIN || 'staging.ohalloran.in' }}
+          SITE_DOMAIN: ${{ vars.SITE_DOMAIN || 'goingsolo.ie' }}
           SITE_WEBROOT: ${{ vars.SITE_WEBROOT }}
           SITE_MAIL: ${{ vars.SITE_MAIL }}
+          MAINTENANCE: ${{ vars.MAINTENANCE_MODE || '1' }}
           DB_NAME: ${{ secrets.DB_NAME }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
@@ -190,12 +191,12 @@ jobs:
           $SSH "$TARGET" "set -e; cd \$HOME; if [ -e $WEBROOT ] && [ ! -L $WEBROOT ]; then mv $WEBROOT $WEBROOT.before-goingsolo.\$(date +%s); fi; ln -sfn \$HOME/$APP/web $WEBROOT"
 
           $SSH "$TARGET" \
-            "DB_NAME='${DB_NAME:-}' DB_USER='${DB_USER:-}' DB_PASS='${DB_PASS:-}' SITE_MAIL='${SITE_MAIL:-hello@goingsolo.ie}' bash \$HOME/$APP/deploy/remote.sh \$HOME/$APP '$SITE_DOMAIN'"
+            "DB_NAME='${DB_NAME:-}' DB_USER='${DB_USER:-}' DB_PASS='${DB_PASS:-}' SITE_MAIL='${SITE_MAIL:-hello@goingsolo.ie}' MAINTENANCE='${MAINTENANCE:-1}' bash \$HOME/$APP/deploy/remote.sh \$HOME/$APP '$SITE_DOMAIN'"
 
       - name: Check the live site
         if: steps.check.outputs.ready == 'true'
         env:
-          SITE_DOMAIN: ${{ vars.SITE_DOMAIN || 'staging.ohalloran.in' }}
+          SITE_DOMAIN: ${{ vars.SITE_DOMAIN || 'goingsolo.ie' }}
         run: |
           exec > >(tee /tmp/deploy-logs/live.log) 2>&1
           echo "DNS for $SITE_DOMAIN:"; dig +short A "$SITE_DOMAIN" || true

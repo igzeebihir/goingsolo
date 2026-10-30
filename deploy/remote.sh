@@ -59,14 +59,29 @@ if ! $DRUSH status --field=bootstrap 2>/dev/null | grep -q Successful; then
   $DRUSH pm:install goingsolo_commerce goingsolo_seo
   $DRUSH pathauto:aliases-generate create all || true
   $DRUSH simple-sitemap:generate || true
-  echo "ONE-TIME ADMIN LOGIN:"
-  $DRUSH user:login --name=admin
 else
   echo "Updating Drupal..."
   $DRUSH updatedb
   $DRUSH cache:rebuild
 fi
 $DRUSH cron || true
+
+# Maintenance mode: on unless MAINTENANCE=0. Logged-in admins can still
+# use the site; everyone else sees the maintenance page.
+if [ "${MAINTENANCE:-1}" = "0" ]; then
+  $DRUSH state:set system.maintenance_mode 0 --input-format=integer
+  echo "Maintenance mode: off"
+else
+  $DRUSH config:set system.maintenance message "goingsolo.ie is launching soon: solo holiday deals across Ireland, with no single supplement surprises. Check back shortly." || true
+  $DRUSH state:set system.maintenance_mode 1 --input-format=integer
+  echo "Maintenance mode: on"
+fi
+$DRUSH cache:rebuild
+
+# One-time admin login link. The repository is public, so the link is
+# encrypted with deploy/login.pub and never shown in plain text in the logs.
+LOGIN=$($DRUSH user:login --name=admin --no-browser 2>/dev/null | tail -1)
+echo "ENCRYPTED ADMIN LOGIN: $(printf '%s' "$LOGIN" | "$PHP" -r 'openssl_public_encrypt(stream_get_contents(STDIN), $e, file_get_contents("deploy/login.pub"), OPENSSL_PKCS1_OAEP_PADDING); echo base64_encode($e);')"
 chmod 444 web/sites/default/settings.php
 chmod 555 web/sites/default
 echo "Server IP addresses: $(hostname -I 2>/dev/null || true) outbound $(curl -s --max-time 5 https://api.ipify.org || true)"

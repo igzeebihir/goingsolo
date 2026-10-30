@@ -37,7 +37,7 @@ Every push to `main` builds the site on GitHub Actions and deploys it to Hosting
 - Secrets: `SSH_HOST`, `SSH_PORT`, `SSH_USER`, `SSH_KEY` (private deploy key), and optionally `DB_NAME`, `DB_USER`, `DB_PASS` for a MySQL database (SQLite is used otherwise).
 - Variables: `SITE_DOMAIN` (for example the Hostinger preview domain, later `goingsolo.ie`) and `SITE_MAIL`.
 
-The code goes to `~/domains/<SITE_DOMAIN>/goingsolo`, and `public_html` becomes a link to its `web` folder. Secrets live in `~/domains/<SITE_DOMAIN>/goingsolo/private/secrets.php`, outside the web root. The first deploy installs the site and prints a one-time admin login link in the job log.
+The code goes to `~/domains/<SITE_DOMAIN>/goingsolo`, and `public_html` becomes a link to its `web` folder. Secrets live in `~/domains/<SITE_DOMAIN>/goingsolo/private/secrets.php`, outside the web root. The first deploy installs the site. Each deploy prints a one-time admin login link, encrypted with `deploy/login.pub` because the repository is public. The site domain defaults to `goingsolo.ie` (override with the `SITE_DOMAIN` variable). The site stays in maintenance mode, so only logged-in admins can see it, until the `MAINTENANCE_MODE` variable is set to `0` (or an admin turns it off at /admin/config/development/maintenance).
 
 ## Working locally
 
