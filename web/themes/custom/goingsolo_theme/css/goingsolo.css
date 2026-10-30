@@ -6,24 +6,24 @@
  * fuchsia. Type: Fraunces for headings, Figtree for text.
  */
 :root {
-  --gs-ink: #10241f;
-  --gs-atlantic: #0b4f4a;
-  --gs-atlantic-deep: #072f2c;
-  --gs-moss: #2e7d5b;
-  --gs-fern: #7fb69b;
-  --gs-seaglass: #dcebe3;
-  --gs-limestone: #f7f4ee;
-  --gs-sand: #efe7da;
-  --gs-gorse: #f2b53a;
-  --gs-fuchsia: #c23b6e;
-  --gs-fuchsia-dark: #9e2a57;
-  --gs-muted: #55635e;
-  --gs-line: #e3ddd1;
-  --gs-card: #ffffff;
-  --gs-radius: 18px;
-  --gs-radius-sm: 10px;
-  --gs-shadow: 0 1px 2px rgba(16, 36, 31, 0.06), 0 8px 24px -12px rgba(16, 36, 31, 0.18);
-  --gs-shadow-lift: 0 2px 4px rgba(16, 36, 31, 0.06), 0 18px 40px -16px rgba(16, 36, 31, 0.3);
+  --gs-ink: #1f2a2a;
+  --gs-atlantic: #2d5552;
+  --gs-atlantic-deep: #1b3433;
+  --gs-moss: #5b7a66;
+  --gs-fern: #a9bfae;
+  --gs-seaglass: #e4ebe5;
+  --gs-limestone: #f6f4ef;
+  --gs-sand: #ece6db;
+  --gs-gorse: #d9a65f;
+  --gs-fuchsia: #b5613a;
+  --gs-fuchsia-dark: #8f4a2b;
+  --gs-muted: #66716d;
+  --gs-line: #e2ddd3;
+  --gs-card: #fffdf9;
+  --gs-radius: 20px;
+  --gs-radius-sm: 12px;
+  --gs-shadow: 0 1px 2px rgba(31, 42, 42, 0.04), 0 10px 30px -18px rgba(31, 42, 42, 0.18);
+  --gs-shadow-lift: 0 2px 4px rgba(31, 42, 42, 0.04), 0 22px 44px -22px rgba(31, 42, 42, 0.28);
   --gs-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
   --gs-sans: 'Figtree', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --gs-gutter: clamp(1rem, 4vw, 2.5rem);
@@ -160,7 +160,7 @@ a.button {
   border-color: var(--gs-fuchsia);
   background: var(--gs-fuchsia);
   color: #fff;
-  box-shadow: 0 6px 18px -8px rgba(194, 59, 110, 0.7);
+  box-shadow: none;
 }
 .button.button--primary:hover,
 .button.button--primary:focus,
@@ -1653,4 +1653,305 @@ a.button {
   font-weight: 700;
   font-size: 0.9rem;
   color: var(--gs-fuchsia-dark);
+}
+
+
+/* ================================================================== */
+/* Calm: restorative and reflective, with copper for the adventure.    */
+/* ================================================================== */
+
+h1, h2, h3, h4,
+.page-title,
+.title {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+h1, .page-title {
+  font-weight: 450;
+}
+body {
+  line-height: 1.75;
+}
+.gs-eyebrow {
+  color: var(--gs-fuchsia);
+  letter-spacing: 0.16em;
+}
+.button,
+.form-submit,
+a.button {
+  font-weight: 600;
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+}
+.button:hover,
+.form-submit:hover {
+  transform: none;
+}
+.button.button--primary,
+.form-submit.button--primary,
+.form-actions .form-submit:first-child {
+  border-color: var(--gs-atlantic-deep);
+  background: var(--gs-atlantic-deep);
+  box-shadow: none;
+}
+.button.button--primary:hover,
+.button.button--primary:focus,
+.form-actions .form-submit:first-child:hover {
+  border-color: var(--gs-fuchsia);
+  background: var(--gs-fuchsia);
+}
+.gs-hero .button.button--primary {
+  border-color: var(--gs-fuchsia);
+  background: var(--gs-fuchsia);
+}
+.gs-hero .button.button--primary:hover {
+  border-color: #fff;
+  background: #fff;
+  color: var(--gs-atlantic-deep);
+}
+.deal-card,
+.guide-card,
+.gs-way,
+.deal-card__postcard::before {
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+}
+.deal-card:hover,
+.guide-card:hover,
+.gs-way:hover {
+  transform: translateY(-2px);
+}
+.deal-card:hover .deal-card__postcard::before {
+  transform: scale(1.03);
+}
+.home-section {
+  padding-top: clamp(4rem, 9vw, 7rem);
+}
+.home-section__head {
+  margin-bottom: 2.25rem;
+}
+
+/* Hero: first light over layered hills. */
+.gs-hero {
+  padding-block: clamp(3rem, 8vw, 6rem) clamp(7rem, 14vw, 11rem);
+  background:
+    radial-gradient(28rem 16rem at 72% 92%, rgba(217, 166, 95, 0.55), transparent 70%),
+    linear-gradient(180deg, #1b3433 0%, #2d5552 46%, #7f9a92 78%, #d9c3a3 100%);
+}
+.gs-hero::before {
+  opacity: 0.5;
+}
+.gs-hero__eyebrow {
+  color: #e7d8c0;
+}
+.gs-hero__eyebrow span[lang='ga'] {
+  color: #f0c98e;
+}
+.gs-hero__title {
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+.gs-hero__title em {
+  font-style: italic;
+  font-weight: 300;
+  color: #f0d3a6;
+}
+.gs-hero__lead {
+  color: rgba(255, 255, 255, 0.88);
+}
+.gs-hero__stats {
+  border-top-color: rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.82);
+}
+.gs-hero__stats strong {
+  font-weight: 400;
+}
+.gs-hero__map {
+  background: rgba(246, 244, 239, 0.92);
+  box-shadow: 0 30px 60px -34px rgba(10, 25, 25, 0.55);
+}
+.gs-hero__hills {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: clamp(90px, 14vw, 200px);
+  pointer-events: none;
+}
+.gs-hero__hill--far { fill: #8ea79e; opacity: 0.55; }
+.gs-hero__hill--mid { fill: #c4cfc4; opacity: 0.8; }
+.gs-hero__hill--near { fill: var(--gs-limestone); }
+.gs-ways {
+  margin-top: -3rem;
+}
+.gs-way {
+  background: var(--gs-card);
+}
+.gs-way__icon {
+  font-weight: 400;
+}
+.gs-way--reduced .gs-way__icon { background: #f3e6d2; color: #8a5a2b; }
+.gs-way--pets .gs-way__icon { background: #f1e1d8; color: var(--gs-fuchsia-dark); }
+.gs-way--routes .gs-way__icon { background: #e6e4ec; color: #4f4a63; }
+
+/* Rest. Reflect. Roam. */
+.gs-pillars {
+  padding-top: clamp(4rem, 9vw, 7rem);
+  text-align: center;
+}
+.gs-pillars__title {
+  margin: 0 0 2.5rem;
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+.gs-pillars__title span {
+  color: var(--gs-moss);
+}
+.gs-pillars__title em {
+  font-weight: 500;
+  color: var(--gs-fuchsia);
+}
+.gs-pillars__grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  text-align: left;
+}
+.gs-pillar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 2rem 1.75rem;
+  border-radius: var(--gs-radius);
+  background: var(--gs-card);
+  box-shadow: var(--gs-shadow);
+  color: var(--gs-ink);
+  text-decoration: none;
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+}
+.gs-pillar:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--gs-shadow-lift);
+  color: var(--gs-ink);
+}
+.gs-pillar__icon svg {
+  width: 3rem;
+  height: 3rem;
+  fill: none;
+  stroke: var(--gs-moss);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.gs-pillar--roam .gs-pillar__icon svg {
+  stroke: var(--gs-fuchsia);
+}
+.gs-pillar__name {
+  font-family: var(--gs-serif);
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+.gs-pillar__text {
+  flex: 1;
+  color: var(--gs-muted);
+}
+.gs-pillar__link {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  color: var(--gs-atlantic);
+}
+.gs-pillar--roam .gs-pillar__link {
+  color: var(--gs-fuchsia);
+}
+
+/* A quiet line between sections. */
+.gs-quote {
+  padding-block: clamp(4rem, 9vw, 7rem) 0;
+  text-align: center;
+}
+.gs-quote__text {
+  max-width: 42rem;
+  margin: 0 auto;
+  font-family: var(--gs-serif);
+  font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--gs-atlantic);
+}
+.gs-quote__text::before,
+.gs-quote__text::after {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 1px;
+  margin: 0 auto 1.75rem;
+  background: var(--gs-gorse);
+}
+.gs-quote__text::after {
+  margin: 1.75rem auto 0;
+}
+
+/* Softer postcards. */
+.deal-card__postcard::before {
+  opacity: 0.6;
+}
+.deal-card__postcard--leinster { background: linear-gradient(160deg, #3f6b5e, #86a491); }
+.deal-card__postcard--munster { background: linear-gradient(160deg, #2f5466, #7d9ead); }
+.deal-card__postcard--connacht { background: linear-gradient(160deg, #4f4a63, #948da3); }
+.deal-card__postcard--ulster { background: linear-gradient(160deg, #5e4636, #a8836a); }
+.deal-card__county {
+  font-weight: 400;
+}
+.deal-card--featured {
+  box-shadow: 0 0 0 2px var(--gs-gorse), var(--gs-shadow);
+}
+.gs-badge {
+  font-weight: 600;
+}
+.gs-badge--reduced, .gs-badge--mode-cycle { background: #f3e6d2; color: #6f4a23; }
+.gs-badge--pets { background: #f1e1d8; color: var(--gs-fuchsia-dark); }
+.gs-badge--mode-drive { background: #e6e4ec; color: #4f4a63; }
+.gs-callout--pets { background: #f4e7df; }
+.deal-card:hover .deal-card__more {
+  background: var(--gs-atlantic-deep);
+}
+.home-section--pets {
+  background: var(--gs-sand);
+}
+.home-section--pets .gs-eyebrow {
+  color: var(--gs-fuchsia);
+}
+.gs-club {
+  background:
+    radial-gradient(30rem 20rem at 100% 100%, rgba(217, 166, 95, 0.25), transparent 70%),
+    var(--gs-atlantic-deep);
+}
+.gs-club .button.button--gorse:hover {
+  color: var(--gs-atlantic-deep);
+}
+.guide-card::before {
+  background: var(--gs-fern);
+}
+.gs-footer {
+  background: var(--gs-atlantic-deep);
+}
+.gs-footer__wave {
+  fill: var(--gs-atlantic-deep);
+}
+.gs-menu__item.is-active > .gs-menu__link,
+.gs-menu__link.is-active {
+  box-shadow: inset 0 -2px 0 var(--gs-fuchsia);
+}
+.gs-logo__sun {
+  fill: var(--gs-gorse);
+}
+.gs-ways__grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+}
+.gs-map__legend {
+  color: var(--gs-ink);
+}
+.gs-way__text {
+  line-height: 1.35;
+  hyphens: manual;
 }

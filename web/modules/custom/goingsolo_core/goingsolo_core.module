@@ -30,6 +30,12 @@ function goingsolo_core_theme(): array {
     'goingsolo_ways_in' => [
       'variables' => ['items' => []],
     ],
+    'goingsolo_pillars' => [
+      'variables' => ['items' => []],
+    ],
+    'goingsolo_quote' => [
+      'variables' => ['text' => NULL],
+    ],
     'goingsolo_club_band' => [
       'variables' => ['join_url' => NULL],
     ],

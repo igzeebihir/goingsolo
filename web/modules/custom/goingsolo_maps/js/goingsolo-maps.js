@@ -3,11 +3,11 @@
  * County map and deal location maps for goingsolo.ie.
  */
 ((Drupal, drupalSettings, once, L) => {
-  const scale = ['#dcebe3', '#b3d4c0', '#7fb69b', '#3f8c6e', '#0b4f4a'];
+  const scale = ['#e6ece6', '#c3d3c6', '#94b19c', '#5f8a73', '#2d5552'];
 
   function colourFor(count, max) {
     if (!count) {
-      return '#efe9df';
+      return '#ece6db';
     }
     const step = Math.min(scale.length - 1, Math.ceil((count / Math.max(max, 1)) * (scale.length - 1)));
     return scale[Math.max(1, step)];
@@ -49,7 +49,7 @@
               : Drupal.t('@county: @count solo deals', { '@county': c.label, '@count': c.count });
             featureLayer.bindTooltip(label, { sticky: true, direction: 'top' });
             featureLayer.on({
-              mouseover: () => featureLayer.setStyle({ weight: 2.5, color: '#c23b6e' }),
+              mouseover: () => featureLayer.setStyle({ weight: 2.5, color: '#b5613a' }),
               mouseout: () => featureLayer.setStyle({ weight: 1.2, color: '#ffffff' }),
               click: () => { window.location.href = c.url; },
             });
@@ -79,7 +79,7 @@
         radius: p.featured ? 10 : 8,
         color: '#ffffff',
         weight: 2,
-        fillColor: p.featured ? '#c23b6e' : '#0b4f4a',
+        fillColor: p.featured ? '#b5613a' : '#2d5552',
         fillOpacity: 0.95,
       });
       const link = document.createElement('a');
@@ -112,7 +112,7 @@
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
     const line = L.polyline(stops.map((s) => [s.lat, s.lng]), {
-      color: '#0b4f4a',
+      color: '#2d5552',
       weight: 3,
       dashArray: '6 8',
       opacity: 0.8,
@@ -123,7 +123,7 @@
         radius: end ? 9 : 7,
         color: '#ffffff',
         weight: 2,
-        fillColor: end ? '#c23b6e' : '#0b4f4a',
+        fillColor: end ? '#b5613a' : '#2d5552',
         fillOpacity: 1,
       }).bindTooltip(`${Drupal.t('Day @day', { '@day': s.day })}: ${s.name}`).addTo(map);
     });

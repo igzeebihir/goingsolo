@@ -1,17 +1,17 @@
 {#
 /**
  * @file
- * Homepage hero with the county map.
+ * Homepage hero: first light over layered hills, with the county map.
  */
 #}
 <section class="gs-hero">
   <div class="gs-container gs-hero__grid">
     <div class="gs-hero__text">
-      <p class="gs-hero__eyebrow"><span lang="ga">Ar do chonlán féin</span> · {{ 'on your own terms'|t }}</p>
-      <h1 class="gs-hero__title">{{ 'Ireland,'|t }} <em>{{ 'for one.'|t }}</em></h1>
-      <p class="gs-hero__lead">{{ 'Hotels, B&Bs and tours across the island with solo rates or no single supplement. Every deal is checked by a person and kept up to date.'|t }}</p>
+      <p class="gs-hero__eyebrow"><span lang="ga">Am duit féin</span> · {{ 'time for yourself'|t }}</p>
+      <h1 class="gs-hero__title">{{ 'Ireland,'|t }} <em>{{ 'at your own pace.'|t }}</em></h1>
+      <p class="gs-hero__lead">{{ 'Quiet coasts, long walks and rooms priced for one. Restful breaks and small adventures for people who travel alone, and are glad of it.'|t }}</p>
       <div class="gs-hero__actions">
-        <a class="button button--primary" href="{{ deals_url }}">{{ 'Browse solo deals'|t }}</a>
+        <a class="button button--primary" href="{{ deals_url }}">{{ 'Find your solo break'|t }}</a>
         <a class="button button--ghost" href="{{ guides_url }}">{{ 'Read the guides'|t }}</a>
       </div>
       {% if stats %}
@@ -24,9 +24,14 @@
     </div>
     {% if map %}
       <div class="gs-hero__map">
-        <p class="gs-hero__map-label">{{ 'Tap a county to see its deals'|t }}</p>
+        <p class="gs-hero__map-label">{{ 'Choose a county'|t }}</p>
         {{ map }}
       </div>
     {% endif %}
   </div>
+  <svg class="gs-hero__hills" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path class="gs-hero__hill gs-hero__hill--far" d="M0 120 C 120 70 230 60 340 95 S 560 40 700 70 S 930 130 1060 85 S 1300 40 1440 80 V220 H0 Z"/>
+    <path class="gs-hero__hill gs-hero__hill--mid" d="M0 160 C 160 120 300 150 430 125 S 700 90 860 140 S 1150 170 1300 130 S 1400 120 1440 125 V220 H0 Z"/>
+    <path class="gs-hero__hill gs-hero__hill--near" d="M0 200 C 200 170 380 190 560 180 S 900 160 1080 185 S 1340 200 1440 190 V220 H0 Z"/>
+  </svg>
 </section>

@@ -1,0 +1,22 @@
+{#
+/**
+ * @file
+ * Rest. Reflect. Roam.
+ */
+#}
+<section class="gs-pillars">
+  <div class="gs-container">
+    <p class="gs-eyebrow">{{ 'Why go alone'|t }}</p>
+    <h2 class="gs-pillars__title">{{ 'Rest.'|t }} <span>{{ 'Reflect.'|t }}</span> <em>{{ 'Roam.'|t }}</em></h2>
+    <div class="gs-pillars__grid">
+      {% for item in items %}
+        <a class="gs-pillar gs-pillar--{{ item.modifier }}" href="{{ item.url }}">
+          <span class="gs-pillar__icon" aria-hidden="true">{{ item.icon|raw }}</span>
+          <strong class="gs-pillar__name">{{ item.title }}</strong>
+          <span class="gs-pillar__text">{{ item.text }}</span>
+          <span class="gs-pillar__link">{{ item.link }} →</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

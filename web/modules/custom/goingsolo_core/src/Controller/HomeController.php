@@ -31,6 +31,16 @@ final class HomeController extends ControllerBase {
       '#items' => $this->waysIn(),
       '#weight' => -5,
     ];
+    $build['pillars'] = [
+      '#theme' => 'goingsolo_pillars',
+      '#items' => $this->pillars(),
+      '#weight' => 0,
+    ];
+    $build['quote'] = [
+      '#theme' => 'goingsolo_quote',
+      '#text' => $this->t('The quiet is the point. The courage is the bonus.'),
+      '#weight' => 29,
+    ];
     $build['deals'] = [
       '#theme' => 'goingsolo_home_section',
       '#modifier' => 'deals',
@@ -178,6 +188,40 @@ final class HomeController extends ControllerBase {
       ];
     }
     return $items;
+  }
+
+  /**
+   * Rest, reflect, roam.
+   */
+  private function pillars(): array {
+    $guide = fn(string $path) => Url::fromUserInput($path)->toString();
+    $roam = $this->moduleHandler()->moduleExists('goingsolo_explore') ? Url::fromRoute('view.routes.page_main')->toString() : $guide('/guides');
+    return [
+      [
+        'modifier' => 'rest',
+        'icon' => '<svg viewBox="0 0 48 48"><path d="M6 30c6-5 12-5 18 0s12 5 18 0" /><path d="M6 38c6-5 12-5 18 0s12 5 18 0" /><circle cx="24" cy="14" r="6" /></svg>',
+        'title' => $this->t('Rest'),
+        'text' => $this->t('Country houses, spa hotels and quiet rooms by the sea, priced for one. Sleep late, eat well, answer to nobody.'),
+        'link' => $this->t('Restful stays'),
+        'url' => Url::fromRoute('view.deals.page_deals')->toString(),
+      ],
+      [
+        'modifier' => 'reflect',
+        'icon' => '<svg viewBox="0 0 48 48"><path d="M8 34h32" /><path d="M14 34c0-6 4-10 10-10s10 4 10 10" /><path d="M24 10v6M12 14l3 4M36 14l-3 4" /></svg>',
+        'title' => $this->t('Reflect'),
+        'text' => $this->t('Retreats, long walks and the slow pleasure of your own company. Time to think, or not think at all.'),
+        'link' => $this->t('Retreats and slow travel'),
+        'url' => $guide('/guides/yoga-and-wellness-retreats-in-ireland-for-one'),
+      ],
+      [
+        'modifier' => 'roam',
+        'icon' => '<svg viewBox="0 0 48 48"><path d="M4 38l12-18 8 10 6-8 14 16z" /><path d="M30 12l4-4 4 4" /></svg>',
+        'title' => $this->t('Roam'),
+        'text' => $this->t('Self-guided routes, sea swims and small adventures. The quiet satisfaction of knowing you did it yourself.'),
+        'link' => $this->t('Routes to follow'),
+        'url' => $roam,
+      ],
+    ];
   }
 
   /**
