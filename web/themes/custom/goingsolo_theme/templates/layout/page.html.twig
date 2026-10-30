@@ -1,0 +1,82 @@
+{#
+/**
+ * @file
+ * Page layout for goingsolo.ie.
+ */
+#}
+<div class="gs-site">
+  <header class="gs-header">
+    <div class="gs-container gs-header__bar">
+      <a class="gs-logo" href="{{ path('<front>') }}" rel="home" aria-label="{{ 'goingsolo.ie home'|t }}">
+        {% include '@goingsolo_theme/includes/logo-mark.html.twig' %}
+        <span class="gs-logo__word">going<em>solo</em><span class="gs-logo__tld">.ie</span></span>
+      </a>
+      {% if page.primary_menu or page.secondary_menu %}
+        <button class="gs-nav-toggle" type="button" data-gs-nav-toggle aria-controls="gs-nav" aria-expanded="false">
+          <span class="gs-nav-toggle__bars" aria-hidden="true"></span>
+          <span class="gs-nav-toggle__label">{{ 'Menu'|t }}</span>
+        </button>
+        <nav id="gs-nav" class="gs-nav" aria-label="{{ 'Main'|t }}">
+          {{ page.primary_menu }}
+          {{ page.secondary_menu }}
+        </nav>
+      {% endif %}
+    </div>
+  </header>
+
+  <a id="main-content" tabindex="-1"></a>
+  {{ page.hero }}
+
+  <div class="gs-main{{ is_front ? ' gs-main--front' }}">
+    {% if page.highlighted or page.breadcrumb %}
+      <div class="gs-container gs-main__top">
+        {{ page.highlighted }}
+        {{ page.breadcrumb }}
+      </div>
+    {% endif %}
+    {% if is_front %}
+      <main class="gs-front">
+        {{ page.content }}
+      </main>
+    {% else %}
+      <div class="gs-container">
+        {% if page.sidebar %}
+          <div class="gs-with-sidebar">
+            <main class="gs-content">
+              {{ page.content_above }}
+              {{ page.content }}
+            </main>
+            <aside class="gs-sidebar">{{ page.sidebar }}</aside>
+          </div>
+        {% else %}
+          <main class="gs-content">
+            {{ page.content_above }}
+            {{ page.content }}
+          </main>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if page.content_below %}
+      <div class="gs-container gs-main__below">{{ page.content_below }}</div>
+    {% endif %}
+  </div>
+
+  <footer class="gs-footer">
+    <svg class="gs-footer__wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 180 0 360 60 540 30 S 900 0 1080 30 S 1350 55 1440 28 V60 H0 Z"/></svg>
+    <div class="gs-container gs-footer__inner">
+      <div class="gs-footer__brand">
+        <a class="gs-logo gs-logo--footer" href="{{ path('<front>') }}">
+          {% include '@goingsolo_theme/includes/logo-mark.html.twig' %}
+          <span class="gs-logo__word">going<em>solo</em><span class="gs-logo__tld">.ie</span></span>
+        </a>
+        <p class="gs-footer__tagline">{{ 'Solo holidays in Ireland, priced for one. Every deal is checked by a person before it goes up.'|t }}</p>
+      </div>
+      <div class="gs-footer__links">
+        {{ page.footer_top }}
+      </div>
+    </div>
+    <div class="gs-container gs-footer__bottom">
+      {{ page.footer_bottom }}
+    </div>
+  </footer>
+</div>

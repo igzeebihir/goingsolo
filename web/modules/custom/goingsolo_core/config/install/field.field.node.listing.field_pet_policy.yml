@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pet_policy
+    - node.type.listing
+id: node.listing.field_pet_policy
+field_name: field_pet_policy
+entity_type: node
+bundle: listing
+label: 'Pet policy'
+description: 'For pet-friendly stays: which rooms, any fee, how many and what size of dogs, and where pets can go.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

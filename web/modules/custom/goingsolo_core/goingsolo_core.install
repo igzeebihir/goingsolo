@@ -21,3 +21,41 @@ function goingsolo_core_install(bool $is_syncing): void {
   }
   \Drupal::configFactory()->getEditable('system.site')->set('page.front', '/home')->save();
 }
+
+/**
+ * Creates or refreshes config entities from this module's config/install.
+ *
+ * @param string[] $names
+ *   Config names to import, in dependency order.
+ */
+function _goingsolo_core_import_config(string $module, array $names): void {
+  $source = new \Drupal\Core\Config\FileStorage(\Drupal::service('extension.list.module')->getPath($module) . '/config/install');
+  $config_manager = \Drupal::service('config.manager');
+  foreach ($names as $name) {
+    $data = $source->read($name);
+    $entity_type_id = $config_manager->getEntityTypeIdByName($name);
+    /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $storage */
+    $storage = \Drupal::entityTypeManager()->getStorage($entity_type_id);
+    $id = $storage->getIDFromConfigName($name, $storage->getEntityType()->getConfigPrefix());
+    $entity = $storage->load($id);
+    $entity = $entity ? $storage->updateFromStorageRecord($entity, $data) : $storage->createFromStorageRecord($data);
+    $entity->save();
+  }
+}
+
+/**
+ * Adds the pet policy field and the pet-friendly deals page.
+ */
+function goingsolo_core_update_11001(): string {
+  _goingsolo_core_import_config('goingsolo_core', [
+    'field.storage.node.field_solo_features',
+    'field.storage.node.field_pet_policy',
+    'field.field.node.listing.field_pet_policy',
+    'core.entity_form_display.node.listing.default',
+    'core.entity_view_display.node.listing.default',
+    'core.entity_view_display.node.listing.teaser',
+    'views.view.deals',
+  ]);
+  \Drupal::service('router.builder')->setRebuildNeeded();
+  return 'Added pet-friendly stays.';
+}

@@ -106,6 +106,7 @@ hidden:
   field_longitude: true
   field_members_only: true
   field_offer_link: true
+  field_pet_policy: true
   field_provider: true
   field_solo_features: true
   field_source_note: true

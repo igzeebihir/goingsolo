@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * A full-width homepage section.
+ */
+#}
+<section class="home-section{% if modifier %} home-section--{{ modifier }}{% endif %}">
+  <div class="gs-container">
+    <div class="home-section__head">
+      <div>
+        {% if eyebrow %}<p class="gs-eyebrow">{{ eyebrow }}</p>{% endif %}
+        <h2 class="home-section__title">{{ title }}</h2>
+        {% if intro %}<p class="home-section__intro">{{ intro }}</p>{% endif %}
+      </div>
+      {% if link %}<div class="home-section__link">{{ link }}</div>{% endif %}
+    </div>
+    {{ content }}
+  </div>
+</section>

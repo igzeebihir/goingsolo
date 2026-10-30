@@ -3,11 +3,11 @@
  * County map and deal location maps for goingsolo.ie.
  */
 ((Drupal, drupalSettings, once, L) => {
-  const scale = ['#e6f2f1', '#b3dbd7', '#7cc1ba', '#3f9e95', '#1f6f68'];
+  const scale = ['#dcebe3', '#b3d4c0', '#7fb69b', '#3f8c6e', '#0b4f4a'];
 
   function colourFor(count, max) {
     if (!count) {
-      return '#f3f1ec';
+      return '#efe9df';
     }
     const step = Math.min(scale.length - 1, Math.ceil((count / Math.max(max, 1)) * (scale.length - 1)));
     return scale[Math.max(1, step)];
@@ -49,7 +49,7 @@
               : Drupal.t('@county: @count solo deals', { '@county': c.label, '@count': c.count });
             featureLayer.bindTooltip(label, { sticky: true, direction: 'top' });
             featureLayer.on({
-              mouseover: () => featureLayer.setStyle({ weight: 2.5, color: '#e0603f' }),
+              mouseover: () => featureLayer.setStyle({ weight: 2.5, color: '#c23b6e' }),
               mouseout: () => featureLayer.setStyle({ weight: 1.2, color: '#ffffff' }),
               click: () => { window.location.href = c.url; },
             });
@@ -79,7 +79,7 @@
         radius: p.featured ? 10 : 8,
         color: '#ffffff',
         weight: 2,
-        fillColor: p.featured ? '#e0603f' : '#1f6f68',
+        fillColor: p.featured ? '#c23b6e' : '#0b4f4a',
         fillOpacity: 0.95,
       });
       const link = document.createElement('a');

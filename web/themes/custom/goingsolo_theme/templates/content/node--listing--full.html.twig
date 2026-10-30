@@ -16,27 +16,38 @@
 <article{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {{ title_suffix }}
+  <div class="deal-full__where">
+    {% if gs_county %}<span class="deal-full__county">{{ 'Co. @county'|t({'@county': gs_county}) }}</span>{% endif %}
+    {% if gs_town and gs_town != gs_county %}<span>{{ gs_town }}</span>{% endif %}
+    {% if gs_type %}<span>{{ gs_type }}</span>{% endif %}
+  </div>
+  {% if gs_badges %}
+    <ul class="deal-card__badges deal-full__badges">
+      {% for badge in gs_badges %}
+        <li class="gs-badge gs-badge--{{ badge.modifier }}">{{ badge.label }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
   <div class="deal-full__layout">
     <div{{ content_attributes.addClass('node__content', 'deal-full__main') }}>
-      {% if gs_badges %}
-        <ul class="deal-card__badges">
-          {% for badge in gs_badges %}
-            <li class="gs-badge gs-badge--{{ badge.modifier }}">{{ badge.label }}</li>
-          {% endfor %}
-        </ul>
+      {% if gs_pet_policy %}
+        <div class="gs-callout gs-callout--pets">
+          <h2 class="gs-callout__title">{{ 'Bringing a dog'|t }}</h2>
+          <p>{{ gs_pet_policy }}</p>
+        </div>
       {% endif %}
-      {{ content|without('field_offer_link', 'field_solo_price', 'field_price_basis') }}
+      {{ content|without('field_offer_link', 'field_solo_price', 'field_price_basis', 'field_pet_policy', 'field_county', 'field_town', 'field_listing_type', 'field_provider') }}
     </div>
     <aside class="deal-full__pricebox">
       {% if gs_provider %}<p class="deal-full__provider">{{ gs_provider }}</p>{% endif %}
       {% if gs_price %}
-        <p class="deal-card__amount">{{ 'from @price'|t({'@price': gs_price}) }}</p>
+        <p class="deal-full__price"><span class="deal-card__from">{{ 'from'|t }}</span> <span class="deal-card__amount">{{ gs_price }}</span></p>
+        {% if gs_price_basis %}<p class="deal-card__basis">{{ gs_price_basis }}</p>{% endif %}
       {% elseif gs_price_basis %}
-        <p class="deal-card__amount deal-card__amount--ask">{{ gs_price_basis }}</p>
+        <p class="deal-full__price deal-card__ask">{{ gs_price_basis }}</p>
       {% else %}
-        <p class="deal-card__amount deal-card__amount--ask">{{ 'Price on request'|t }}</p>
+        <p class="deal-full__price deal-card__ask">{{ 'Price on request'|t }}</p>
       {% endif %}
-      {% if gs_price and gs_price_basis %}<p class="deal-card__basis">{{ gs_price_basis }}</p>{% endif %}
       {% if gs_offer_url %}
         <a class="button button--primary deal-full__cta" href="{{ gs_offer_url }}" target="_blank" rel="nofollow noopener sponsored">{{ 'See the offer'|t }}</a>
       {% endif %}

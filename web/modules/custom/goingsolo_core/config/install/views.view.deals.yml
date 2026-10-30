@@ -6,6 +6,7 @@ dependencies:
     - field.storage.node.field_county
     - field.storage.node.field_featured
     - field.storage.node.field_listing_type
+    - field.storage.node.field_solo_features
     - field.storage.node.field_solo_price
     - field.storage.node.field_supplement
     - node.type.listing
@@ -278,6 +279,17 @@ display:
           value:
             listing: listing
           group: 1
+        field_supplement_value:
+          id: field_supplement_value
+          table: node__field_supplement
+          field: field_supplement_value
+          plugin_id: list_field
+          operator: or
+          value:
+            none: none
+            reduced: reduced
+            share: share
+          group: 1
       filter_groups:
         operator: AND
         groups:
@@ -344,6 +356,159 @@ display:
           plugin_id: bundle
           value:
             listing: listing
+          group: 1
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+  page_pets:
+    id: page_pets
+    display_title: 'Pet-friendly page'
+    display_plugin: page
+    position: 4
+    display_options:
+      title: 'Pet-friendly stays for solo travellers'
+      display_extenders: {  }
+      path: pet-friendly
+      menu:
+        type: normal
+        title: 'Pet friendly'
+        weight: 1
+        menu_name: main
+        parent: ''
+        expanded: false
+      defaults:
+        filters: false
+        filter_groups: false
+        title: false
+        empty: false
+        header: false
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          plugin_id: text_custom
+          empty: true
+          content: '<p class="view-intro">Travelling alone does not have to mean leaving the dog at home. These hotels and guesthouses take pets, and each listing says which rooms, what it costs and where your dog can go. Pet policies change, so confirm when you book and mention you are travelling solo.</p>'
+          tokenize: false
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          plugin_id: text_custom
+          empty: true
+          content: 'No pet-friendly stays match yet. Know one? <a href="/list-your-offer">Tell us about it</a>.'
+          tokenize: false
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            listing: listing
+          group: 1
+        field_solo_features_value:
+          id: field_solo_features_value
+          table: node__field_solo_features
+          field: field_solo_features_value
+          plugin_id: list_field
+          operator: or
+          value:
+            dog_friendly: dog_friendly
+          group: 1
+        field_county_target_id:
+          id: field_county_target_id
+          table: node__field_county
+          field: field_county_target_id
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_county_target_id_op
+            label: County
+            identifier: county
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          type: select
+          limit: true
+          vid: county
+          hierarchy: false
+          error_message: true
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+  block_pets:
+    id: block_pets
+    display_title: 'Pet-friendly deals'
+    display_plugin: block
+    position: 5
+    display_options:
+      title: 'Bring the dog'
+      display_extenders: {  }
+      block_description: 'Pet-friendly solo stays'
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 3
+      defaults:
+        pager: false
+        filters: false
+        filter_groups: false
+        title: false
+        empty: false
+      empty: {  }
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            listing: listing
+          group: 1
+        field_solo_features_value:
+          id: field_solo_features_value
+          table: node__field_solo_features
+          field: field_solo_features_value
+          plugin_id: list_field
+          operator: or
+          value:
+            dog_friendly: dog_friendly
           group: 1
       filter_groups:
         operator: AND

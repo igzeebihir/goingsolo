@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.listing.field_longitude
     - field.field.node.listing.field_members_only
     - field.field.node.listing.field_offer_link
+    - field.field.node.listing.field_pet_policy
     - field.field.node.listing.field_price_basis
     - field.field.node.listing.field_provider
     - field.field.node.listing.field_solo_features
@@ -132,6 +133,14 @@ content:
     region: content
     settings:
       size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pet_policy:
+    type: string_textarea
+    weight: 10
+    region: content
+    settings:
+      rows: 3
       placeholder: ''
     third_party_settings: {  }
   field_solo_features:

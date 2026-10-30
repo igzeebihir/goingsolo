@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.listing.field_longitude
     - field.field.node.listing.field_members_only
     - field.field.node.listing.field_offer_link
+    - field.field.node.listing.field_pet_policy
     - field.field.node.listing.field_price_basis
     - field.field.node.listing.field_provider
     - field.field.node.listing.field_solo_features
@@ -107,6 +108,13 @@ content:
       link_rel: canonical
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_pet_policy:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
     region: content
   field_solo_features:
     type: list_default

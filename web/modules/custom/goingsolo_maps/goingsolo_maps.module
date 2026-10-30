@@ -15,4 +15,7 @@ function goingsolo_maps_preprocess_views_view(array &$variables): void {
   if ($view->id() === 'deals' && $view->current_display === 'page_deals') {
     $variables['header']['gs_map'] = \Drupal::service('goingsolo_maps.builder')->dealsMap();
   }
+  elseif ($view->id() === 'deals' && $view->current_display === 'page_pets') {
+    $variables['header']['gs_map'] = \Drupal::service('goingsolo_maps.builder')->dealsMap(NULL, 'dog_friendly');
+  }
 }

@@ -15,3 +15,18 @@ function goingsolo_content_install(bool $is_syncing): void {
     \Drupal::service('goingsolo_content.importer')->importAll();
   }
 }
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function goingsolo_content_update_dependencies(): array {
+  return ['goingsolo_content' => [11001 => ['goingsolo_core' => 11001]]];
+}
+
+/**
+ * Adds pet-friendly stays and guides, and new pages.
+ */
+function goingsolo_content_update_11001(): string {
+  $counts = \Drupal::service('goingsolo_content.importer')->importAll();
+  return 'Imported: ' . json_encode($counts);
+}

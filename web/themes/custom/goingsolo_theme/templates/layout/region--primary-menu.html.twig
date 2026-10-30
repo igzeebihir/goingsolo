@@ -1,0 +1,11 @@
+{#
+/**
+ * @file
+ * Plain region wrapper. The page template handles layout.
+ */
+#}
+{% if content %}
+  <div{{ attributes.addClass('region', 'region--' ~ region|clean_class) }}>
+    {{ content }}
+  </div>
+{% endif %}

@@ -5,6 +5,24 @@ core_version_requirement: ^11
 base theme: olivero
 libraries:
   - goingsolo_theme/global
+libraries-override:
+  # The theme has its own header, navigation and fonts.
+  olivero/global-styling:
+    css:
+      base:
+        css/base/fonts.css: false
+      component:
+        css/components/header-buttons-mobile.css: false
+        css/components/header-navigation.css: false
+        css/components/header-site-branding.css: false
+        css/components/header-sticky-toggle.css: false
+        css/components/navigation/nav-button-mobile.css: false
+        css/components/site-header.css: false
+        css/components/footer.css: false
+        css/components/hero.css: false
+  olivero/navigation-base:
+    js:
+      js/navigation-utils.js: false
 regions:
   header: Header
   primary_menu: 'Primary menu'

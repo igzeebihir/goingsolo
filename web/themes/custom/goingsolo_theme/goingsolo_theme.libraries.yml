@@ -1,5 +1,12 @@
 global:
-  version: 1.0
+  version: 2.0
   css:
+    base:
+      css/fonts.css: {}
     theme:
       css/goingsolo.css: {}
+  js:
+    js/goingsolo.js: { attributes: { defer: true } }
+  dependencies:
+    - core/drupal
+    - core/once

@@ -190,6 +190,7 @@
   price_basis: 'Single occupancy B&B from €134 (2023)'
   supplement: reduced
   features: [dog_friendly]
+  pet_policy: 'Three Pet Suites with a dog bed, welcome bag and dog menu. No pet charge, but a €50 a night deposit is held against the bill. One dog per room, with size and breed checked at booking. Dogs are welcome in the bar, lobby and terrace. Book direct.'
   summary: 'A boutique hotel by the sea just west of Galway city.'
   description: |
     In 2023 The Twelve offered single occupancy B&B from €134, and €15 off the best rate for solo guests in its dog-friendly Pet Suites. Confirm before publishing.
@@ -243,7 +244,8 @@
   type: Hotel
   price_basis: 'Ask for the solo rate'
   supplement: standard
-  features: [spa]
+  features: [spa, dog_friendly]
+  pet_policy: 'Four pet-friendly rooms overlooking the back gardens, with access to the gardens at any hour.'
   summary: 'A Galway city hotel whose staff plan itineraries for solo guests.'
   description: |
     The Irish Hotels Federation's solo travel feature says the Ardilaun's team will tailor an itinerary for solo guests. Ask whether there is a solo rate.
@@ -288,3 +290,203 @@
   lat: 52.6700
   lng: -6.2300
   source: 'irelandhotels.com, Feb 2026. Needs a call.'
+
+# Pet-friendly stays. These are not solo packages: single occupancy usually
+# costs the room rate, so each one says to ask for the solo price. Pet details
+# come from the hotel's own page or the guide named in the source line.
+
+- title: 'Dog-friendly lakeside rooms at Glasson Lakehouse'
+  provider: 'Glasson Lakehouse'
+  town: Glasson
+  county: Westmeath
+  type: Hotel
+  price_basis: 'Ask for the single occupancy rate'
+  supplement: standard
+  features: [dog_friendly]
+  pet_policy: 'Doggy Rooms with direct outdoor access, blankets, bowls and treats. One small or medium dog per room. Dogs stay on a lead in public areas and are not allowed in the restaurant or on the golf course. They can be left in the room for up to an hour. Bring your own dog bed.'
+  summary: 'A four-star hotel on Lough Ree near Athlone with ground-floor rooms set up for dogs and plenty of lakeside walking.'
+  description: |
+    Glasson Lakehouse sits on the shore of Lough Ree, five minutes from Glasson village and ten from Athlone. Its Doggy Rooms open straight onto the grounds, so early and late walks are easy when you are the only one on dog duty.
+
+    Reception keeps maps of local walks and picnic spots, and will lend you a walking stick or a spare lead. Ask for the single occupancy rate when you book and mention you are bringing a dog.
+  url: 'https://glassonlakehouse.ie/stay/dog-friendly-rooms/'
+  last_checked: '2026-10-30'
+  lat: 53.4655
+  lng: -7.8805
+  source: 'Hotel website, dog-friendly rooms page'
+
+- title: 'Dogs welcome at Gregans Castle, the Burren'
+  provider: 'Gregans Castle Hotel'
+  town: Ballyvaughan
+  county: Clare
+  type: Country house hotel
+  price_basis: 'Ask for the single occupancy rate'
+  supplement: standard
+  features: [dog_friendly, meals_included]
+  pet_policy: 'Ground-floor rooms with garden access, which must be requested at booking. €25 per pet per stay. Dogs are welcome in the bar on a lead and in the grounds, but not in other public areas.'
+  summary: 'An award-winning country house hotel above Ballyvaughan Bay with garden rooms for guests travelling with a dog.'
+  description: |
+    Gregans Castle looks across the Burren to Galway Bay and is one of the best-known dog-friendly hotels in the west. A handful of ground-floor rooms open onto the gardens, so ask for one when you book because they are not guaranteed.
+
+    The Burren is ideal walking country for a solo traveller and a dog, with quiet green roads and the Flaggy Shore a short drive away. Ask for the single occupancy rate, and expect to meet the hotel's two cats by the fire.
+  url: 'https://gregans.ie/pets.html'
+  last_checked: '2026-10-30'
+  lat: 53.0786
+  lng: -9.1872
+  source: 'Hotel website, pet policy page'
+
+- title: 'Pet-friendly garden rooms at Castlemartyr Resort'
+  provider: 'Castlemartyr Resort'
+  town: Castlemartyr
+  county: Cork
+  type: Hotel
+  price_basis: 'Ask for the single occupancy rate'
+  supplement: standard
+  features: [dog_friendly, spa]
+  pet_policy: 'Ground-floor Garden Deluxe Rooms with private gardens, and the Orchard Residences (€25 per dog per night). Up to two dogs, up to standard Labrador size, no restricted breeds. Dogs cannot be left alone in the room and are not allowed in food and drink areas. Welcome gift, dog bed and walking maps included.'
+  summary: 'A five-star resort in east Cork with garden rooms for dogs, a pet concierge and woodland walks on the estate.'
+  description: |
+    Castlemartyr's Garden Deluxe Rooms each have a private garden, and the resort's pet concierge can point you to local dog walkers, sitters and vets if you want an hour in the spa on your own.
+
+    It is a splurge rather than a budget stay, so ask for the single occupancy rate and any midweek offers when you book.
+  url: 'https://www.castlemartyrresort.ie/room/pet-friendly/'
+  last_checked: '2026-10-30'
+  lat: 51.9105
+  lng: -8.0535
+  source: 'Hotel website, pet-friendly accommodation page'
+
+- title: 'Balcony rooms for dogs at Dunmore House, Clonakilty'
+  provider: 'Dunmore House Hotel'
+  town: Clonakilty
+  county: Cork
+  type: Hotel
+  price_basis: 'Ask for the single occupancy rate'
+  supplement: standard
+  features: [dog_friendly]
+  pet_policy: 'Five ground-floor pet rooms with balconies. Two or three dogs stay free. Dogs can go almost everywhere except the Adrift restaurant, and breakfast can be served in the lounge so your dog can join you.'
+  summary: 'A family-run hotel on the West Cork coast where dogs stay free and can join you for breakfast in the lounge.'
+  description: |
+    Dunmore House is right on the Atlantic outside Clonakilty, with the beaches at Inchydoney close by. Dogs stay free, and being allowed in most of the hotel makes a big difference when you are travelling on your own and do not want to leave your dog in the room.
+
+    Confirm the pet rooms are free for your dates and ask for the single occupancy rate.
+  url: 'https://www.discoverireland.ie/guides/dog-friendly-hotels-ireland'
+  last_checked: '2026-10-30'
+  lat: 51.5900
+  lng: -8.8510
+  source: 'Discover Ireland dog-friendly hotels guide. Confirm with the hotel.'
+
+- title: 'Dog rooms by the beach at the Ocean Sands Hotel, Enniscrone'
+  provider: 'Ocean Sands Hotel'
+  town: Enniscrone
+  county: Sligo
+  type: Hotel
+  price_basis: 'Ask for the single occupancy rate'
+  supplement: standard
+  features: [dog_friendly]
+  pet_policy: 'Eight ground-floor dog rooms, some with outdoor access. €15 per dog per night, up to two dogs. Dogs must be trained and vaccinated, and restricted breeds are not allowed. Dogs can join you at pet-friendly tables in the lobby. Bring their bed, food and bowls.'
+  summary: 'A seafront hotel on Killala Bay with dog rooms a short walk from Enniscrone''s long sandy beach.'
+  description: |
+    Enniscrone's beach runs for miles, which makes this an easy base for a solo break with a dog. The hotel lets dogs join you for dinner at its pet-friendly lobby tables, so you are not eating alone in your room.
+
+    Book direct to get a dog room and ask for the single occupancy rate.
+  url: 'https://www.discoverireland.ie/guides/dog-friendly-hotels-ireland'
+  last_checked: '2026-10-30'
+  lat: 54.2135
+  lng: -9.0960
+  source: 'Discover Ireland and Irish Examiner dog-friendly guides. Confirm with the hotel.'
+
+- title: 'Rooms where dogs stay free at Gleesons, Roscommon'
+  provider: 'Gleesons Townhouse & Restaurant'
+  town: Roscommon
+  county: Roscommon
+  type: 'B&B or guesthouse'
+  price_basis: 'Ask for the single occupancy rate'
+  supplement: standard
+  features: [dog_friendly]
+  pet_policy: 'Dogs are welcome in bedrooms, up to two per room, with no charge. They can sit with you at designated tables in reception, but not in the restaurant. Bring everything your dog needs.'
+  summary: 'A townhouse with rooms and a restaurant on Roscommon''s main square, where dogs stay free.'
+  description: |
+    Gleesons is a good stop in the midlands if you are driving across the country with a dog. You can eat at the reception tables with your dog beside you, which suits a solo traveller who would rather not leave them in the room.
+
+    Ask for the single occupancy rate when you book.
+  url: 'https://www.discoverireland.ie/guides/dog-friendly-hotels-ireland'
+  last_checked: '2026-10-30'
+  lat: 53.6325
+  lng: -8.1890
+  source: 'Discover Ireland and Irish Examiner dog-friendly guides. Confirm with the hotel.'
+
+- title: 'Garden suite for dogs at The Mustard Seed, Ballingarry'
+  provider: 'The Mustard Seed at Echo Lodge'
+  town: Ballingarry
+  county: Limerick
+  type: Country house hotel
+  price_basis: 'Ask for the single occupancy rate'
+  supplement: standard
+  features: [dog_friendly, meals_included]
+  pet_policy: 'Two pet-friendly rooms, the Garden Suite and the Courtyard Mews, both with outdoor access. No pet charge. Your dog can stay in the room while you have dinner.'
+  summary: 'A country house restaurant with rooms near Adare, with two rooms set aside for guests with dogs.'
+  description: |
+    The Mustard Seed is best known for its food, and it is a comfortable place to dine alone. With only two pet rooms, book early and ask for the single occupancy rate.
+  url: 'https://www.discoverireland.ie/guides/dog-friendly-hotels-ireland'
+  last_checked: '2026-10-30'
+  lat: 52.4738
+  lng: -8.8626
+  source: 'Discover Ireland dog-friendly hotels guide. Confirm with the hotel.'
+
+- title: 'Stable rooms for dogs at Bellinter House, Boyne Valley'
+  provider: 'Bellinter House'
+  town: Navan
+  county: Meath
+  type: Country house hotel
+  price_basis: 'Ask for the single occupancy rate'
+  supplement: standard
+  features: [dog_friendly, spa]
+  pet_policy: 'Stable Rooms take up to two dogs of any breed. €20 for the first night and €10 for each night after. Dogs can join you for outdoor dining.'
+  summary: 'A Palladian country house in the Boyne Valley, under an hour from Dublin, with converted stable rooms for dogs.'
+  description: |
+    Bellinter is close enough to Dublin for a one-night break, and the Boyne Valley around it has easy riverside walking and the passage tombs at Brú na Bóinne nearby.
+
+    Ask for the single occupancy rate and a Stable Room when you book.
+  url: 'https://www.discoverireland.ie/guides/dog-friendly-hotels-ireland'
+  last_checked: '2026-10-30'
+  lat: 53.6097
+  lng: -6.6560
+  source: 'Discover Ireland dog-friendly hotels guide. Confirm with the hotel.'
+
+- title: 'Dog-friendly rooms at The Wyatt Hotel, Westport'
+  provider: 'The Wyatt Hotel'
+  town: Westport
+  county: Mayo
+  type: Hotel
+  price_basis: 'Ask for the single occupancy rate'
+  supplement: standard
+  features: [dog_friendly, public_transport]
+  pet_policy: 'Dog-friendly rooms with direct outdoor access. All breeds welcome. €25 per night. Dogs are not allowed in the main hotel.'
+  summary: 'A town-centre hotel on Westport''s Octagon, close to the Great Western Greenway, with dog rooms that open outside.'
+  description: |
+    Westport is one of the easiest towns in Ireland for a solo trip, with the train from Dublin and the Great Western Greenway on the doorstep. The Wyatt's dog rooms have their own outdoor access, which helps since dogs cannot go into the main hotel.
+
+    Ask for the single occupancy rate when you book.
+  url: 'https://www.discoverireland.ie/guides/dog-friendly-hotels-ireland'
+  last_checked: '2026-10-30'
+  lat: 53.8000
+  lng: -9.5225
+  source: 'Discover Ireland dog-friendly hotels guide. Confirm with the hotel.'
+
+- title: 'Dog-friendly rooms at The Mill, Dunfanaghy'
+  provider: 'The Mill Restaurant & Accommodation'
+  town: Dunfanaghy
+  county: Donegal
+  type: 'B&B or guesthouse'
+  price_basis: 'Ask for the single occupancy rate'
+  supplement: standard
+  features: [dog_friendly]
+  pet_policy: 'Two dog-friendly rooms, one dog per room, which must be requested at booking. Dogs can sit in the conservatory on a lead. Walking maps provided.'
+  summary: 'A restaurant with rooms beside New Lake in north Donegal, near Killahoey beach and Horn Head.'
+  description: |
+    Dunfanaghy is a small, friendly village and a good base for walking Horn Head and Killahoey beach with a dog. With only two dog rooms, request one when you book and ask for the single occupancy rate.
+  url: 'https://www.irishexaminer.com/lifestyle/travel/arid-41688219.html'
+  last_checked: '2026-10-30'
+  lat: 55.1800
+  lng: -7.9740
+  source: 'Irish Examiner dog-friendly stays guide. Confirm with the hotel.'

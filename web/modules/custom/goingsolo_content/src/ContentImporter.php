@@ -85,6 +85,7 @@ final class ContentImporter {
     $created = 0;
     foreach ($data as $item) {
       if ($this->nodeExists('listing', $item['title'])) {
+        $this->updatePetDetails($item);
         continue;
       }
       $values = [
@@ -109,12 +110,33 @@ final class ContentImporter {
         'field_featured' => (int) ($item['featured'] ?? 0),
         'field_members_only' => (int) ($item['members_only'] ?? 0),
         'field_source_note' => $item['source'] ?? NULL,
+        'field_pet_policy' => $item['pet_policy'] ?? NULL,
         'path' => ['alias' => '/deals/' . $this->slug($item['county']) . '/' . $this->slug($item['title'])],
       ];
       $this->entityTypeManager->getStorage('node')->create($values)->save();
       $created++;
     }
     return $created;
+  }
+
+  /**
+   * Adds pet details to a listing imported before they were in the data.
+   */
+  private function updatePetDetails(array $item): void {
+    if (empty($item['pet_policy'])) {
+      return;
+    }
+    $storage = $this->entityTypeManager->getStorage('node');
+    $ids = $storage->getQuery()->accessCheck(FALSE)->condition('type', 'listing')->condition('title', $item['title'])->execute();
+    foreach ($storage->loadMultiple($ids) as $node) {
+      if (!$node->hasField('field_pet_policy') || !$node->get('field_pet_policy')->isEmpty()) {
+        continue;
+      }
+      $features = array_column($node->get('field_solo_features')->getValue(), 'value');
+      $node->set('field_solo_features', array_values(array_unique(array_merge($features, ['dog_friendly']))));
+      $node->set('field_pet_policy', $item['pet_policy']);
+      $node->save();
+    }
   }
 
   /**

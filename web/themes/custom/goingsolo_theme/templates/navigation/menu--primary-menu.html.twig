@@ -1,0 +1,15 @@
+{#
+/**
+ * @file
+ * Main menu, styled by the theme without Olivero's navigation script.
+ */
+#}
+{% if items %}
+  <ul class="gs-menu gs-menu--main">
+    {% for item in items %}
+      <li class="gs-menu__item{{ item.in_active_trail ? ' is-active' }}">
+        {{ link(item.title, item.url, { class: ['gs-menu__link'] }) }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

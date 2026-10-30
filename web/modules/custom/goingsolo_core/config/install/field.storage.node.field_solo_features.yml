@@ -30,7 +30,7 @@ settings:
       label: 'Reachable by public transport'
     -
       value: dog_friendly
-      label: 'Dog friendly'
+      label: 'Pet friendly'
     -
       value: meals_included
       label: 'Meals included'

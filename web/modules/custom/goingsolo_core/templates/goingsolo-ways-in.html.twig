@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * Shortcut tiles under the homepage hero.
+ */
+#}
+<nav class="gs-ways" aria-label="{{ 'Ways to browse'|t }}">
+  <div class="gs-container gs-ways__grid">
+    {% for item in items %}
+      <a class="gs-way gs-way--{{ item.modifier }}" href="{{ item.url }}">
+        <span class="gs-way__icon" aria-hidden="true">{{ item.icon }}</span>
+        <span class="gs-way__text">
+          <strong>{{ item.title }}</strong>
+          <span>{{ item.text }}</span>
+        </span>
+      </a>
+    {% endfor %}
+  </div>
+</nav>

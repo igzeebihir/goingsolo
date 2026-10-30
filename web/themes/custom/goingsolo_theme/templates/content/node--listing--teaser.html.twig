@@ -1,11 +1,19 @@
 {#
 /**
  * @file
- * Solo deal card.
+ * Solo deal card with a county "postcard" header.
  */
 #}
 <article{{ attributes.addClass('deal-card', node.field_featured.value ? 'deal-card--featured') }}>
-  <div class="deal-card__top">
+  <a class="deal-card__postcard deal-card__postcard--{{ gs_province|default('ireland')|clean_class }}" href="{{ url }}" tabindex="-1" aria-hidden="true">
+    {% if content.field_image|render|striptags('<img>')|trim %}
+      {{ content.field_image }}
+    {% else %}
+      <span class="deal-card__county">{{ gs_county ? 'Co. @county'|t({'@county': gs_county}) : 'Ireland'|t }}</span>
+      {% if gs_town and gs_town != gs_county %}<span class="deal-card__town">{{ gs_town }}</span>{% endif %}
+    {% endif %}
+  </a>
+  <div class="deal-card__body">
     {% if gs_badges %}
       <ul class="deal-card__badges">
         {% for badge in gs_badges %}
@@ -13,26 +21,28 @@
         {% endfor %}
       </ul>
     {% endif %}
-    <p class="deal-card__where">
-      {{ gs_type }}{% if gs_town %} · {{ gs_town }}{% endif %}{% if gs_county %}, {{ 'Co. @county'|t({'@county': gs_county}) }}{% endif %}
-    </p>
+    {{ title_prefix }}
+    <h3{{ title_attributes.addClass('deal-card__title') }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h3>
+    {{ title_suffix }}
+    <p class="deal-card__where">{{ gs_type }}{% if gs_provider %} · {{ gs_provider }}{% endif %}</p>
+    <div class="deal-card__summary">{{ content.body }}</div>
+    <div class="deal-card__foot">
+      <div class="deal-card__price">
+        {% if gs_price %}
+          <span class="deal-card__from">{{ 'from'|t }}</span>
+          <span class="deal-card__amount">{{ gs_price }}</span>
+          {% if gs_price_basis %}<span class="deal-card__basis">{{ gs_price_basis }}</span>{% endif %}
+        {% elseif gs_price_basis %}
+          <span class="deal-card__ask">{{ gs_price_basis }}</span>
+        {% else %}
+          <span class="deal-card__ask">{{ 'Price on request'|t }}</span>
+        {% endif %}
+      </div>
+      <a class="deal-card__more" href="{{ url }}" aria-label="{{ 'See the deal: @title'|t({'@title': node.label}) }}">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
   </div>
-  {{ title_prefix }}
-  <h3{{ title_attributes.addClass('deal-card__title') }}>
-    <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-  </h3>
-  {{ title_suffix }}
-  {% if gs_provider %}<p class="deal-card__provider">{{ gs_provider }}</p>{% endif %}
-  <div class="deal-card__summary">{{ content.body }}</div>
-  <div class="deal-card__price">
-    {% if gs_price %}
-      <span class="deal-card__amount">{{ 'from @price'|t({'@price': gs_price}) }}</span>
-    {% elseif gs_price_basis %}
-      <span class="deal-card__amount deal-card__amount--ask">{{ gs_price_basis }}</span>
-    {% else %}
-      <span class="deal-card__amount deal-card__amount--ask">{{ 'Price on request'|t }}</span>
-    {% endif %}
-    {% if gs_price and gs_price_basis %}<span class="deal-card__basis">{{ gs_price_basis }}</span>{% endif %}
-  </div>
-  <a class="deal-card__more" href="{{ url }}">{{ 'See the deal'|t }}<span class="visually-hidden">: {{ label }}</span></a>
 </article>

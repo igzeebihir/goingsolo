@@ -22,7 +22,16 @@ use Drupal\node\NodeInterface;
 function goingsolo_core_theme(): array {
   return [
     'goingsolo_hero' => [
-      'variables' => ['deals_url' => NULL, 'guides_url' => NULL],
+      'variables' => ['deals_url' => NULL, 'guides_url' => NULL, 'map' => NULL, 'stats' => []],
+    ],
+    'goingsolo_home_section' => [
+      'variables' => ['modifier' => NULL, 'eyebrow' => NULL, 'title' => NULL, 'intro' => NULL, 'content' => NULL, 'link' => NULL],
+    ],
+    'goingsolo_ways_in' => [
+      'variables' => ['items' => []],
+    ],
+    'goingsolo_club_band' => [
+      'variables' => ['join_url' => NULL],
     ],
     'goingsolo_members_teaser' => [
       'variables' => ['join_url' => NULL, 'login_url' => NULL],
@@ -124,13 +133,19 @@ function goingsolo_core_preprocess_node(array &$variables): void {
   elseif ($supplement === 'reduced') {
     $badges[] = ['label' => t('Reduced solo rate'), 'modifier' => 'reduced'];
   }
+  $features = array_column($node->get('field_solo_features')->getValue(), 'value');
+  if (in_array('dog_friendly', $features, TRUE)) {
+    $badges[] = ['label' => t('Pet friendly'), 'modifier' => 'pets'];
+  }
   $variables['gs_badges'] = $badges;
+  $variables['gs_pet_policy'] = $node->get('field_pet_policy')->value;
   $variables['gs_provider'] = $node->get('field_provider')->value;
   $price = $node->get('field_solo_price')->value;
   $variables['gs_price'] = $price !== NULL ? '€' . number_format((float) $price, ((float) $price == floor((float) $price)) ? 0 : 2) : NULL;
   $variables['gs_price_basis'] = $node->get('field_price_basis')->value;
   $county = $node->get('field_county')->entity;
   $variables['gs_county'] = $county?->label();
+  $variables['gs_province'] = $county?->get('field_province')->value;
   $variables['gs_town'] = $node->get('field_town')->value;
   $type = $node->get('field_listing_type')->entity;
   $variables['gs_type'] = $type?->label();

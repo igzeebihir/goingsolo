@@ -67,9 +67,9 @@ final class MapBuilder {
   }
 
   /**
-   * Map of deal locations, optionally limited to one county.
+   * Map of deal locations, optionally limited to one county or feature.
    */
-  public function dealsMap(?int $county_tid = NULL): array {
+  public function dealsMap(?int $county_tid = NULL, ?string $feature = NULL): array {
     $storage = $this->entityTypeManager->getStorage('node');
     $query = $storage->getQuery()
       ->accessCheck(TRUE)
@@ -80,6 +80,9 @@ final class MapBuilder {
       ->range(0, 500);
     if ($county_tid) {
       $query->condition('field_county', $county_tid);
+    }
+    if ($feature) {
+      $query->condition('field_solo_features', $feature);
     }
     $points = [];
     foreach ($storage->loadMultiple($query->execute()) as $node) {
@@ -97,7 +100,7 @@ final class MapBuilder {
     if (!$points) {
       return ['#cache' => ['tags' => ['node_list:listing']]];
     }
-    $id = 'deals-' . ($county_tid ?: 'all');
+    $id = 'deals-' . ($county_tid ?: 'all') . ($feature ? '-' . $feature : '');
     return [
       '#type' => 'html_tag',
       '#tag' => 'div',
