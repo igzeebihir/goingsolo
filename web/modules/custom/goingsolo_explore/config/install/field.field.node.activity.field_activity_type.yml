@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_activity_type
+  - node.type.activity
+  - taxonomy.vocabulary.activity_type
+id: node.activity.field_activity_type
+field_name: field_activity_type
+entity_type: node
+bundle: activity
+label: Activity type
+description: ''
+required: true
+translatable: true
+default_value: {}
+default_value_callback: ''
+settings:
+  handler: default:taxonomy_term
+  handler_settings:
+    target_bundles:
+      activity_type: activity_type
+    auto_create: false
+    sort:
+      field: name
+      direction: asc
+field_type: entity_reference

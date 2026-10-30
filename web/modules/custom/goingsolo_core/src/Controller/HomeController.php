@@ -50,6 +50,28 @@ final class HomeController extends ControllerBase {
       '#link' => $this->link($this->t('All pet-friendly stays'), Url::fromRoute('view.deals.page_pets')),
       '#weight' => 20,
     ];
+    if ($this->moduleHandler()->moduleExists('goingsolo_explore')) {
+      $build['routes'] = [
+        '#theme' => 'goingsolo_home_section',
+        '#modifier' => 'routes',
+        '#eyebrow' => $this->t('Self-guided routes'),
+        '#title' => $this->t('Two or three days, at your own pace'),
+        '#intro' => $this->t('Greenways, coastal walks and road trips with daily stages you can open in OpenStreetMap or download to your phone.'),
+        '#content' => views_embed_view('routes', 'block_latest'),
+        '#link' => $this->link($this->t('All routes'), Url::fromRoute('view.routes.page_main')),
+        '#weight' => 25,
+      ];
+      $build['activities'] = [
+        '#theme' => 'goingsolo_home_section',
+        '#modifier' => 'activities',
+        '#eyebrow' => $this->t('Solo activities'),
+        '#title' => $this->t('Easy to join on your own'),
+        '#intro' => $this->t('Tours, classes and days out where you will meet people, priced per person.'),
+        '#content' => views_embed_view('activities', 'block_latest'),
+        '#link' => $this->link($this->t('All activities'), Url::fromRoute('view.activities.page_main')),
+        '#weight' => 27,
+      ];
+    }
     if ($this->moduleHandler()->moduleExists('goingsolo_commerce')) {
       $build['club'] = [
         '#theme' => 'goingsolo_club_band',
@@ -116,13 +138,20 @@ final class HomeController extends ControllerBase {
         'url' => Url::fromRoute('view.deals.page_pets')->toString(),
       ],
     ];
-    if (Url::fromUserInput('/activities')->isRouted()) {
+    if ($this->moduleHandler()->moduleExists('goingsolo_explore')) {
       $items[] = [
         'modifier' => 'activities',
         'icon' => '✦',
         'title' => $this->t('Solo activities'),
         'text' => $this->t('Tours and classes to join alone'),
-        'url' => Url::fromUserInput('/activities')->toString(),
+        'url' => Url::fromRoute('view.activities.page_main')->toString(),
+      ];
+      $items[] = [
+        'modifier' => 'routes',
+        'icon' => '↝',
+        'title' => $this->t('Self-guided routes'),
+        'text' => $this->t('Two or three days, mapped'),
+        'url' => Url::fromRoute('view.routes.page_main')->toString(),
       ];
     }
     return $items;

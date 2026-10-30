@@ -1,0 +1,167 @@
+# Solo activities. Each was checked against the provider's listing on the
+# national tourism sites (Discover Ireland or Ireland.com) on last_checked.
+# Prices are left out until confirmed with the provider.
+
+- title: 'Dublin Literary Pub Crawl'
+  provider: 'Dublin Literary Pub Crawl'
+  type: 'Walking tour'
+  county: Dublin
+  town: Dublin
+  duration: 'An evening'
+  summary: 'Two actors lead a walk between historic Dublin pubs, performing scenes from Joyce, Beckett, Behan and Wilde along the way.'
+  description: |
+    One of Dublin's longest-running evening tours. You meet at a city-centre pub, then walk with the group between pubs connected to the city's writers while two actors perform short scenes and tell the stories behind them.
+
+    There is a quiz along the way, which is an easy way to get talking to the people around you.
+  tip: 'It gives you a ready-made group for the evening. You walk and drink with the same people for a few hours, and the performances give everyone something to talk about.'
+  url: 'https://www.discoverireland.ie/dublin/dublin-literary-pub-crawl'
+  lat: 53.3417
+  lng: -6.2593
+  last_checked: '2026-10-30'
+  source: 'Discover Ireland listing'
+
+- title: 'The Wicklow Tour with Hilltoptreks'
+  provider: 'Hilltoptreks'
+  type: 'Guided tour or day trip'
+  county: Wicklow
+  town: Glendalough
+  duration: 'Full day from Dublin'
+  summary: 'A small-group day trip from Dublin into the Wicklow Mountains, with time to walk at Glendalough.'
+  description: |
+    A day out of the city in the Wicklow Mountains, including the monastic site and lakes at Glendalough, with guided walking along the way. Transport from Dublin is included, so you do not need a car.
+  tip: 'Getting to the Wicklow Mountains without a car is awkward on your own. A small-group tour solves the transport and gives you company on the walk.'
+  url: 'https://www.discoverireland.ie/dublin/the-wicklow-tour-hilltoptreks'
+  lat: 53.0103
+  lng: -6.3297
+  last_checked: '2026-10-30'
+  source: 'Discover Ireland listing'
+
+- title: 'Doolin Cliff Walk Guided Tour'
+  provider: 'Doolin Cliff Walk'
+  type: 'Walking tour'
+  county: Clare
+  town: Doolin
+  duration: 'About three hours'
+  summary: 'A guided walk from Doolin along the coastal path towards the Cliffs of Moher, led by a local farmer.'
+  description: |
+    The walk starts in Doolin and follows the cliff path south through farmland towards the Cliffs of Moher, with stories about the land, the families who farm it and the wildlife along the coast.
+  tip: 'The cliff path is exposed and not always well marked. Walking it with a guide means you can enjoy it without worrying about the route, and you set off as a group.'
+  url: 'https://www.discoverireland.ie/clare/doolin-cliff-walk-guided-tour'
+  lat: 53.0177
+  lng: -9.4027
+  last_checked: '2026-10-30'
+  source: 'Discover Ireland listing'
+
+- title: 'Surf lessons at Strandhill Surf School'
+  provider: 'Strandhill Surf School'
+  type: 'Outdoors and adventure'
+  county: Sligo
+  town: Strandhill
+  duration: 'Around two hours'
+  summary: 'Beginner surf lessons on one of the west coast''s best-known surf beaches, with wetsuit and board included.'
+  description: |
+    Strandhill is a small surf village a short drive from Sligo town, with a long beach facing the Atlantic and Knocknarea behind it. Lessons cover the basics on the sand before you head into the water.
+
+    Afterwards, the village has cafés and a seaweed bath house, which is a good way to warm up.
+  tip: 'Group lessons put you in the water with others at the same level, and surf villages are sociable places to be on your own.'
+  url: 'https://discoverireland.ie/sligo/strandhill-surf-school'
+  lat: 54.2711
+  lng: -8.6066
+  last_checked: '2026-10-30'
+  source: 'Discover Ireland listing'
+
+- title: 'Kilkenny Walking Tours'
+  provider: 'Pat Tynan Kilkenny Walking Tours'
+  type: 'Walking tour'
+  county: Kilkenny
+  town: Kilkenny
+  duration: 'About an hour'
+  summary: 'A guided walk through Kilkenny''s medieval streets with a local guide, starting from the Tholsel on High Street.'
+  description: |
+    A family-run walking tour of Ireland's medieval city, taking in the Medieval Mile between Kilkenny Castle and St Canice's Cathedral, with stories of witches, monks and merchants.
+  tip: 'An hour with a guide on your first afternoon helps you get your bearings, and you will know where everything is for the rest of your stay.'
+  url: 'https://www.discoverireland.ie/kilkenny/kilkenny-walking-tours'
+  lat: 52.6510
+  lng: -7.2510
+  last_checked: '2026-10-30'
+  source: 'Discover Ireland and Visit Kilkenny listings'
+
+- title: 'Cork Fab Food Trail'
+  provider: 'Fab Food Trails'
+  type: 'Food and drink'
+  county: Cork
+  town: Cork
+  duration: 'A few hours'
+  summary: 'A guided tasting walk through Cork city, including the English Market, meeting producers and traders along the way.'
+  description: |
+    Cork calls itself Ireland's food capital, and the English Market is the heart of it. The trail introduces you to traders, producers and food spots around the city centre, with tastings as you go.
+  tip: 'Eating alone can be the hardest part of a solo trip. A food tour gives you a group to taste and talk with, and a list of places to come back to.'
+  url: 'https://discoverireland.ie/cork/cork-fab-food-trail'
+  lat: 51.8977
+  lng: -8.4744
+  last_checked: '2026-10-30'
+  source: 'Discover Ireland listing'
+
+- title: 'Short courses at Ballymaloe Cookery School'
+  provider: 'Ballymaloe Cookery School'
+  type: 'Class or workshop'
+  county: Cork
+  town: Shanagarry
+  duration: 'Half-day to week-long'
+  summary: 'Short cookery courses on an organic farm in east Cork, from half-day demonstrations to week-long courses.'
+  description: |
+    Ballymaloe is one of Ireland's best-known cookery schools, set on an organic farm near the coast at Shanagarry. Short courses range from half-day demonstrations to hands-on courses over several days, and many people come on their own.
+  tip: 'A course gives your trip a purpose and a group of people to share it with. Lunch is often eaten together.'
+  url: 'https://www.ballymaloecookeryschool.ie/cookery-courses/about-our-short-courses'
+  lat: 51.8790
+  lng: -8.0310
+  last_checked: '2026-10-30'
+  source: 'Ballymaloe Cookery School website'
+
+- title: 'Galway Food Tours'
+  provider: 'Galway Food Tours'
+  type: 'Food and drink'
+  county: Galway
+  town: Galway
+  duration: 'A few hours'
+  summary: 'A walking food tour of Galway city with tastings from local producers, cafés and the market.'
+  description: |
+    Galway's compact centre is ideal for a walking food tour, taking in local producers, artisan shops and the Saturday market area by St Nicholas' Church.
+  tip: 'A friendly small group, plenty to eat and recommendations for the rest of your stay.'
+  url: 'https://www.discoverireland.ie/galway/galway-food-tours'
+  lat: 53.2723
+  lng: -9.0533
+  last_checked: '2026-10-30'
+  source: 'Discover Ireland listing'
+
+- title: 'Cycle Inis Mór with Aran Bike Hire'
+  provider: 'Aran Bike Hire'
+  type: 'Cycling and bike hire'
+  county: Galway
+  town: 'Inis Mór'
+  duration: 'A day'
+  summary: 'Hire a bike in Kilronan and cycle the largest Aran Island at your own pace, out to Dún Aonghasa and the seal colony.'
+  description: |
+    The ferry from Rossaveal brings you into Kilronan, where you can hire a bike for the day. Quiet roads lead west along the island to Dún Aonghasa, the stone fort on the cliff edge, with beaches, stone walls and a seal colony along the way.
+  tip: 'One of the best solo days in the west of Ireland. You set your own pace, and there are cafés and pubs to stop at along the way.'
+  url: 'https://www.discoverireland.ie/galway/aran-bike-hire'
+  lat: 53.1196
+  lng: -9.6694
+  last_checked: '2026-10-30'
+  source: 'Discover Ireland listing'
+
+- title: 'The Black Cab Tour, Belfast'
+  provider: 'The Black Cab Tour'
+  type: 'Guided tour or day trip'
+  county: Northern Ireland
+  town: Belfast
+  duration: 'About 90 minutes'
+  summary: 'A driver-guided tour of Belfast''s murals and peace walls, with the history of the Troubles told by people who lived through them.'
+  description: |
+    Belfast's black taxi tours take you through the Falls and Shankill areas to see the murals and peace walls, with your driver explaining the history and stopping for photos. Prices are in sterling.
+  tip: 'Many black cab tours are private, so the price is per cab, not per person. Ask whether you can join a shared tour.'
+  url: 'https://www.ireland.com/en-us/myireland/attraction/7e8fa99b601d42afb0afc719e0763975/the-black-cab-tour'
+  lat: 54.5970
+  lng: -5.9300
+  last_checked: '2026-10-30'
+  source: 'Ireland.com listing'

@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {}
+name: Solo activity
+type: activity
+description: A tour, class or experience that works well on your own.
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

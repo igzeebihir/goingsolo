@@ -7,3 +7,4 @@ dependencies:
   - goingsolo_core:goingsolo_core
   - drupal:menu_link_content
   - drupal:contact
+  - goingsolo_explore:goingsolo_explore

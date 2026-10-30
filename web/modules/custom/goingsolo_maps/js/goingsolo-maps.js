@@ -105,6 +105,31 @@
     }
   }
 
+  function routeMap(el, stops) {
+    const map = L.map(el, { scrollWheelZoom: false });
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+    const line = L.polyline(stops.map((s) => [s.lat, s.lng]), {
+      color: '#0b4f4a',
+      weight: 3,
+      dashArray: '6 8',
+      opacity: 0.8,
+    }).addTo(map);
+    stops.forEach((s, i) => {
+      const end = i === 0 || i === stops.length - 1;
+      L.circleMarker([s.lat, s.lng], {
+        radius: end ? 9 : 7,
+        color: '#ffffff',
+        weight: 2,
+        fillColor: end ? '#c23b6e' : '#0b4f4a',
+        fillOpacity: 1,
+      }).bindTooltip(`${Drupal.t('Day @day', { '@day': s.day })}: ${s.name}`).addTo(map);
+    });
+    map.fitBounds(line.getBounds(), { padding: [30, 30] });
+  }
+
   Drupal.behaviors.goingsoloMaps = {
     attach(context) {
       const settings = drupalSettings.goingsoloMaps || {};
@@ -113,6 +138,12 @@
         const points = (settings.points || {})[el.dataset.gsMapId] || [];
         if (points.length) {
           dealsMap(el, points);
+        }
+      });
+      once('gs-map', '[data-gs-map="route"]', context).forEach((el) => {
+        const stops = (settings.routes || {})[el.dataset.gsMapId] || [];
+        if (stops.length) {
+          routeMap(el, stops);
         }
       });
     },

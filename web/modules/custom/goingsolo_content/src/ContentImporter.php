@@ -38,6 +38,8 @@ final class ContentImporter {
     $counts['listings'] = $this->importListings();
     $counts['articles'] = $this->importArticles();
     $counts['pages'] = $this->importPages();
+    $counts['activities'] = $this->importActivities();
+    $counts['routes'] = $this->importRoutes();
     $this->createContactForm();
     $this->loggerFactory->get('goingsolo_content')->notice('Starter content imported: @c', ['@c' => json_encode($counts)]);
     return $counts;
@@ -137,6 +139,77 @@ final class ContentImporter {
       $node->set('field_pet_policy', $item['pet_policy']);
       $node->save();
     }
+  }
+
+  /**
+   * Imports solo activities, when the activities module is on.
+   */
+  public function importActivities(): int {
+    if (!$this->entityTypeManager->getStorage('node_type')->load('activity')) {
+      return 0;
+    }
+    $created = 0;
+    foreach (Yaml::decode(file_get_contents($this->dataPath('activities.yml'))) as $item) {
+      if ($this->nodeExists('activity', $item['title'])) {
+        continue;
+      }
+      $this->entityTypeManager->getStorage('node')->create([
+        'type' => 'activity',
+        'title' => $item['title'],
+        'status' => 1,
+        'uid' => 1,
+        'body' => ['value' => $this->markdown($item['description']), 'summary' => $item['summary'] ?? '', 'format' => 'basic_html'],
+        'field_provider' => $item['provider'],
+        'field_activity_type' => $this->termId('activity_type', $item['type']),
+        'field_county' => $this->termId('county', $item['county']),
+        'field_town' => $item['town'] ?? NULL,
+        'field_duration' => $item['duration'] ?? NULL,
+        'field_solo_tip' => $item['tip'] ?? NULL,
+        'field_solo_price' => $item['price'] ?? NULL,
+        'field_price_basis' => $item['price_basis'] ?? NULL,
+        'field_offer_link' => ['uri' => $item['url']],
+        'field_latitude' => $item['lat'] ?? NULL,
+        'field_longitude' => $item['lng'] ?? NULL,
+        'field_last_checked' => $item['last_checked'] ?? NULL,
+        'field_source_note' => $item['source'] ?? NULL,
+        'path' => ['alias' => '/activities/' . $this->slug($item['county']) . '/' . $this->slug($item['title'])],
+      ])->save();
+      $created++;
+    }
+    return $created;
+  }
+
+  /**
+   * Imports self-guided routes, when the routes module is on.
+   */
+  public function importRoutes(): int {
+    if (!$this->entityTypeManager->getStorage('node_type')->load('route')) {
+      return 0;
+    }
+    $created = 0;
+    foreach (Yaml::decode(file_get_contents($this->dataPath('routes.yml'))) as $item) {
+      if ($this->nodeExists('route', $item['title'])) {
+        continue;
+      }
+      $counties = array_values(array_filter(array_map(fn($c) => $this->termId('county', $c), $item['counties'] ?? [])));
+      $this->entityTypeManager->getStorage('node')->create([
+        'type' => 'route',
+        'title' => $item['title'],
+        'status' => 1,
+        'uid' => 1,
+        'body' => ['value' => $this->markdown($item['body']), 'format' => 'basic_html'],
+        'field_standfirst' => $item['standfirst'],
+        'field_counties' => $counties,
+        'field_route_mode' => $item['mode'],
+        'field_days' => $item['days'],
+        'field_distance_km' => $item['distance'] ?? NULL,
+        'field_difficulty' => $item['difficulty'] ?? NULL,
+        'field_route_stops' => trim($item['stops']),
+        'path' => ['alias' => '/routes/' . $this->slug($item['title'])],
+      ])->save();
+      $created++;
+    }
+    return $created;
   }
 
   /**

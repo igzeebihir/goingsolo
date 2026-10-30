@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_standfirst
+  - node.type.route
+id: node.route.field_standfirst
+field_name: field_standfirst
+entity_type: node
+bundle: route
+label: Summary
+description: One or two sentences shown under the title and on teasers.
+required: false
+translatable: true
+default_value: {}
+default_value_callback: ''
+settings: {}
+field_type: string_long

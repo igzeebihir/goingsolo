@@ -1,0 +1,246 @@
+# Self-guided routes. Stops are "day|lat|lng|name"; each day starts where the
+# day before ended. Distances are approximate.
+
+- title: 'Great Western Greenway: Westport to Achill by bike'
+  mode: cycle
+  days: 2
+  distance: 42
+  difficulty: easy
+  counties: [Mayo]
+  standfirst: 'Ireland''s best-known greenway, traffic-free along an old railway line from Westport to Achill Island with Clew Bay beside you.'
+  stops: |
+    1|53.8008|-9.5199|Westport
+    1|53.8846|-9.5458|Newport
+    2|53.9057|-9.7818|Mulranny
+    2|53.9312|-9.9257|Achill Sound
+  body: |
+    ## Before you go
+
+    Westport has a direct train from Dublin, and several bike hire companies in town rent bikes and e-bikes and will collect you (and the bike) from Achill at the end. Book the shuttle when you hire.
+
+    ## Day 1: Westport to Newport
+
+    A short first day of about 11 km, so you can start after lunch. The greenway leaves Westport past the quay and runs through farmland to Newport, a small town on the river with a viaduct and a couple of good pubs. Stay the night in Newport.
+
+    ## Day 2: Newport to Achill Sound
+
+    The longest and most scenic stretch, about 31 km. The path follows the shore of Clew Bay with Croagh Patrick across the water, past Mulranny and its causeway beach, then over the bog to Achill Sound. Stop at Mulranny for lunch. From Achill Sound, take your shuttle back or stay on to explore Keem Bay and Keel.
+
+    ## Good to know
+
+    The path is shared with walkers and has gates at farm crossings. There is little shade or shelter on the bog stretch, so bring a rain jacket whatever the forecast.
+
+- title: 'Waterford Greenway: Waterford to Dungarvan'
+  mode: cycle
+  days: 2
+  distance: 46
+  difficulty: easy
+  counties: [Waterford]
+  standfirst: 'Viaducts, a tunnel and the Comeragh Mountains on an easy two-day ride from Ireland''s oldest city to the sea at Dungarvan.'
+  stops: |
+    1|52.2593|-7.1101|Waterford
+    1|52.2063|-7.4187|Kilmacthomas
+    2|52.0886|-7.6253|Dungarvan
+  body: |
+    ## Before you go
+
+    Waterford city has a direct train from Dublin. Bike hire companies at both ends of the greenway rent bikes and run shuttles, so you can ride one way.
+
+    ## Day 1: Waterford to Kilmacthomas
+
+    About 25 km beside the River Suir and through farmland, crossing the Kilmacthomas viaduct at the end of the day. The Workhouse in Kilmacthomas has a café. Stay nearby or ride on a little further if you have booked beyond.
+
+    ## Day 2: Kilmacthomas to Dungarvan
+
+    About 21 km. This is the best stretch: the Durrow viaduct, the Ballyvoile tunnel and the first view of the sea before you roll into Dungarvan's harbour. Dungarvan has good restaurants for a solo dinner and buses back to Waterford.
+
+    ## Good to know
+
+    The whole route is flat and well signed. If you prefer to walk it, allow three days.
+
+- title: 'Wicklow Way: Marlay Park to Glendalough'
+  mode: walk
+  days: 3
+  distance: 52
+  difficulty: hard
+  counties: [Dublin, Wicklow]
+  standfirst: 'The first three stages of Ireland''s oldest waymarked trail, from the edge of Dublin over the mountains to the monastic valley at Glendalough.'
+  stops: |
+    1|53.2737|-6.2700|Marlay Park
+    1|53.1990|-6.2470|Knockree
+    2|53.0640|-6.2240|Roundwood
+    3|53.0110|-6.3290|Glendalough
+  body: |
+    ## Before you go
+
+    Marlay Park in Rathfarnham is reachable by Dublin Bus. At the end, St Kevin's Bus runs from Glendalough back to Dublin. The trail is waymarked with yellow walking-man arrows, but carry a map and download the route to your phone.
+
+    ## Day 1: Marlay Park to Knockree
+
+    About 21 km. A steady climb out of the city into the Dublin Mountains, with views back over the bay, then down into the Glencullen valley and on to Knockree. There is a youth hostel at Knockree, which is a sociable place to stay on your own.
+
+    ## Day 2: Knockree to Roundwood
+
+    About 19 km past the Powerscourt estate, with views of the waterfall across the valley, then up over the shoulder of Djouce on boardwalks with views of Lough Tay. Roundwood, a short detour off the trail, has B&Bs and a pub.
+
+    ## Day 3: Roundwood to Glendalough
+
+    About 12 km, a shorter day over the hill to the Glendalough valley, its round tower and two lakes. Leave time for the walk around the Upper Lake before your bus.
+
+    ## Good to know
+
+    This is proper hill walking with exposed sections. Tell someone your plan each day, check the weather, and do not rely on phone signal in the mountains.
+
+- title: 'Causeway Coast Way: Ballycastle to Portrush'
+  mode: walk
+  days: 2
+  distance: 45
+  difficulty: moderate
+  counties: [Northern Ireland]
+  standfirst: 'Two days on Northern Ireland''s north coast, past Carrick-a-Rede and Ballintoy harbour to the Giant''s Causeway and on to Portrush.'
+  stops: |
+    1|55.2041|-6.2443|Ballycastle
+    1|55.2393|-6.3324|Carrick-a-Rede
+    1|55.2453|-6.3693|Ballintoy Harbour
+    1|55.2408|-6.5116|Giant's Causeway
+    2|55.2047|-6.5197|Bushmills
+    2|55.2052|-6.6519|Portrush
+  body: |
+    ## Before you go
+
+    Translink buses link the towns along this coast, so you can leave luggage at one end or hop on a bus if the weather turns. Prices are in sterling.
+
+    ## Day 1: Ballycastle to the Giant's Causeway
+
+    The longer day, mostly along clifftops and beaches. Book ahead if you want to cross the Carrick-a-Rede rope bridge. Ballintoy harbour is a good lunch stop. Arrive at the Causeway late in the afternoon, when most of the coaches have gone, and stay in Bushmills.
+
+    ## Day 2: Bushmills to Portrush
+
+    A shorter day past Dunluce Castle and along the White Rocks to Portrush, a seaside town with plenty of places to eat.
+
+    ## Good to know
+
+    Some beach sections can only be passed at low tide. Check tide times before you set off each morning.
+
+- title: 'Connemara by car: Galway to Leenane'
+  mode: drive
+  days: 3
+  difficulty: easy
+  counties: [Galway]
+  standfirst: 'Three easy days through Connemara''s coast, bogs and mountains, with time to stop wherever you like.'
+  stops: |
+    1|53.2707|-9.0568|Galway
+    1|53.2440|-9.3050|Spiddal
+    1|53.3955|-9.9180|Roundstone
+    2|53.4890|-10.0193|Clifden
+    3|53.5615|-9.8890|Kylemore Abbey
+    3|53.5963|-9.6965|Leenane
+  body: |
+    ## Before you go
+
+    Pick up a hire car in Galway. Buses run to Clifden if you would rather not drive, but you will see far less of the coast.
+
+    ## Day 1: Galway to Roundstone
+
+    Follow the coast road west through Spiddal, where the craft village is worth a stop, and on through the Irish-speaking Gaeltacht to Roundstone, a small harbour village with views of the Twelve Bens. Stay the night in Roundstone.
+
+    ## Day 2: Roundstone to Clifden
+
+    A short drive past the beaches at Gurteen and Dog's Bay and across the bog to Clifden. In the afternoon, drive the Sky Road loop west of town. Clifden is the liveliest town in Connemara, with plenty of places to eat alone.
+
+    ## Day 3: Clifden to Leenane
+
+    Drive north to Kylemore Abbey and its walled garden, then through the Inagh valley or along Killary Harbour to Leenane. From here you can carry on to Westport or loop back to Galway through Maam Cross.
+
+    ## Good to know
+
+    Roads are narrow and often single-track. Fill up with fuel in Clifden, as stations are few and far between.
+
+- title: 'Slea Head loop by bike, Dingle'
+  mode: cycle
+  days: 2
+  distance: 47
+  difficulty: moderate
+  counties: [Kerry]
+  standfirst: 'The road around the tip of the Dingle Peninsula, split over two days so you can stop for the beaches, the Blasket views and the early Christian sites.'
+  stops: |
+    1|52.1408|-10.2689|Dingle
+    1|52.1325|-10.3634|Ventry
+    1|52.0975|-10.4580|Slea Head
+    1|52.1260|-10.4580|Dunquin
+    2|52.1660|-10.4070|Ballyferriter
+    2|52.1720|-10.3490|Gallarus Oratory
+    2|52.1408|-10.2689|Dingle
+  body: |
+    ## Before you go
+
+    Hire a bike in Dingle town; an e-bike makes the hills much easier. Ride the loop clockwise, the same way as the traffic.
+
+    ## Day 1: Dingle to Dunquin
+
+    Out past Ventry beach and around Slea Head, where the road clings to the cliffs above the Atlantic with the Blasket Islands offshore. Stop at the Blasket Centre in Dunquin and stay the night nearby.
+
+    ## Day 2: Dunquin back to Dingle
+
+    North through Ballyferriter and past Gallarus Oratory, an early Christian stone church, then back over the hill to Dingle for a solo dinner and live music.
+
+    ## Good to know
+
+    The road is busy with cars and coaches in summer. Go early in the day, wear something bright, and take your time on the descents.
+
+- title: 'Old Rail Trail: Athlone to Mullingar'
+  mode: cycle
+  days: 2
+  distance: 40
+  difficulty: easy
+  counties: [Westmeath]
+  standfirst: 'A quiet, flat greenway across the midlands on an old railway line, between two towns with direct trains to Dublin.'
+  stops: |
+    1|53.4239|-7.9407|Athlone
+    1|53.3964|-7.7186|Moate
+    2|53.5259|-7.3381|Mullingar
+  body: |
+    ## Before you go
+
+    Athlone has direct trains from Dublin and Galway, and Mullingar from Dublin, so you can arrive at one end and leave from the other.
+
+    ## Day 1: Athlone and Moate
+
+    Spend the morning in Athlone, with its castle, the Shannon and Sean's Bar, then ride the first stretch east to Moate.
+
+    ## Day 2: Moate to Mullingar
+
+    The rest of the trail runs through farmland and cuttings, with old railway bridges along the way, to Mullingar, where you can link up with the Royal Canal Greenway if you want to keep going.
+
+    ## Good to know
+
+    The surface is smooth tarmac and the gradient is gentle the whole way, which makes this a good first multi-day ride.
+
+- title: 'Limerick Greenway: Rathkeale to Abbeyfeale'
+  mode: cycle
+  days: 2
+  distance: 40
+  difficulty: easy
+  counties: [Limerick]
+  standfirst: 'West Limerick''s greenway, with a restored railway station, a viaduct and quiet countryside over two easy days.'
+  stops: |
+    1|52.5229|-8.9389|Rathkeale
+    1|52.4495|-9.0613|Newcastle West
+    2|52.4130|-9.1370|Barnagh
+    2|52.3856|-9.3009|Abbeyfeale
+  body: |
+    ## Before you go
+
+    Buses link Limerick city with towns along the route. Bike hire is available on the greenway; check opening times out of season.
+
+    ## Day 1: Rathkeale to Newcastle West
+
+    A gentle start through farmland to Newcastle West, the biggest town on the route, with its Desmond Castle and plenty of places to stay and eat.
+
+    ## Day 2: Newcastle West to Abbeyfeale
+
+    A gradual climb to Barnagh, where the old station has a café and the line runs through a tunnel, then a long easy descent towards Abbeyfeale on the Kerry border.
+
+    ## Good to know
+
+    There are few services between towns, so carry water and a snack.

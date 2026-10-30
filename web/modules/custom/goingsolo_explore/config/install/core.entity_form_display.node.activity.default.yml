@@ -1,0 +1,185 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.field.node.activity.body
+  - field.field.node.activity.field_activity_type
+  - field.field.node.activity.field_county
+  - field.field.node.activity.field_duration
+  - field.field.node.activity.field_image
+  - field.field.node.activity.field_last_checked
+  - field.field.node.activity.field_latitude
+  - field.field.node.activity.field_longitude
+  - field.field.node.activity.field_offer_link
+  - field.field.node.activity.field_price_basis
+  - field.field.node.activity.field_provider
+  - field.field.node.activity.field_solo_price
+  - field.field.node.activity.field_solo_tip
+  - field.field.node.activity.field_source_note
+  - field.field.node.activity.field_town
+  - image.style.thumbnail
+  - node.type.activity
+  module:
+  - datetime
+  - image
+  - link
+  - path
+  - text
+id: node.activity.default
+targetEntityType: node
+bundle: activity
+mode: default
+content:
+  title:
+    type: string_textfield
+    weight: -10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {}
+  field_activity_type:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {}
+    third_party_settings: {}
+  field_county:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {}
+    third_party_settings: {}
+  field_town:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {}
+  field_provider:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {}
+  body:
+    type: text_textarea_with_summary
+    weight: 4
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {}
+  field_solo_tip:
+    type: string_textarea
+    weight: 5
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {}
+  field_duration:
+    type: string_textfield
+    weight: 6
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {}
+  field_solo_price:
+    type: number
+    weight: 7
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {}
+  field_price_basis:
+    type: string_textfield
+    weight: 8
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {}
+  field_offer_link:
+    type: link_default
+    weight: 9
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {}
+  field_image:
+    type: image_image
+    weight: 10
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {}
+  field_latitude:
+    type: number
+    weight: 11
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {}
+  field_longitude:
+    type: number
+    weight: 12
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {}
+  field_last_checked:
+    type: datetime_default
+    weight: 13
+    region: content
+    settings: {}
+    third_party_settings: {}
+  field_source_note:
+    type: string_textfield
+    weight: 14
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {}
+  status:
+    type: boolean_checkbox
+    weight: 100
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {}
+  path:
+    type: path
+    weight: 90
+    region: content
+    settings: {}
+    third_party_settings: {}
+  uid:
+    type: entity_reference_autocomplete
+    weight: 95
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {}
+  created:
+    type: datetime_timestamp
+    weight: 96
+    region: content
+    settings: {}
+    third_party_settings: {}
+hidden:
+  promote: true
+  sticky: true

@@ -1,0 +1,290 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.node.teaser
+  - node.type.route
+  - taxonomy.vocabulary.county
+  - field.storage.node.field_counties
+  - field.storage.node.field_route_mode
+  module:
+  - node
+  - options
+  - taxonomy
+  - user
+id: routes
+label: Self-guided routes
+module: views
+description: Self-guided routes page and blocks.
+tag: goingsolo
+base_table: node_field_data
+base_field: nid
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: Self-guided routes for two or three days
+      fields: {}
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 12
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Show
+          reset_button: true
+          reset_button_label: Reset
+      access:
+        type: perm
+        options:
+          perm: access content
+      cache:
+        type: tag
+        options: {}
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          plugin_id: text_custom
+          empty: true
+          content: No routes match yet.
+          tokenize: false
+      sorts:
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          entity_type: node
+          entity_field: title
+          plugin_id: standard
+          order: ASC
+      arguments: {}
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            route: route
+          group: 1
+        field_route_mode_value:
+          id: field_route_mode_value
+          table: node__field_route_mode
+          field: field_route_mode_value
+          plugin_id: list_field
+          operator: or
+          value: {}
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_route_mode_value_op
+            label: Getting around
+            identifier: mode
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+        field_counties_target_id:
+          id: field_counties_target_id
+          table: node__field_counties
+          field: field_counties_target_id
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: {}
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_counties_target_id_op
+            label: County
+            identifier: county
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          type: select
+          limit: true
+          vid: county
+          hierarchy: false
+          error_message: true
+      style:
+        type: default
+        options:
+          grouping: {}
+          row_class: route-grid__item
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: entity:node
+        options:
+          relationship: none
+          view_mode: teaser
+      query:
+        type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: true
+      relationships: {}
+      css_class: route-grid
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          plugin_id: text_custom
+          empty: true
+          content: <p class="view-intro">Routes you can follow on your own over a long weekend, on foot, by bike or by car. Each stage opens in OpenStreetMap with directions, and you can download the whole route as a GPX file for your phone.</p>
+          tokenize: false
+      footer: {}
+      display_extenders: {}
+    cache_metadata:
+      max-age: -1
+      contexts:
+      - languages:language_content
+      - languages:language_interface
+      - url
+      - url.query_args
+      - user.node_grants:view
+      - user.permissions
+      tags: {}
+  page_main:
+    id: page_main
+    display_title: Page
+    display_plugin: page
+    position: 1
+    display_options:
+      display_extenders: {}
+      path: routes
+      menu:
+        type: normal
+        title: Routes
+        weight: 3
+        menu_name: main
+        parent: ''
+        expanded: false
+  block_latest:
+    id: block_latest
+    display_title: Latest
+    display_plugin: block
+    position: 2
+    display_options:
+      display_extenders: {}
+      block_description: Latest self-guided routes
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 3
+      defaults:
+        pager: false
+        filters: false
+        filter_groups: false
+        empty: false
+        header: false
+      empty: {}
+      header: {}
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            route: route
+          group: 1
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+  block_county:
+    id: block_county
+    display_title: In a county
+    display_plugin: block
+    position: 3
+    display_options:
+      display_extenders: {}
+      block_description: Self-guided routes in one county
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 12
+      defaults:
+        pager: false
+        filters: false
+        filter_groups: false
+        arguments: false
+        empty: false
+        header: false
+      empty: {}
+      header: {}
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            route: route
+          group: 1
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      arguments:
+        field_counties_target_id:
+          id: field_counties_target_id
+          table: node__field_counties
+          field: field_counties_target_id
+          plugin_id: taxonomy_index_tid
+          default_action: empty
+          default_argument_type: fixed
+          specify_validation: false
+          break_phrase: false
+          not: false

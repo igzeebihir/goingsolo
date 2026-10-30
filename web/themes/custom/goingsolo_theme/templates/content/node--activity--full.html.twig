@@ -1,0 +1,42 @@
+{#
+/**
+ * @file
+ * Full solo activity page.
+ */
+#}
+<article{{ attributes.addClass('node', 'node--type-activity', 'deal-full') }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  <div class="deal-full__where">
+    {% if gs_county %}<span class="deal-full__county">{{ 'Co. @county'|t({'@county': gs_county}) }}</span>{% endif %}
+    {% if gs_town and gs_town != gs_county %}<span>{{ gs_town }}</span>{% endif %}
+    {% if gs_type %}<span>{{ gs_type }}</span>{% endif %}
+  </div>
+  <div class="deal-full__layout">
+    <div{{ content_attributes.addClass('node__content', 'deal-full__main') }}>
+      {% if gs_solo_tip %}
+        <div class="gs-callout">
+          <h2 class="gs-callout__title">{{ 'Why it works on your own'|t }}</h2>
+          <p>{{ gs_solo_tip }}</p>
+        </div>
+      {% endif %}
+      {{ content }}
+    </div>
+    <aside class="deal-full__pricebox">
+      {% if gs_provider %}<p class="deal-full__provider">{{ gs_provider }}</p>{% endif %}
+      {% if gs_duration %}<p class="deal-full__fact"><strong>{{ 'Duration'|t }}</strong> {{ gs_duration }}</p>{% endif %}
+      {% if gs_price %}
+        <p class="deal-full__price"><span class="deal-card__amount">{{ gs_price }}</span> <span class="deal-card__from">{{ gs_price_basis|default('per person'|t) }}</span></p>
+      {% else %}
+        <p class="deal-full__price deal-card__ask">{{ gs_price_basis|default('See website for prices'|t) }}</p>
+      {% endif %}
+      {% if gs_offer_url %}
+        <a class="button button--primary deal-full__cta" href="{{ gs_offer_url }}" target="_blank" rel="nofollow noopener">{{ 'Find out more and book'|t }}</a>
+      {% endif %}
+      {% if gs_osm_url %}
+        <a class="button deal-full__cta" href="{{ gs_osm_url }}" target="_blank" rel="noopener">{{ 'Open in OpenStreetMap'|t }}</a>
+      {% endif %}
+      <p class="deal-full__note">{{ 'Times and prices change. Check with the provider before you go.'|t }}</p>
+    </aside>
+  </div>
+</article>

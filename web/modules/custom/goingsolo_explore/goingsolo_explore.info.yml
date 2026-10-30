@@ -1,0 +1,8 @@
+name: 'Going Solo activities and routes'
+type: module
+description: 'Solo activities and self-guided multi-day routes with maps, OpenStreetMap links and GPX downloads.'
+package: 'Going Solo'
+core_version_requirement: ^11
+dependencies:
+  - goingsolo_core:goingsolo_core
+  - goingsolo_maps:goingsolo_maps

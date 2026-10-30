@@ -36,3 +36,6 @@
 .leaflet-interactive:focus {
   outline: none;
 }
+.gs-map--route {
+  height: 460px;
+}

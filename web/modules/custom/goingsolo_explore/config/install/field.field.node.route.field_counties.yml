@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_counties
+  - node.type.route
+  - taxonomy.vocabulary.county
+id: node.route.field_counties
+field_name: field_counties
+entity_type: node
+bundle: route
+label: Counties
+description: Counties this article is about, used to show it on county pages.
+required: false
+translatable: true
+default_value: {}
+default_value_callback: ''
+settings:
+  handler: default:taxonomy_term
+  handler_settings:
+    target_bundles:
+      county: county
+    auto_create: false
+field_type: entity_reference

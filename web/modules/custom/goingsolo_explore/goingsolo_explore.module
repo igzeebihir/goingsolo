@@ -1,0 +1,170 @@
+<?php
+
+/**
+ * @file
+ * Solo activities and self-guided routes.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
+
+/**
+ * OpenStreetMap routing engines by route mode.
+ */
+const GOINGSOLO_EXPLORE_OSM_ENGINES = [
+  'walk' => 'fossgis_osrm_foot',
+  'cycle' => 'fossgis_osrm_bike',
+  'drive' => 'fossgis_osrm_car',
+];
+
+/**
+ * Parses the stops field: one "day|lat|lng|name" per line.
+ *
+ * @return array<int, array{day: int, lat: float, lng: float, name: string}>
+ */
+function goingsolo_explore_stops(NodeInterface $node): array {
+  $stops = [];
+  foreach (preg_split('/\R/', (string) $node->get('field_route_stops')->value) as $line) {
+    $parts = array_map('trim', explode('|', $line, 4));
+    if (count($parts) === 4 && is_numeric($parts[1]) && is_numeric($parts[2])) {
+      $stops[] = ['day' => max(1, (int) $parts[0]), 'lat' => (float) $parts[1], 'lng' => (float) $parts[2], 'name' => $parts[3]];
+    }
+  }
+  return $stops;
+}
+
+/**
+ * Link to a point on openstreetmap.org.
+ */
+function goingsolo_explore_osm_point_url(array $stop): string {
+  return sprintf('https://www.openstreetmap.org/?mlat=%.5F&mlon=%.5F#map=14/%.5F/%.5F', $stop['lat'], $stop['lng'], $stop['lat'], $stop['lng']);
+}
+
+/**
+ * Link to OpenStreetMap directions between two stops.
+ */
+function goingsolo_explore_osm_directions_url(array $from, array $to, string $mode): string {
+  return sprintf('https://www.openstreetmap.org/directions?engine=%s&route=%.5F%%2C%.5F%%3B%.5F%%2C%.5F',
+    GOINGSOLO_EXPLORE_OSM_ENGINES[$mode] ?? 'fossgis_osrm_foot', $from['lat'], $from['lng'], $to['lat'], $to['lng']);
+}
+
+/**
+ * Splits stops into daily stages, each starting where the last day ended.
+ */
+function goingsolo_explore_stages(array $stops, string $mode): array {
+  $by_day = [];
+  foreach ($stops as $stop) {
+    $by_day[$stop['day']][] = $stop;
+  }
+  ksort($by_day);
+  $stages = [];
+  $previous = NULL;
+  foreach ($by_day as $day => $day_stops) {
+    $points = $previous ? array_merge([$previous], $day_stops) : $day_stops;
+    $legs = [];
+    for ($i = 1; $i < count($points); $i++) {
+      $legs[] = [
+        'from' => $points[$i - 1]['name'],
+        'to' => $points[$i]['name'],
+        'url' => goingsolo_explore_osm_directions_url($points[$i - 1], $points[$i], $mode),
+      ];
+    }
+    $stages[] = [
+      'day' => $day,
+      'from' => $points[0]['name'],
+      'to' => end($points)['name'],
+      'legs' => $legs,
+      'stops' => array_map(fn($s) => ['name' => $s['name'], 'url' => goingsolo_explore_osm_point_url($s)], $day_stops),
+    ];
+    $previous = end($day_stops);
+  }
+  return $stages;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for node templates.
+ */
+function goingsolo_explore_preprocess_node(array &$variables): void {
+  $node = $variables['node'];
+  if ($node->bundle() === 'activity') {
+    $variables['gs_county'] = $node->get('field_county')->entity?->label();
+    $variables['gs_province'] = $node->get('field_county')->entity?->get('field_province')->value;
+    $variables['gs_town'] = $node->get('field_town')->value;
+    $variables['gs_type'] = $node->get('field_activity_type')->entity?->label();
+    $variables['gs_provider'] = $node->get('field_provider')->value;
+    $variables['gs_duration'] = $node->get('field_duration')->value;
+    $variables['gs_solo_tip'] = $node->get('field_solo_tip')->value;
+    $price = $node->get('field_solo_price')->value;
+    $variables['gs_price'] = $price !== NULL ? '€' . number_format((float) $price, ((float) $price == floor((float) $price)) ? 0 : 2) : NULL;
+    $variables['gs_price_basis'] = $node->get('field_price_basis')->value;
+    $link = $node->get('field_offer_link');
+    $variables['gs_offer_url'] = (!$link->isEmpty() && $link->access('view')) ? $link->first()->getUrl()->toString() : NULL;
+    $lat = $node->get('field_latitude')->value;
+    $lng = $node->get('field_longitude')->value;
+    $variables['gs_osm_url'] = ($lat !== NULL && $lng !== NULL) ? goingsolo_explore_osm_point_url(['lat' => (float) $lat, 'lng' => (float) $lng]) : NULL;
+  }
+  elseif ($node->bundle() === 'route') {
+    $mode = (string) $node->get('field_route_mode')->value;
+    $stops = goingsolo_explore_stops($node);
+    $variables['gs_mode'] = $mode;
+    $variables['gs_mode_label'] = $node->get('field_route_mode')->isEmpty() ? NULL : $node->get('field_route_mode')->first()->getPossibleOptions()[$mode] ?? NULL;
+    $variables['gs_days'] = $node->get('field_days')->value;
+    $distance = $node->get('field_distance_km')->value;
+    $variables['gs_distance'] = $distance !== NULL ? rtrim(rtrim(number_format((float) $distance, 1), '0'), '.') . ' km' : NULL;
+    $difficulty = $node->get('field_difficulty')->value;
+    $variables['gs_difficulty'] = $difficulty ? ['easy' => t('Easy'), 'moderate' => t('Moderate'), 'hard' => t('Challenging')][$difficulty] ?? NULL : NULL;
+    $variables['gs_counties'] = implode(', ', array_map(fn($t) => $t->label(), $node->get('field_counties')->referencedEntities()));
+    $variables['gs_province'] = $node->get('field_counties')->entity?->get('field_province')->value;
+    $variables['gs_start'] = $stops[0]['name'] ?? NULL;
+    $variables['gs_finish'] = $stops ? end($stops)['name'] : NULL;
+    if ($variables['view_mode'] === 'full' && $stops) {
+      $variables['gs_stages'] = goingsolo_explore_stages($stops, $mode);
+      $variables['gs_osm_url'] = goingsolo_explore_osm_directions_url($stops[0], end($stops), $mode);
+      $variables['gs_gpx_url'] = Url::fromRoute('goingsolo_explore.route_gpx', ['node' => $node->id()])->toString();
+      $id = 'route-' . $node->id();
+      $variables['gs_map'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'div',
+        '#attributes' => [
+          'class' => ['gs-map', 'gs-map--route'],
+          'data-gs-map' => 'route',
+          'data-gs-map-id' => $id,
+          'role' => 'region',
+          'aria-label' => (string) t('Map of the route stops'),
+        ],
+        '#attached' => [
+          'library' => ['goingsolo_maps/maps'],
+          'drupalSettings' => ['goingsoloMaps' => ['routes' => [$id => $stops]]],
+        ],
+      ];
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view() for taxonomy terms.
+ *
+ * Adds activities and routes to county pages.
+ */
+function goingsolo_explore_taxonomy_term_view(array &$build, EntityInterface $term, EntityViewDisplayInterface $display, string $view_mode): void {
+  if ($term->bundle() !== 'county' || $view_mode !== 'full') {
+    return;
+  }
+  foreach (['activities' => [t('Things to do on your own'), 30], 'routes' => [t('Self-guided routes'), 35]] as $view => [$title, $weight]) {
+    $result = views_get_view_result($view, 'block_county', $term->id());
+    if (!$result) {
+      continue;
+    }
+    $build['gs_' . $view] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['county-section']],
+      'title' => ['#markup' => '<h2>' . $title . '</h2>'],
+      'view' => views_embed_view($view, 'block_county', $term->id()),
+      '#weight' => $weight,
+    ];
+  }
+}

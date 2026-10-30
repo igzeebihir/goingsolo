@@ -1,0 +1,49 @@
+{#
+/**
+ * @file
+ * Full self-guided route page.
+ */
+#}
+<article{{ attributes.addClass('node', 'node--type-route', 'route-full') }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {% if node.field_standfirst.value %}
+    <p class="route-full__standfirst">{{ node.field_standfirst.value }}</p>
+  {% endif %}
+  <ul class="route-full__facts">
+    {% if gs_days %}<li><strong>{{ gs_days }}</strong> {{ gs_days == 1 ? 'day'|t : 'days'|t }}</li>{% endif %}
+    {% if gs_distance %}<li><strong>{{ gs_distance }}</strong> {{ 'in total'|t }}</li>{% endif %}
+    {% if gs_mode_label %}<li><strong>{{ gs_mode_label }}</strong> {{ 'route'|t }}</li>{% endif %}
+    {% if gs_difficulty %}<li><strong>{{ gs_difficulty }}</strong> {{ 'difficulty'|t }}</li>{% endif %}
+  </ul>
+  <div class="route-full__actions">
+    {% if gs_osm_url %}<a class="button button--primary" href="{{ gs_osm_url }}" target="_blank" rel="noopener">{{ 'Open in OpenStreetMap'|t }}</a>{% endif %}
+    {% if gs_gpx_url %}<a class="button" href="{{ gs_gpx_url }}">{{ 'Download GPX'|t }}</a>{% endif %}
+  </div>
+  {{ gs_map }}
+  <p class="route-full__mapnote">{{ 'The dashed line joins the stops. Use the stage links for turn-by-turn directions on OpenStreetMap, or load the GPX file into an app such as OsmAnd or Organic Maps.'|t }}</p>
+
+  <div class="route-full__layout">
+    <div class="route-full__main">
+      {{ content }}
+    </div>
+    {% if gs_stages %}
+      <aside class="route-full__stages">
+        <h2>{{ 'Stages'|t }}</h2>
+        <ol class="gs-stages">
+          {% for stage in gs_stages %}
+            <li class="gs-stage">
+              <p class="gs-stage__day">{{ 'Day @day'|t({'@day': stage.day}) }}</p>
+              <p class="gs-stage__title">{{ stage.from }} → {{ stage.to }}</p>
+              <ul class="gs-stage__legs">
+                {% for leg in stage.legs %}
+                  <li><a href="{{ leg.url }}" target="_blank" rel="noopener">{{ leg.from }} → {{ leg.to }}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% endfor %}
+        </ol>
+      </aside>
+    {% endif %}
+  </div>
+</article>

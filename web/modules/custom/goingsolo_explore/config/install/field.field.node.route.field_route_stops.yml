@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_route_stops
+  - node.type.route
+id: node.route.field_route_stops
+field_name: field_route_stops
+entity_type: node
+bundle: route
+label: Stops
+description: 'One stop per line: day|latitude|longitude|name. For example: 1|53.8008|-9.5199|Westport. Each day runs from the last stop of the day before.'
+required: true
+translatable: true
+default_value: {}
+default_value_callback: ''
+settings: {}
+field_type: string_long

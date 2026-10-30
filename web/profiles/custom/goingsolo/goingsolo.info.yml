@@ -36,6 +36,7 @@ install:
   - contact
   - goingsolo_core
   - goingsolo_maps
+  - goingsolo_explore
   - goingsolo_ads
   - goingsolo_content
 themes:

@@ -1370,3 +1370,202 @@ a.button {
 .field--name-body p {
   line-height: 1.7;
 }
+
+/* ------------------------------------------------------------------ */
+/* Activities and routes */
+
+.activity-grid > .view-content,
+.route-grid > .view-content {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+}
+.route-grid > .view-header,
+.route-grid > .view-filters,
+.route-grid > .view-empty {
+  margin-bottom: 1.5rem;
+}
+.route-grid__item {
+  display: flex;
+}
+.route-grid__item > * {
+  flex: 1;
+}
+.activity-card__type {
+  position: absolute;
+  top: 1rem;
+  left: 1.25rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.activity-card__postcard::after {
+  border-radius: 50%;
+}
+.route-card__postcard {
+  min-height: 10rem;
+}
+.route-card__postcard::after {
+  display: none;
+}
+.route-card__days {
+  position: absolute;
+  top: 0.9rem;
+  right: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--gs-serif);
+  font-size: 2.2rem;
+  font-weight: 600;
+  line-height: 1;
+}
+.route-card__days small {
+  font-family: var(--gs-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.route-card__postcard .deal-card__county {
+  max-width: 80%;
+  font-size: 1.4rem;
+}
+.route-card__arrow {
+  color: var(--gs-gorse);
+  font-style: normal;
+}
+.gs-badge--mode-walk { background: var(--gs-seaglass); }
+.gs-badge--mode-cycle { background: #fdf0d3; color: #6e4800; }
+.gs-badge--mode-drive { background: #e6e3f1; color: #3b3a5e; }
+.deal-full__fact {
+  margin: 0 0 0.75rem;
+}
+.deal-full__fact strong {
+  margin-right: 0.35rem;
+}
+.deal-full__cta.button + .deal-full__cta.button {
+  margin-top: 0.6rem;
+}
+.route-full__standfirst {
+  max-width: 46rem;
+  margin: -0.5rem 0 1.5rem;
+  font-family: var(--gs-serif);
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  line-height: 1.45;
+  color: var(--gs-muted);
+}
+.route-full__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+.route-full__facts li {
+  padding: 0.6rem 1rem;
+  border-radius: var(--gs-radius-sm);
+  background: #fff;
+  box-shadow: var(--gs-shadow);
+  font-size: 0.9rem;
+  color: var(--gs-muted);
+}
+.route-full__facts strong {
+  display: block;
+  font-family: var(--gs-serif);
+  font-size: 1.3rem;
+  color: var(--gs-ink);
+}
+.route-full__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.route-full__mapnote {
+  margin: -1rem 0 2rem;
+  font-size: 0.88rem;
+  color: var(--gs-muted);
+}
+.route-full__layout {
+  display: grid;
+  gap: 2rem;
+}
+@media (min-width: 62rem) {
+  .route-full__layout {
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    align-items: start;
+    gap: 3.5rem;
+  }
+  .route-full__stages {
+    position: sticky;
+    top: 6rem;
+  }
+}
+.route-full__stages {
+  padding: 1.5rem;
+  border-radius: var(--gs-radius);
+  background: #fff;
+  box-shadow: var(--gs-shadow);
+}
+.route-full__stages h2 {
+  margin-top: 0;
+  font-size: 1.4rem;
+}
+.gs-stages {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+.gs-stage {
+  position: relative;
+  padding: 0 0 1.25rem 1.5rem;
+  border-left: 2px dashed var(--gs-fern);
+}
+.gs-stage:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+.gs-stage::before {
+  content: '';
+  position: absolute;
+  top: 0.2rem;
+  left: -0.45rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: var(--gs-fuchsia);
+  box-shadow: 0 0 0 3px #fff;
+}
+.gs-stage__day {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gs-moss);
+}
+.gs-stage__title {
+  margin: 0.15rem 0 0.4rem;
+  font-family: var(--gs-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+.gs-stage__legs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+}
+.gs-stage__legs a::after {
+  content: ' ↗';
+}
+.gs-way--routes .gs-way__icon { background: #e6e3f1; color: #3b3a5e; }
+.home-section--activities {
+  padding-bottom: 0;
+}

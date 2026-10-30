@@ -69,11 +69,11 @@ final class MapBuilder {
   /**
    * Map of deal locations, optionally limited to one county or feature.
    */
-  public function dealsMap(?int $county_tid = NULL, ?string $feature = NULL): array {
+  public function dealsMap(?int $county_tid = NULL, ?string $feature = NULL, string $bundle = 'listing'): array {
     $storage = $this->entityTypeManager->getStorage('node');
     $query = $storage->getQuery()
       ->accessCheck(TRUE)
-      ->condition('type', 'listing')
+      ->condition('type', $bundle)
       ->condition('status', 1)
       ->exists('field_latitude')
       ->exists('field_longitude')
@@ -87,6 +87,7 @@ final class MapBuilder {
     $points = [];
     foreach ($storage->loadMultiple($query->execute()) as $node) {
       $price = $node->get('field_solo_price')->value;
+      $featured = $node->hasField('field_featured') && $node->get('field_featured')->value;
       $points[] = [
         'lat' => (float) $node->get('field_latitude')->value,
         'lng' => (float) $node->get('field_longitude')->value,
@@ -94,13 +95,13 @@ final class MapBuilder {
         'url' => $node->toUrl()->toString(),
         'price' => $price !== NULL ? '€' . number_format((float) $price, 0) : '',
         'basis' => (string) $node->get('field_price_basis')->value,
-        'featured' => (bool) $node->get('field_featured')->value,
+        'featured' => (bool) $featured,
       ];
     }
     if (!$points) {
-      return ['#cache' => ['tags' => ['node_list:listing']]];
+      return ['#cache' => ['tags' => ['node_list:' . $bundle]]];
     }
-    $id = 'deals-' . ($county_tid ?: 'all') . ($feature ? '-' . $feature : '');
+    $id = $bundle . '-' . ($county_tid ?: 'all') . ($feature ? '-' . $feature : '');
     return [
       '#type' => 'html_tag',
       '#tag' => 'div',
@@ -115,7 +116,7 @@ final class MapBuilder {
         'library' => ['goingsolo_maps/maps'],
         'drupalSettings' => ['goingsoloMaps' => ['points' => [$id => $points]]],
       ],
-      '#cache' => ['tags' => ['node_list:listing']],
+      '#cache' => ['tags' => ['node_list:' . $bundle]],
     ];
   }
 

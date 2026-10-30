@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.node.teaser
+  - field.field.node.route.body
+  - field.field.node.route.field_counties
+  - field.field.node.route.field_days
+  - field.field.node.route.field_difficulty
+  - field.field.node.route.field_distance_km
+  - field.field.node.route.field_image
+  - field.field.node.route.field_route_mode
+  - field.field.node.route.field_route_stops
+  - field.field.node.route.field_standfirst
+  - node.type.route
+  module:
+  - text
+  - user
+id: node.route.teaser
+targetEntityType: node
+bundle: route
+mode: teaser
+content:
+  field_standfirst:
+    type: basic_string
+    label: hidden
+    settings: {}
+    third_party_settings: {}
+    weight: 0
+    region: content
+hidden:
+  body: true
+  field_counties: true
+  field_days: true
+  field_difficulty: true
+  field_distance_km: true
+  field_image: true
+  field_route_mode: true
+  field_route_stops: true
+  links: true

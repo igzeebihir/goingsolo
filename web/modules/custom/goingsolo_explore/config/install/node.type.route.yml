@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {}
+name: Self-guided route
+type: route
+description: A two or three day route you can follow on your own, with stages, a map and OpenStreetMap links.
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

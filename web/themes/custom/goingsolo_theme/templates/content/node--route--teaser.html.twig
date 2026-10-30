@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Self-guided route card.
+ */
+#}
+<article{{ attributes.addClass('deal-card', 'route-card', 'route-card--' ~ gs_mode|clean_class) }}>
+  <a class="deal-card__postcard deal-card__postcard--{{ gs_province|default('ireland')|clean_class }} route-card__postcard" href="{{ url }}" tabindex="-1" aria-hidden="true">
+    <span class="route-card__days">{{ gs_days }}<small>{{ gs_days == 1 ? 'day'|t : 'days'|t }}</small></span>
+    <span class="deal-card__county">{{ gs_start }} <span class="route-card__arrow">→</span> {{ gs_finish }}</span>
+    {% if gs_counties %}<span class="deal-card__town">{{ gs_counties }}</span>{% endif %}
+  </a>
+  <div class="deal-card__body">
+    <ul class="deal-card__badges">
+      {% if gs_mode_label %}<li class="gs-badge gs-badge--mode-{{ gs_mode|clean_class }}">{{ gs_mode_label }}</li>{% endif %}
+      {% if gs_distance %}<li class="gs-badge">{{ gs_distance }}</li>{% endif %}
+      {% if gs_difficulty %}<li class="gs-badge">{{ gs_difficulty }}</li>{% endif %}
+    </ul>
+    {{ title_prefix }}
+    <h3{{ title_attributes.addClass('deal-card__title') }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h3>
+    {{ title_suffix }}
+    <div class="deal-card__summary">{{ content.field_standfirst }}</div>
+    <div class="deal-card__foot">
+      <span class="deal-card__ask">{{ 'Stages, map and GPX'|t }}</span>
+      <a class="deal-card__more" href="{{ url }}" aria-label="{{ 'See the route: @title'|t({'@title': node.label}) }}">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</article>

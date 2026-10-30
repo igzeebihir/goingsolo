@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {}
+name: Activity type
+vid: activity_type
+description: Kinds of solo activity.
+weight: 0
+new_revision: false

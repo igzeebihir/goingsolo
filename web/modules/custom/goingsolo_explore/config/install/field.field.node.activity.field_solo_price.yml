@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_solo_price
+  - node.type.activity
+id: node.activity.field_solo_price
+field_name: field_solo_price
+entity_type: node
+bundle: activity
+label: Price per person (€)
+description: ''
+required: false
+translatable: true
+default_value: {}
+default_value_callback: ''
+settings:
+  min: 0.0
+  max: null
+  prefix: €
+  suffix: ''
+field_type: decimal

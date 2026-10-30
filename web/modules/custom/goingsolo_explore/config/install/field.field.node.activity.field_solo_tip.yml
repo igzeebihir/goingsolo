@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_solo_tip
+  - node.type.activity
+id: node.activity.field_solo_tip
+field_name: field_solo_tip
+entity_type: node
+bundle: activity
+label: Why it works on your own
+description: One or two sentences on why this suits a solo traveller.
+required: false
+translatable: true
+default_value: {}
+default_value_callback: ''
+settings: {}
+field_type: string_long

@@ -30,3 +30,12 @@ function goingsolo_content_update_11001(): string {
   $counts = \Drupal::service('goingsolo_content.importer')->importAll();
   return 'Imported: ' . json_encode($counts);
 }
+
+/**
+ * Turns on solo activities and routes and imports them.
+ */
+function goingsolo_content_update_11002(): string {
+  \Drupal::service('module_installer')->install(['goingsolo_explore']);
+  $counts = \Drupal::service('goingsolo_content.importer')->importAll();
+  return 'Imported: ' . json_encode($counts);
+}

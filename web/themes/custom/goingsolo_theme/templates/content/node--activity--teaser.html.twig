@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Solo activity card.
+ */
+#}
+<article{{ attributes.addClass('deal-card', 'activity-card') }}>
+  <a class="deal-card__postcard deal-card__postcard--{{ gs_province|default('ireland')|clean_class }} activity-card__postcard" href="{{ url }}" tabindex="-1" aria-hidden="true">
+    {% if gs_type %}<span class="activity-card__type">{{ gs_type }}</span>{% endif %}
+    <span class="deal-card__county">{{ gs_town ?: gs_county }}</span>
+    {% if gs_county and gs_town != gs_county %}<span class="deal-card__town">{{ 'Co. @county'|t({'@county': gs_county}) }}</span>{% endif %}
+  </a>
+  <div class="deal-card__body">
+    {{ title_prefix }}
+    <h3{{ title_attributes.addClass('deal-card__title') }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h3>
+    {{ title_suffix }}
+    <p class="deal-card__where">{{ gs_provider }}{% if gs_duration %} · {{ gs_duration }}{% endif %}</p>
+    <div class="deal-card__summary">{{ content.body }}</div>
+    <div class="deal-card__foot">
+      <div class="deal-card__price">
+        {% if gs_price %}
+          <span class="deal-card__amount">{{ gs_price }}</span>
+          <span class="deal-card__basis">{{ gs_price_basis|default('per person'|t) }}</span>
+        {% else %}
+          <span class="deal-card__ask">{{ gs_price_basis|default('See website for prices'|t) }}</span>
+        {% endif %}
+      </div>
+      <a class="deal-card__more" href="{{ url }}" aria-label="{{ 'More about @title'|t({'@title': node.label}) }}">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</article>

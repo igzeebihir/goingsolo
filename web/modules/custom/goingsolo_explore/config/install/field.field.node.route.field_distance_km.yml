@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_distance_km
+  - node.type.route
+id: node.route.field_distance_km
+field_name: field_distance_km
+entity_type: node
+bundle: route
+label: Total distance (km)
+description: ''
+required: false
+translatable: true
+default_value: {}
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ' km'
+field_type: decimal
