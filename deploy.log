@@ -1,0 +1,13 @@
+Web root: ~/domains/goingsolo.ie/public_html  App: ~/domains/goingsolo.ie/goingsolo
+Using PHP 8.4.27 (cli) (built: Oct 21 2026 00:00:00) (NTS)
+Updating Drupal...
+ [success] No pending updates.
+ [success] Cache rebuild complete.
+
+ // Do you want to update message key in system.maintenance config?: yes.       
+
+Maintenance mode: on
+ [success] Cache rebuild complete.
+ENCRYPTED ADMIN LOGIN: 2Q5Au3EndubR4jmjnGhxa2O+fT4R+rZnjBrTrAGXKhwJJaE/59rIO8OMgMpt9i6tQ0O3n3m7HFkwHDN94nPkqxfwhy1dmS2+xvdaKEIR7SJJHsEkpwYJx8btZdlU3EExFEmcpELNHQkDrStrhWQ8NUSHrWTUVK721/MvbImppbh6OBEs1nOU3uTm5fv+3uSms4mP+CEEoPbZ65W9yyhE7wcsq1+OIj7K6yaXHUVZsGXRLEKlXz1jwVlDYFnuKeK1CIxz1ycKFZz82sV3uhVCXFP/7tAjH0/a1zLRARCTsw636ccbCFiPd+k+szdrqDTnfogvxFJkdWGGMYTFKjZlCHrkgFZwhx3WhavPxxmYr74UUAcIZXqyrC66PoaQnOhKwhV2FZDSrI1ydkfjICnuyeprASMD8zu3N27W+1ysKKrxGqj3VPEk4+HVBhGWXQVxdCm1cSg28++cNvAamQxjnhLNE2yJoNW6EIK5hLMF57sHuwcgzJUKCR/xhDotVDcp
+Server IP addresses:  outbound 45.84.206.2
+Done: https://goingsolo.ie

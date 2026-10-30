@@ -1,0 +1,51 @@
+DNS for goingsolo.ie:
+77.37.76.48
+92.112.198.174
+Name servers for ie:
+a.ns.ie.
+i.ns.ie.
+h.ns.ie.
+e.ns.ie.
+d.ns.ie.
+c.ns.ie.
+A record for ie:
+* Host goingsolo.ie:443 was resolved.
+* IPv6: 2a02:4780:4f:1eb4:c0ad:36cd:1c4c:da1b, 2a02:4780:51:61d3:705d:ba06:c0c7:a1a6
+* IPv4: 77.37.76.48, 92.112.198.174
+*   Trying 77.37.76.48:443...
+* Connected to goingsolo.ie (77.37.76.48) port 443
+* ALPN: curl offers h2,http/1.1
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+*  CAfile: /etc/ssl/certs/ca-certificates.crt
+*  CApath: /etc/ssl/certs
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+503 0.286761s / <title>Site under maintenance | goingsolo.ie
+503 0.277921s /deals <title>Site under maintenance | goingsolo.ie
+503 0.280299s /guides <title>Site under maintenance | goingsolo.ie
+503 0.276882s /county/galway <title>Site under maintenance | goingsolo.ie
+503 0.274345s /membership <title>Site under maintenance | goingsolo.ie
+503 0.279457s /membership/monthly <title>Site under maintenance | goingsolo.ie
+503 0.294823s /providers/featured-listing <title>Site under maintenance | goingsolo.ie
+503 0.274683s /ads.txt <title>Site under maintenance | goingsolo.ie
+503 0.291462s /sitemap.xml <title>Site under maintenance | goingsolo.ie
+200 0.550187s /user/login <title>Log in | goingsolo.ie
+HTTP/2 503 
+date: Fri, 30 Oct 2026 16:32:34 GMT
+content-type: text/html; charset=utf-8
+vary: Accept-Encoding
+x-powered-by: PHP/8.3.36
+cache-control: must-revalidate, no-cache, private
+x-drupal-dynamic-cache: UNCACHEABLE (503)
+content-language: en
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+expires: Sun, 19 Nov 1978 05:00:00 GMT
+x-generator: Drupal 11 (https://www.drupal.org)
+x-commerce-core: 3
+x-drupal-cache: UNCACHEABLE (response policy)
+platform: hostinger
