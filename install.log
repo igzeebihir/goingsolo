@@ -1,0 +1,54 @@
+ You are about to:
+ * CREATE the '/tmp/goingsolo.sqlite' database.
+
+ // Do you want to continue?: yes.                                              
+
+ [notice] Starting Drupal installation. This takes a while.
+ [notice] Performed install task: install_select_language
+ [notice] Performed install task: install_select_profile
+ [notice] Performed install task: install_load_profile
+ [notice] Performed install task: install_verify_requirements
+ [notice] Performed install task: install_verify_database_ready
+ [notice] Performed install task: install_base_system
+ [notice] Performed install task: install_bootstrap_full
+ [notice] Starter content imported: {"terms":44,"listings":32,"articles":40,"pages":7,"activities":10,"routes":8,"events":12}
+ [notice] Performed install task: install_profile_modules
+ [notice] Performed install task: install_profile_themes
+ [notice] Performed install task: install_install_profile
+ [notice] Performed install task: install_configure_form
+ [notice] Performed install task: install_finished
+ [success] Installation complete. (Admin)
+The following module(s) will be installed: goingsolo_commerce, goingsolo_seo, commerce_product, commerce, address, entity, inline_entity_form, token, commerce_price, commerce_store, commerce_order, commerce_number_pattern, entity_reference_revisions, profile, state_machine, commerce_cart, commerce_checkout, commerce_payment, commerce_payment_example, commerce_recurring, advancedqueue, pathauto, metatag, simple_sitemap
+
+ // Do you want to continue?: yes.                                              
+
+ [success] Module goingsolo_commerce has been installed.
+ [success] Module goingsolo_seo has been installed.
+ [success] Module commerce_product has been installed. (Permissions - Configure)
+ [success] Module commerce has been installed. (Permissions - Configure)
+ [success] Module address has been installed.
+ [success] Module entity has been installed.
+ [success] Module inline_entity_form has been installed.
+ [success] Module token has been installed.
+ [success] Module commerce_price has been installed. (Permissions - Configure)
+ [success] Module commerce_store has been installed. (Permissions - Configure)
+ [success] Module commerce_order has been installed. (Permissions - Configure)
+ [success] Module commerce_number_pattern has been installed. (Permissions - Configure)
+ [success] Module entity_reference_revisions has been installed. (Permissions)
+ [success] Module profile has been installed. (Permissions - Configure)
+ [success] Module state_machine has been installed.
+ [success] Module commerce_cart has been installed.
+ [success] Module commerce_checkout has been installed. (Permissions - Configure)
+ [success] Module commerce_payment has been installed. (Permissions - Configure)
+ [success] Module commerce_payment_example has been installed.
+ [success] Module commerce_recurring has been installed. (Permissions - Configure)
+ [success] Module advancedqueue has been installed. (Permissions - Configure)
+ [success] Module pathauto has been installed. (Permissions - Configure)
+ [success] Module metatag has been installed. (Permissions - Configure)
+ [success] Module simple_sitemap has been installed. (Permissions - Configure)
+>  [notice] Processed 1 of 1 aliases for Store.
+>  [notice] Processed 23 of 23 aliases for Taxonomy term.
+>  [notice] Processed 1 of 1 aliases for User.
+>  [notice] Message: No new URL aliases to generate.
+> 
+ [success] Cache rebuild complete.

@@ -1,0 +1,21 @@
+200 /
+200 /deals
+200 /guides
+200 /county/galway
+200 /membership
+200 /membership/monthly
+200 /membership/annual
+200 /providers/pro
+200 /providers/featured-listing
+200 /list-your-offer
+200 /about
+200 /ads.txt
+200 /sitemap.xml
+200 /user/register
+ ---- -------------- ------ ---------- ---------------------------------------- 
+  ID   Date           Type   Severity   Message                                 
+ ---- -------------- ------ ---------- ---------------------------------------- 
+  82   30/Oct 16:31   mail   Error      Error sending email (from               
+                                        admin@example.com to admin@example.com  
+                                        with reply-to not set).                 
+ ---- -------------- ------ ---------- ---------------------------------------- 

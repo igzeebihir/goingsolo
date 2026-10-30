@@ -1,0 +1,134 @@
+ ---- -------------- -------------------- ---------- -------------------------- 
+  ID   Date           Type                 Severity   Message                   
+ ---- -------------- -------------------- ---------- -------------------------- 
+  86   30/Oct 16:31   goingsolo_commerce   Notice     Listing Solo Sojourn at   
+                                                      Cashel Palace featured    
+                                                      until 2026-11-29.         
+  85   30/Oct 16:31   mail                 Error      Error sending email       
+                                                      (from goingsolo.ie  to    
+                                                      ci@example.com with       
+                                                      reply-to not set).        
+  84   30/Oct 16:31   cron                 Info       Cron run completed.       
+  83   30/Oct 16:31   cron                 Info       Execution of              
+                                                      update_cron() took        
+                                                      214.99ms.                 
+  82   30/Oct 16:31   mail                 Error      Error sending email       
+                                                      (from admin@example.com   
+                                                      to admin@example.com      
+                                                      with reply-to not set).   
+  81   30/Oct 16:31   cron                 Info       Starting execution of     
+                                                      update_cron(), execution  
+                                                      of system_cron() took     
+                                                      170.33ms.                 
+  80   30/Oct 16:31   cron                 Info       Starting execution of     
+                                                      system_cron(), execution  
+                                                      of simple_sitemap_cron()  
+                                                      took 129.76ms.            
+  79   30/Oct 16:31   cron                 Info       Starting execution of     
+                                                      simple_sitemap_cron(),    
+                                                      execution of              
+                                                      layout_builder_cron()     
+                                                      took 0.71ms.              
+  78   30/Oct 16:31   cron                 Info       Starting execution of     
+                                                      layout_builder_cron(),    
+                                                      execution of              
+                                                      goingsolo_core_cron()     
+                                                      took 0.93ms.              
+  77   30/Oct 16:31   cron                 Info       Starting execution of     
+                                                      goingsolo_core_cron(),    
+                                                      execution of file_cron()  
+                                                      took 1.05ms.              
+  76   30/Oct 16:31   cron                 Info       Starting execution of     
+                                                      file_cron(), execution    
+                                                      of dblog_cron() took      
+                                                      0.59ms.                   
+  75   30/Oct 16:31   cron                 Info       Starting execution of     
+                                                      dblog_cron(), execution   
+                                                      of                        
+                                                      commerce_recurring_cron(  
+                                                      ) took 1.66ms.            
+  74   30/Oct 16:31   cron                 Info       Starting execution of     
+                                                      commerce_recurring_cron(  
+                                                      ), execution of           
+                                                      commerce_cart_cron()      
+                                                      took 0.75ms.              
+  73   30/Oct 16:31   cron                 Info       Starting execution of     
+                                                      commerce_cart_cron(),     
+                                                      execution of              
+                                                      commerce_cron() took      
+                                                      219.4ms.                  
+  72   30/Oct 16:31   cron                 Info       Starting execution of     
+                                                      commerce_cron(),          
+                                                      execution of              
+                                                      advancedqueue_cron()      
+                                                      took 6.2ms.               
+  71   30/Oct 16:31   cron                 Info       Starting execution of     
+                                                      advancedqueue_cron().     
+  70   30/Oct 16:31   system               Info       goingsolo_seo module      
+                                                      installed.                
+  69   30/Oct 16:31   system               Info       goingsolo_commerce        
+                                                      module installed.         
+  68   30/Oct 16:31   system               Info       simple_sitemap module     
+                                                      installed.                
+  67   30/Oct 16:31   system               Info       pathauto module           
+                                                      installed.                
+  66   30/Oct 16:31   system               Info       metatag module            
+                                                      installed.                
+  65   30/Oct 16:31   system               Info       commerce_recurring        
+                                                      module installed.         
+  64   30/Oct 16:31   system               Info       commerce_product module   
+                                                      installed.                
+  63   30/Oct 16:31   system               Info       commerce_payment_example  
+                                                      module installed.         
+  62   30/Oct 16:31   system               Info       commerce_payment module   
+                                                      installed.                
+  61   30/Oct 16:31   system               Info       commerce_checkout module  
+                                                      installed.                
+  60   30/Oct 16:31   system               Info       commerce_cart module      
+                                                      installed.                
+  59   30/Oct 16:31   system               Info       commerce_order module     
+                                                      installed.                
+  58   30/Oct 16:31   system               Info       state_machine module      
+                                                      installed.                
+  57   30/Oct 16:31   system               Info       profile module            
+                                                      installed.                
+  56   30/Oct 16:31   system               Info       entity_reference_revisio  
+                                                      ns module installed.      
+  55   30/Oct 16:31   system               Info       commerce_number_pattern   
+                                                      module installed.         
+  54   30/Oct 16:31   system               Info       commerce_store module     
+                                                      installed.                
+  53   30/Oct 16:31   system               Info       commerce_price module     
+                                                      installed.                
+  52   30/Oct 16:31   system               Info       commerce module           
+                                                      installed.                
+  51   30/Oct 16:31   system               Info       token module installed.   
+  50   30/Oct 16:31   system               Info       inline_entity_form        
+                                                      module installed.         
+  49   30/Oct 16:31   system               Info       entity module installed.  
+  48   30/Oct 16:31   system               Info       advancedqueue module      
+                                                      installed.                
+  47   30/Oct 16:31   system               Info       address module            
+                                                      installed.                
+  46   30/Oct 16:31   system               Info       update module installed.  
+  45   30/Oct 16:31   system               Info       goingsolo module          
+                                                      installed.                
+  44   30/Oct 16:31   system               Info       goingsolo_theme theme     
+                                                      installed.                
+  43   30/Oct 16:31   system               Info       claro theme installed.    
+  42   30/Oct 16:31   system               Info       olivero theme installed.  
+  41   30/Oct 16:31   system               Info       goingsolo_content module  
+                                                      installed.                
+  40   30/Oct 16:31   goingsolo_content    Notice     Starter content           
+                                                      imported:                 
+                                                      {"terms":44,"listings":3  
+                                                      2,"articles":40,"pages":  
+                                                      7,"activities":10,"route  
+                                                      s":8,"events":12}         
+  39   30/Oct 16:31   system               Info       goingsolo_explore module  
+                                                      installed.                
+  38   30/Oct 16:31   system               Info       goingsolo_maps module     
+                                                      installed.                
+  37   30/Oct 16:31   system               Info       goingsolo_core module     
+                                                      installed.                
+ ---- -------------- -------------------- ---------- -------------------------- 

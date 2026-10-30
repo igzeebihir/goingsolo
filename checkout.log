@@ -1,0 +1,12 @@
+sh: 1: /usr/sbin/sendmail: not found
+ [error]  Error sending email (from goingsolo.ie <admin@example.com> to ci@example.com with reply-to not set). 
+ [notice] Listing Solo Sojourn at Cashel Palace featured until 2026-11-29.
+Order 1 state completed, paid: yes
+Subscriptions: 1
+ - Solo Club monthly #1 active
+Member role granted.
+Listing featured until 2026-11-29
+Role removed after cancelling.
+All commerce checks passed.
+ [error]  Message: Unable to send email. Contact the site administrator if the problem persists.
+ 
