@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_solo_tip
+  - node.type.event
+id: node.event.field_solo_tip
+field_name: field_solo_tip
+entity_type: node
+bundle: event
+label: Going on your own
+description: Why it is a good event to go to alone.
+required: false
+translatable: true
+default_value: {}
+default_value_callback: ''
+settings: {}
+field_type: string_long

@@ -107,6 +107,18 @@ function goingsolo_explore_preprocess_node(array &$variables): void {
     $lng = $node->get('field_longitude')->value;
     $variables['gs_osm_url'] = ($lat !== NULL && $lng !== NULL) ? goingsolo_explore_osm_point_url(['lat' => (float) $lat, 'lng' => (float) $lng]) : NULL;
   }
+  elseif ($node->bundle() === 'event') {
+    $variables['gs_county'] = $node->get('field_county')->entity?->label();
+    $variables['gs_province'] = $node->get('field_county')->entity?->get('field_province')->value;
+    $variables['gs_town'] = $node->get('field_town')->value;
+    $variables['gs_when'] = $node->get('field_event_when')->value;
+    $month = (int) $node->get('field_event_month')->value;
+    $variables['gs_month'] = $month ? \Drupal::service('date.formatter')->format(mktime(0, 0, 0, $month, 1, 2000), 'custom', 'F') : NULL;
+    $variables['gs_month_short'] = $month ? \Drupal::service('date.formatter')->format(mktime(0, 0, 0, $month, 1, 2000), 'custom', 'M') : NULL;
+    $variables['gs_solo_tip'] = $node->get('field_solo_tip')->value;
+    $link = $node->get('field_offer_link');
+    $variables['gs_offer_url'] = $link->isEmpty() ? NULL : $link->first()->getUrl()->toString();
+  }
   elseif ($node->bundle() === 'route') {
     $mode = (string) $node->get('field_route_mode')->value;
     $stops = goingsolo_explore_stops($node);
@@ -146,6 +158,20 @@ function goingsolo_explore_preprocess_node(array &$variables): void {
 }
 
 /**
+ * Loads the next published events, starting from the current month.
+ *
+ * @return \Drupal\node\NodeInterface[]
+ */
+function goingsolo_explore_upcoming_events(int $limit = 3): array {
+  $storage = \Drupal::entityTypeManager()->getStorage('node');
+  $ids = $storage->getQuery()->accessCheck(TRUE)->condition('type', 'event')->condition('status', 1)->execute();
+  $current = (int) date('n');
+  $events = $storage->loadMultiple($ids);
+  usort($events, fn($a, $b) => [((int) $a->get('field_event_month')->value - $current + 12) % 12, $a->label()] <=> [((int) $b->get('field_event_month')->value - $current + 12) % 12, $b->label()]);
+  return array_slice($events, 0, $limit);
+}
+
+/**
  * Implements hook_ENTITY_TYPE_view() for taxonomy terms.
  *
  * Adds activities and routes to county pages.
@@ -154,7 +180,7 @@ function goingsolo_explore_taxonomy_term_view(array &$build, EntityInterface $te
   if ($term->bundle() !== 'county' || $view_mode !== 'full') {
     return;
   }
-  foreach (['activities' => [t('Things to do on your own'), 30], 'routes' => [t('Self-guided routes'), 35]] as $view => [$title, $weight]) {
+  foreach (['activities' => [t('Things to do on your own'), 30], 'routes' => [t('Self-guided routes'), 35], 'events' => [t('Festivals and events'), 38]] as $view => [$title, $weight]) {
     $result = views_get_view_result($view, 'block_county', $term->id());
     if (!$result) {
       continue;

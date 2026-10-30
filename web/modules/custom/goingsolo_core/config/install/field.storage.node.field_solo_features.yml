@@ -34,6 +34,9 @@ settings:
     -
       value: meals_included
       label: 'Meals included'
+    -
+      value: solo_dining
+      label: 'Solo-friendly dining'
   allowed_values_function: ''
 module: options
 locked: false

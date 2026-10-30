@@ -22,6 +22,9 @@ settings:
     -
       value: standard
       label: 'Single supplement applies'
+    -
+      value: ask
+      label: 'Ask for the single rate'
   allowed_values_function: ''
 module: options
 locked: false

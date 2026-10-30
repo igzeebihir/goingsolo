@@ -40,6 +40,7 @@ final class ContentImporter {
     $counts['pages'] = $this->importPages();
     $counts['activities'] = $this->importActivities();
     $counts['routes'] = $this->importRoutes();
+    $counts['events'] = $this->importEvents();
     $this->createContactForm();
     $this->loggerFactory->get('goingsolo_content')->notice('Starter content imported: @c', ['@c' => json_encode($counts)]);
     return $counts;
@@ -173,6 +174,40 @@ final class ContentImporter {
         'field_last_checked' => $item['last_checked'] ?? NULL,
         'field_source_note' => $item['source'] ?? NULL,
         'path' => ['alias' => '/activities/' . $this->slug($item['county']) . '/' . $this->slug($item['title'])],
+      ])->save();
+      $created++;
+    }
+    return $created;
+  }
+
+  /**
+   * Imports festivals and events, when the events content type exists.
+   */
+  public function importEvents(): int {
+    if (!$this->entityTypeManager->getStorage('node_type')->load('event')) {
+      return 0;
+    }
+    $created = 0;
+    foreach (Yaml::decode(file_get_contents($this->dataPath('events.yml'))) as $item) {
+      if ($this->nodeExists('event', $item['title'])) {
+        continue;
+      }
+      $this->entityTypeManager->getStorage('node')->create([
+        'type' => 'event',
+        'title' => $item['title'],
+        'status' => 1,
+        'uid' => 1,
+        'body' => ['value' => $this->markdown($item['description']), 'summary' => $item['summary'] ?? '', 'format' => 'basic_html'],
+        'field_event_month' => $item['month'],
+        'field_event_when' => $item['when'],
+        'field_county' => $this->termId('county', $item['county']),
+        'field_town' => $item['town'] ?? NULL,
+        'field_solo_tip' => $item['tip'] ?? NULL,
+        'field_offer_link' => ['uri' => $item['url']],
+        'field_latitude' => $item['lat'] ?? NULL,
+        'field_longitude' => $item['lng'] ?? NULL,
+        'field_last_checked' => '2026-10-30',
+        'path' => ['alias' => '/events/' . $this->slug($item['title'])],
       ])->save();
       $created++;
     }

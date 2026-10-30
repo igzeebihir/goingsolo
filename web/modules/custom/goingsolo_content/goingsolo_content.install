@@ -20,7 +20,12 @@ function goingsolo_content_install(bool $is_syncing): void {
  * Implements hook_update_dependencies().
  */
 function goingsolo_content_update_dependencies(): array {
-  return ['goingsolo_content' => [11001 => ['goingsolo_core' => 11001]]];
+  return [
+    'goingsolo_content' => [
+      11001 => ['goingsolo_core' => 11001],
+      11003 => ['goingsolo_core' => 11002, 'goingsolo_explore' => 11001],
+    ],
+  ];
 }
 
 /**
@@ -36,6 +41,14 @@ function goingsolo_content_update_11001(): string {
  */
 function goingsolo_content_update_11002(): string {
   \Drupal::service('module_installer')->install(['goingsolo_explore']);
+  $counts = \Drupal::service('goingsolo_content.importer')->importAll();
+  return 'Imported: ' . json_encode($counts);
+}
+
+/**
+ * Imports events, hostels, women's tours and the dining badge page.
+ */
+function goingsolo_content_update_11003(): string {
   $counts = \Drupal::service('goingsolo_content.importer')->importAll();
   return 'Imported: ' . json_encode($counts);
 }

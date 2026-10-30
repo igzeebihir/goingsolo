@@ -490,3 +490,137 @@
   lat: 55.1800
   lng: -7.9740
   source: 'Irish Examiner dog-friendly stays guide. Confirm with the hotel.'
+
+# Women-only small-group tours. Checked on the operator's page or in trade
+# press on the last_checked date.
+
+- title: 'Wild Women of Ireland: six days on the west coast'
+  provider: 'Irish Experience Tours'
+  town: Westport
+  county: Mayo
+  type: Guided tour
+  price: 1799
+  price_basis: 'per person, 6 days from Dublin. Ask about the single room price.'
+  supplement: ask
+  features: [women_only, group_activities]
+  summary: 'An Irish-run, women-only small-group tour from Sligo to the Cliffs of Moher, with Achill, Westport, Connemara and Galway along the way.'
+  description: |
+    Irish Experience Tours describes this as the first women-only tour run by an Irish tour company. Over six days it travels from Dublin to Sligo, then down the west coast through Achill Island, Westport, Connemara, Galway and the Burren, before returning to Dublin by way of Clonmacnoise and Athlone.
+
+    The itinerary includes a storytelling evening, a baking workshop, an optional cycle on the Great Western Greenway and trad music in Galway. Lunches and dinners are not included.
+  url: 'https://irishexperiencetours.wetravel.com/trips/6-day-wild-women-of-ireland-small-group-tour-copy-irish-experience-tours-63152926'
+  last_checked: '2026-10-30'
+  lat: 53.8008
+  lng: -9.5199
+  source: 'Operator booking page and Travel Market Report, Aug 2026'
+
+- title: 'Women-only small-group tour: Dublin, Kilkenny, Killarney and Dingle'
+  provider: 'A Solo Woman Traveling'
+  town: Killarney
+  county: Kerry
+  type: Guided tour
+  price: 5999
+  price_basis: 'per person in a single room, 10 days, 21 to 30 August 2027 (€4,699 sharing)'
+  supplement: standard
+  features: [women_only, group_activities, single_rooms]
+  summary: 'A ten-day trip for no more than 12 women, based in Dublin and Killarney with days out to Kilkenny, Dingle, Blarney and Kinsale.'
+  description: |
+    Hosted by the founder of A Solo Woman Traveling, this tour caps the group at 12 women. It spends three nights in Dublin and four in Killarney, with day trips to Kilkenny, the Dingle Peninsula, Blarney and Kinsale, and a final night at Carton House in Kildare.
+
+    A single room costs €5,999 against €4,699 per person sharing, so the single supplement is €1,300. Both prices include a €500 non-refundable fee.
+  url: 'https://asinglewomantraveling.com/all-female-small-group-tour-in-ireland/'
+  valid_until: '2027-08-21'
+  last_checked: '2026-10-30'
+  lat: 52.0599
+  lng: -9.5044
+  source: 'Operator website'
+
+- title: 'Connemara and the Burren: women''s hiking and walking tour'
+  provider: 'Backroads'
+  town: Galway
+  county: Galway
+  type: 'Walking or activity holiday'
+  price_basis: 'From US$6,199 per person sharing. Reduced private room fees on some dates.'
+  supplement: reduced
+  features: [women_only, group_activities, meals_included]
+  summary: 'Six days of guided hiking for women, from the Maumturks in Connemara to the Burren and the Cliffs of Moher, staying in country house hotels.'
+  description: |
+    A six-day, women-only walking trip that starts in Galway and finishes in Limerick. You stay two nights at Glenlo Abbey near Galway, two at Gregans Castle in the Burren and one at the Old Ground in Ennis, with hikes in the Maumturks, Burren National Park and along the Cliffs of Moher.
+
+    Backroads offers reduced private room fees on some departures through its Solo Room Savings scheme. Departures are listed for May and July 2027.
+  url: 'https://www.backroads.com/trips/WIRIW/ireland-womens-walking-hiking-tour'
+  last_checked: '2026-10-30'
+  lat: 53.2900
+  lng: -9.0700
+  source: 'Operator website'
+
+# Hostels with private rooms. A private room in a hostel is often the cheapest
+# way to have a room to yourself.
+
+- title: 'Single en suite rooms at Kinlay Hostel, Eyre Square'
+  provider: 'Kinlay Hostel Galway'
+  town: Galway
+  county: Galway
+  type: Hostel
+  price_basis: 'Check rates for a single room'
+  supplement: none
+  features: [single_rooms, public_transport, communal_dining]
+  summary: 'A big, sociable hostel on the corner of Eyre Square with single en suite rooms as well as dorms.'
+  description: |
+    Kinlay is right on Eyre Square, a couple of minutes from Galway's train and bus stations, so it is easy to arrive without a car. As well as dorms it has private rooms, including single rooms with their own bathroom, which means you can have your own space and still use the shared kitchen and common room to meet people.
+  url: 'https://www.galwaytourism.ie/accommodation/hostels/kinlay-house-hostel/'
+  last_checked: '2026-10-30'
+  lat: 53.2740
+  lng: -9.0480
+  source: 'Galway Tourism and hostel booking listings'
+
+- title: 'Private rooms at The Nest Boutique Hostel, Salthill'
+  provider: 'The Nest Boutique Hostel'
+  town: Salthill
+  county: Galway
+  type: Hostel
+  price_basis: 'Ask for the private room rate'
+  supplement: ask
+  features: [single_rooms, communal_dining]
+  summary: 'A boutique hostel a minute from the beach at Salthill, with private rooms alongside dorms.'
+  description: |
+    The Nest is in Salthill, Galway's seaside suburb, close to the Prom for an early walk or a swim at Blackrock. Private rooms come with comfortable beds and power showers, and the shared spaces make it easy to meet other travellers.
+  url: 'https://www.discoverireland.ie/accommodation/the-nest-boutique-hostel'
+  last_checked: '2026-10-30'
+  lat: 53.2600
+  lng: -9.0820
+  source: 'Discover Ireland and Hostelz private rooms guide'
+
+- title: 'Private rooms at Ben Lettery Hostel, Connemara'
+  provider: 'Ben Lettery Hostel'
+  town: Ballinafad
+  county: Galway
+  type: Hostel
+  price_basis: 'Ask for the private room rate'
+  supplement: ask
+  features: [single_rooms]
+  summary: 'A hostel at the foot of the Twelve Bens, ideal for walkers who want a private room in the heart of Connemara.'
+  description: |
+    Ben Lettery sits on the main road between Galway and Clifden at the foot of the Twelve Bens, so you can walk straight out of the door into the mountains. It has private rooms as well as dorms. Ask about single use of a private room when you book.
+  url: 'https://www.discoverireland.ie/accommodation/ben-lettery-hostel'
+  last_checked: '2026-10-30'
+  lat: 53.4580
+  lng: -9.8650
+  source: 'Discover Ireland and Hostelz private rooms guide'
+
+- title: 'Private rooms at Jacobs Inn, Dublin'
+  provider: 'Latroupe Jacobs Inn'
+  town: 'Talbot Place'
+  county: Dublin
+  type: Hostel
+  price_basis: 'Ask for the private room rate'
+  supplement: ask
+  features: [single_rooms, public_transport]
+  summary: 'A city-centre Dublin hostel beside Busáras and Connolly Station, rated one of the best in the city for private rooms.'
+  description: |
+    Jacobs Inn is a short walk from the airport bus, Busáras and Connolly Station, which makes it an easy first night in Dublin. It is recommended for solo and female solo travellers, and has private rooms as well as dorms.
+  url: 'https://www.discoverireland.ie/accommodation/jacobs-inn'
+  last_checked: '2026-10-30'
+  lat: 53.3505
+  lng: -6.2510
+  source: 'Discover Ireland and Hostelz private rooms guide'

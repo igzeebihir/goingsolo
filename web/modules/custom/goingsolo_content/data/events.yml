@@ -1,0 +1,158 @@
+# Festivals and events that work well on your own. Dates move from year to
+# year, so each one links to the festival or Discover Ireland for this year's.
+
+- title: "St Patrick's Festival, Dublin"
+  month: 3
+  when: 'Around 17 March every year'
+  county: Dublin
+  town: Dublin
+  summary: "Ireland's biggest festival: a parade, music, a céilí and events across the city over several days."
+  description: |
+    The parade on St Patrick's Day is the centrepiece, but the festival runs for several days around it, with free outdoor concerts, a céilí, walking tours and events for all ages. Dublin is packed, so book your bed early.
+  tip: 'Crowds make it easy to fall into conversation, and the festival programme is full of free things to do on your own.'
+  url: 'https://www.stpatricksfestival.ie/'
+  lat: 53.3498
+  lng: -6.2603
+
+- title: "Listowel Writers' Week"
+  month: 5
+  when: 'Late May or early June'
+  county: Kerry
+  town: Listowel
+  summary: "One of Ireland's oldest literary festivals, with readings, workshops and late-night sessions in a small Kerry town."
+  description: |
+    Listowel Writers' Week brings well-known writers to a small market town in north Kerry for five days of readings, talks, workshops and music.
+  tip: 'Writing workshops put you in a small group for the week, and in a town this size you keep bumping into the same people.'
+  url: 'https://writersweek.ie'
+  lat: 52.4464
+  lng: -9.4850
+
+- title: 'Bloomsday, Dublin'
+  month: 6
+  when: '16 June every year'
+  county: Dublin
+  town: Dublin
+  summary: "Dublin celebrates James Joyce's Ulysses with readings, walks and Edwardian costume on the day the novel is set."
+  description: |
+    On 16 June, Joyce fans retrace Leopold Bloom's day around the city, with readings, guided walks, breakfasts and people in boaters and long skirts. The James Joyce Centre publishes the programme.
+  tip: 'Guided Bloomsday walks are a ready-made group, and nobody minds if you turn up alone in a straw hat.'
+  url: 'https://jamesjoyce.ie/'
+  lat: 53.3546
+  lng: -6.2610
+
+- title: 'Willie Clancy Summer School, Miltown Malbay'
+  month: 7
+  when: 'Early July'
+  county: Clare
+  town: 'Miltown Malbay'
+  summary: 'A week of traditional music classes, lectures and sessions in a small west Clare town.'
+  description: |
+    Scoil Samhraidh Willie Clancy is the biggest traditional music summer school in Ireland. By day there are classes in instruments and dance; by night the pubs of Miltown Malbay fill with sessions.
+  tip: 'Sign up for a class and you have a group for the week. Even if you do not play, the sessions are open to everyone.'
+  url: 'https://scoilsamhraidhwillieclancy.com/'
+  lat: 52.8560
+  lng: -9.4010
+
+- title: 'Galway International Arts Festival'
+  month: 7
+  when: 'The second half of July'
+  county: Galway
+  town: Galway
+  summary: 'Two weeks of theatre, music, visual art and street spectacle across Galway city.'
+  description: |
+    Galway's arts festival takes over the city each July with theatre, big-name gigs in the Big Top, exhibitions and free street events.
+  tip: 'Going to the theatre or a gig alone is easy, and the festival club and the city''s pubs are busy every night.'
+  url: 'https://www.giaf.ie/'
+  lat: 53.2707
+  lng: -9.0568
+
+- title: 'Puck Fair, Killorglin'
+  month: 8
+  when: '10 to 12 August every year'
+  county: Kerry
+  town: Killorglin
+  summary: 'One of the oldest fairs in Ireland, where a wild goat is crowned king for three days.'
+  description: |
+    Killorglin crowns a mountain goat King Puck and celebrates for three days with a horse fair, street music and late nights. It is on the Ring of Kerry, so it is easy to combine with a few days in the area.
+  tip: 'The whole town is outdoors for three days. You will not be alone for long.'
+  url: 'https://www.puckfair.ie/'
+  lat: 52.1060
+  lng: -9.7830
+
+- title: 'Kilkenny Arts Festival'
+  month: 8
+  when: 'August'
+  county: Kilkenny
+  town: Kilkenny
+  summary: 'Classical music, theatre, literature and visual art in the medieval city.'
+  description: |
+    Kilkenny's arts festival fills churches, the castle and the city's venues with concerts, theatre, readings and exhibitions over ten days in August.
+  tip: 'Concerts and readings are easy to go to alone, and Kilkenny is compact enough to walk everywhere.'
+  url: 'https://www.kilkennyarts.ie/'
+  lat: 52.6541
+  lng: -7.2448
+
+- title: 'Lisdoonvarna Matchmaking Festival'
+  month: 9
+  when: 'Weekends through September'
+  county: Clare
+  town: Lisdoonvarna
+  summary: "Europe's biggest singles festival: a month of dancing, music and matchmaking in the Burren."
+  description: |
+    For more than 150 years, people have come to Lisdoonvarna in September looking for love, or at least a good night out. There is dancing from lunchtime, music in every bar and a traditional matchmaker.
+  tip: 'The one festival in Ireland built for people who arrive on their own.'
+  url: 'https://www.discoverireland.ie/clare/lisdoonvarna-matchmaking-festival-2026'
+  lat: 53.0300
+  lng: -9.2890
+
+- title: 'Galway International Oyster and Seafood Festival'
+  month: 9
+  when: 'Late September'
+  county: Galway
+  town: Galway
+  summary: 'The longest-running seafood festival in the world, with oyster shucking and a festival marquee.'
+  description: |
+    Galway celebrates the start of the oyster season with the World Oyster Opening Championship, tastings, a seafood trail and a festival marquee by the docks.
+  tip: 'Seafood trails and tasting tables are easy to join on your own.'
+  url: 'https://www.discoverireland.ie/galway/galway-international-oyster-and-seafood-festival-2026'
+  lat: 53.2707
+  lng: -9.0568
+
+- title: 'Dublin Theatre Festival'
+  month: 9
+  when: 'Late September into October'
+  county: Dublin
+  town: Dublin
+  summary: 'Irish and international theatre in venues across the city.'
+  description: |
+    Europe's oldest specialist theatre festival brings Irish and international productions to Dublin's theatres for two and a half weeks each autumn.
+  tip: 'A single seat is often easier to find than a pair for sold-out shows.'
+  url: 'https://www.dublintheatrefestival.ie/'
+  lat: 53.3438
+  lng: -6.2546
+
+- title: 'Guinness Cork Jazz Festival'
+  month: 10
+  when: 'The October bank holiday weekend'
+  county: Cork
+  town: Cork
+  summary: 'Cork fills with jazz, soul and funk in pubs, hotels and concert halls over the bank holiday weekend.'
+  description: |
+    Ireland's biggest jazz festival turns Cork city into one big venue, with ticketed concerts and free gigs in pubs and hotels across the city.
+  tip: 'Free pub gigs mean you can wander from one to the next and stay wherever the music is best.'
+  url: 'https://www.discoverireland.ie/cork/guinness-cork-jazz-festival-2026'
+  lat: 51.8985
+  lng: -8.4756
+
+- title: 'Wexford Festival Opera'
+  month: 10
+  when: 'Late October into November'
+  county: Wexford
+  town: Wexford
+  summary: 'Rare operas and lunchtime recitals in Wexford''s opera house and around the town.'
+  description: |
+    Wexford's festival specialises in forgotten and rarely performed operas, with daytime recitals and short operas in venues around the town as well as evening performances at the National Opera House.
+  tip: 'Opera-goers are a friendly crowd, and the interval bar is a good place to start a conversation.'
+  url: 'https://www.wexfordopera.com/'
+  lat: 52.3369
+  lng: -6.4633

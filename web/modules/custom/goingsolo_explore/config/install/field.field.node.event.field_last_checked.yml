@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_last_checked
+  - node.type.event
+  module:
+  - datetime
+id: node.event.field_last_checked
+field_name: field_last_checked
+entity_type: node
+bundle: event
+label: Last checked
+description: When the price and availability were last confirmed.
+required: false
+translatable: true
+default_value:
+- default_date_type: now
+  default_date: now
+default_value_callback: ''
+settings: {}
+field_type: datetime

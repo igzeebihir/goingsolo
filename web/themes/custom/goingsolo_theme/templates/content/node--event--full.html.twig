@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Full festival or event page.
+ */
+#}
+<article{{ attributes.addClass('node', 'node--type-event', 'deal-full') }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  <div class="deal-full__where">
+    {% if gs_county %}<span class="deal-full__county">{{ 'Co. @county'|t({'@county': gs_county}) }}</span>{% endif %}
+    {% if gs_town and gs_town != gs_county %}<span>{{ gs_town }}</span>{% endif %}
+    {% if gs_month %}<span>{{ gs_month }}</span>{% endif %}
+  </div>
+  <div class="deal-full__layout">
+    <div{{ content_attributes.addClass('node__content', 'deal-full__main') }}>
+      {% if gs_solo_tip %}
+        <div class="gs-callout">
+          <h2 class="gs-callout__title">{{ 'Going on your own'|t }}</h2>
+          <p>{{ gs_solo_tip }}</p>
+        </div>
+      {% endif %}
+      {{ content }}
+    </div>
+    <aside class="deal-full__pricebox">
+      <p class="deal-full__provider">{{ 'When'|t }}</p>
+      <p class="deal-full__price deal-card__ask">{{ gs_when }}</p>
+      {% if gs_offer_url %}
+        <a class="button button--primary deal-full__cta" href="{{ gs_offer_url }}" target="_blank" rel="noopener">{{ 'Dates and tickets'|t }}</a>
+      {% endif %}
+      <p class="deal-full__note">{{ 'Dates change from year to year. Book your bed early, as towns fill up during festivals.'|t }}</p>
+    </aside>
+  </div>
+</article>

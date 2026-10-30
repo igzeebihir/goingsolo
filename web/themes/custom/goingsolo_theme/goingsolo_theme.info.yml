@@ -22,7 +22,7 @@ libraries-override:
         css/components/hero.css: false
   olivero/navigation-base:
     js:
-      js/navigation-utils.js: false
+      js/navigation-utils.js: js/olivero-shim.js
 regions:
   header: Header
   primary_menu: 'Primary menu'

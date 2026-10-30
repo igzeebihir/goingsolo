@@ -1,0 +1,22 @@
+{#
+/**
+ * @file
+ * Festival or event card.
+ */
+#}
+<article{{ attributes.addClass('deal-card', 'event-card') }}>
+  <a class="deal-card__postcard deal-card__postcard--{{ gs_province|default('ireland')|clean_class }} event-card__postcard" href="{{ url }}" tabindex="-1" aria-hidden="true">
+    {% if gs_month_short %}<span class="event-card__date">{{ gs_month_short }}</span>{% endif %}
+    <span class="deal-card__county">{{ gs_town ?: gs_county }}</span>
+    {% if gs_county and gs_town != gs_county %}<span class="deal-card__town">{{ 'Co. @county'|t({'@county': gs_county}) }}</span>{% endif %}
+  </a>
+  <div class="deal-card__body">
+    {% if gs_when %}<p class="event-card__when">{{ gs_when }}</p>{% endif %}
+    {{ title_prefix }}
+    <h3{{ title_attributes.addClass('deal-card__title') }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h3>
+    {{ title_suffix }}
+    <div class="deal-card__summary">{{ content.body }}</div>
+  </div>
+</article>

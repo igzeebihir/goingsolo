@@ -72,6 +72,29 @@ final class HomeController extends ControllerBase {
         '#weight' => 27,
       ];
     }
+    if ($this->moduleHandler()->moduleExists('goingsolo_explore') && ($events = goingsolo_explore_upcoming_events(3))) {
+      $build['events'] = [
+        '#theme' => 'goingsolo_home_section',
+        '#modifier' => 'events',
+        '#eyebrow' => $this->t('Coming up'),
+        '#title' => $this->t('Festivals to go to on your own'),
+        '#content' => [
+          '#type' => 'container',
+          '#attributes' => ['class' => ['event-grid']],
+          'items' => [
+            '#type' => 'container',
+            '#attributes' => ['class' => ['view-content']],
+          ] + array_map(fn($node) => [
+            '#type' => 'container',
+            '#attributes' => ['class' => ['event-grid__item']],
+            'node' => $this->entityTypeManager()->getViewBuilder('node')->view($node, 'teaser'),
+          ], $events),
+        ],
+        '#link' => $this->link($this->t('All festivals and events'), Url::fromRoute('view.events.page_main')),
+        '#cache' => ['tags' => ['node_list:event'], 'max-age' => 86400],
+        '#weight' => 28,
+      ];
+    }
     if ($this->moduleHandler()->moduleExists('goingsolo_commerce')) {
       $build['club'] = [
         '#theme' => 'goingsolo_club_band',

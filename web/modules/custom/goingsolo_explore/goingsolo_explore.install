@@ -20,9 +20,25 @@ function goingsolo_explore_install(bool $is_syncing): void {
       $terms->create(['vid' => 'activity_type', 'name' => $name, 'weight' => $weight])->save();
     }
   }
+  _goingsolo_explore_patterns();
+  // Editors manage activities and routes like solo deals.
+  if ($role = \Drupal::entityTypeManager()->getStorage('user_role')->load('content_editor')) {
+    foreach (['activity', 'route', 'event'] as $bundle) {
+      foreach (['create', 'edit any', 'delete any'] as $op) {
+        $role->grantPermission("$op $bundle content");
+      }
+    }
+    $role->save();
+  }
+}
+
+/**
+ * Creates URL patterns for activities, routes and events.
+ */
+function _goingsolo_explore_patterns(): void {
   if (\Drupal::moduleHandler()->moduleExists('pathauto')) {
     $patterns = \Drupal::entityTypeManager()->getStorage('pathauto_pattern');
-    foreach (['activity' => ['activities/[node:field_county:entity:name]/[node:title]', 'Solo activities'], 'route' => ['routes/[node:title]', 'Self-guided routes']] as $bundle => [$pattern, $label]) {
+    foreach (['activity' => ['activities/[node:field_county:entity:name]/[node:title]', 'Solo activities'], 'route' => ['routes/[node:title]', 'Self-guided routes'], 'event' => ['events/[node:title]', 'Festivals and events']] as $bundle => [$pattern, $label]) {
       if ($patterns->load($bundle)) {
         continue;
       }
@@ -36,13 +52,41 @@ function goingsolo_explore_install(bool $is_syncing): void {
       $entity->save();
     }
   }
-  // Editors manage activities and routes like solo deals.
+}
+
+/**
+ * Adds festivals and events.
+ */
+function goingsolo_explore_update_11001(): string {
+  \Drupal::moduleHandler()->loadInclude('goingsolo_core', 'install');
+  _goingsolo_core_import_config('goingsolo_explore', [
+    'node.type.event',
+    'field.storage.node.field_event_month',
+    'field.storage.node.field_event_when',
+    'field.field.node.event.body',
+    'field.field.node.event.field_county',
+    'field.field.node.event.field_town',
+    'field.field.node.event.field_offer_link',
+    'field.field.node.event.field_latitude',
+    'field.field.node.event.field_longitude',
+    'field.field.node.event.field_last_checked',
+    'field.field.node.event.field_source_note',
+    'field.field.node.event.field_image',
+    'field.field.node.event.field_event_month',
+    'field.field.node.event.field_event_when',
+    'field.field.node.event.field_solo_tip',
+    'core.entity_form_display.node.event.default',
+    'core.entity_view_display.node.event.default',
+    'core.entity_view_display.node.event.teaser',
+    'views.view.events',
+  ]);
   if ($role = \Drupal::entityTypeManager()->getStorage('user_role')->load('content_editor')) {
-    foreach (['activity', 'route'] as $bundle) {
-      foreach (['create', 'edit any', 'delete any'] as $op) {
-        $role->grantPermission("$op $bundle content");
-      }
+    foreach (['create', 'edit any', 'delete any'] as $op) {
+      $role->grantPermission("$op event content");
     }
     $role->save();
   }
+  _goingsolo_explore_patterns();
+  \Drupal::service('router.builder')->setRebuildNeeded();
+  return 'Added festivals and events.';
 }

@@ -137,6 +137,12 @@ function goingsolo_core_preprocess_node(array &$variables): void {
   if (in_array('dog_friendly', $features, TRUE)) {
     $badges[] = ['label' => t('Pet friendly'), 'modifier' => 'pets'];
   }
+  if (in_array('solo_dining', $features, TRUE)) {
+    $badges[] = ['label' => t('Solo-friendly dining'), 'modifier' => 'dining'];
+  }
+  if (in_array('women_only', $features, TRUE)) {
+    $badges[] = ['label' => t('Women only'), 'modifier' => 'women'];
+  }
   $variables['gs_badges'] = $badges;
   $variables['gs_pet_policy'] = $node->get('field_pet_policy')->value;
   $variables['gs_provider'] = $node->get('field_provider')->value;

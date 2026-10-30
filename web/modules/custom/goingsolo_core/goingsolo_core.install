@@ -59,3 +59,14 @@ function goingsolo_core_update_11001(): string {
   \Drupal::service('router.builder')->setRebuildNeeded();
   return 'Added pet-friendly stays.';
 }
+
+/**
+ * Adds the "ask for the single rate" option and the solo-friendly dining badge.
+ */
+function goingsolo_core_update_11002(): string {
+  _goingsolo_core_import_config('goingsolo_core', [
+    'field.storage.node.field_supplement',
+    'field.storage.node.field_solo_features',
+  ]);
+  return 'Added options.';
+}

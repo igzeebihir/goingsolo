@@ -357,7 +357,7 @@ a.button {
 .gs-nav-toggle[aria-expanded='true'] .gs-nav-toggle__bars::before { transform: translateY(6px) rotate(45deg); }
 .gs-nav-toggle[aria-expanded='true'] .gs-nav-toggle__bars::after { transform: translateY(-6px) rotate(-45deg); }
 
-@media (max-width: 62rem) {
+@media (max-width: 78rem) {
   .gs-nav-toggle {
     display: inline-flex;
   }
@@ -1568,4 +1568,89 @@ a.button {
 .gs-way--routes .gs-way__icon { background: #e6e3f1; color: #3b3a5e; }
 .home-section--activities {
   padding-bottom: 0;
+}
+
+/* Solo-friendly dining badge */
+.gs-badge--dining { background: #e7f0ff; color: #1d3c78; }
+.gs-badge--dining::before { content: '🍽 '; }
+.gs-badge--women { background: #f3e6f7; color: #5b2a6e; }
+.gs-dining-badge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 12.5rem;
+  height: 12.5rem;
+  margin: 2rem 0;
+  border: 3px solid var(--gs-gorse);
+  border-radius: 50%;
+  background: var(--gs-atlantic);
+  color: #fff;
+  box-shadow: 0 0 0 6px var(--gs-atlantic), var(--gs-shadow-lift);
+  text-align: center;
+}
+.gs-dining-badge__ring {
+  position: absolute;
+  top: 1.6rem;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gs-gorse);
+}
+.gs-dining-badge__mark {
+  font-family: var(--gs-serif);
+  font-size: 4rem;
+  font-style: italic;
+  line-height: 1;
+}
+.gs-dining-badge__site {
+  position: absolute;
+  bottom: 1.5rem;
+  font-family: var(--gs-serif);
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--gs-fern);
+}
+
+/* Events */
+.event-grid > .view-content {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+}
+.event-grid > .view-header,
+.event-grid > .view-filters,
+.event-grid > .view-empty {
+  margin-bottom: 1.5rem;
+}
+.event-grid__item {
+  display: flex;
+}
+.event-grid__item > * {
+  flex: 1;
+}
+.event-card__postcard::after {
+  display: none;
+}
+.event-card__date {
+  position: absolute;
+  top: 0.9rem;
+  right: 1rem;
+  display: grid;
+  place-items: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--gs-fuchsia-dark);
+  font-family: var(--gs-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.event-card__when {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--gs-fuchsia-dark);
 }
